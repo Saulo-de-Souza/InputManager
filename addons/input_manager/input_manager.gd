@@ -13,35 +13,80 @@ class_name InputManager extends Node
 ## Right Trigger deadzone
 @export_range(0.0, 1.0, 0.01) var _right_trigger_deadzone: float = 0.0
 
-@export_group("Mapping")
-@export_subgroup("Button A")
+@export_category("Mapping")
+@export_subgroup("Left Stick")
+## Left Stick action name
+@export_placeholder("Left Stick action name") var _left_stick_action_name = "left_stick":
+	set(value):
+		_actions_sticks.erase(_left_stick_action_name)
+		_left_stick_action_name = value
+		if value != "":
+			_actions_sticks[_left_stick_action_name] = get_left_stick
+## Corresponding key of negative axis x stick.
+@export var _left_stick_key_negative_x: Key = Key.KEY_A:
+	set(value):
+		_left_stick_key_negative_x = value
+## Corresponding key of positive axis x stick.
+@export var _left_stick_key_positive_x: Key = Key.KEY_D:
+	set(value):
+		_left_stick_key_positive_x = value
+## Corresponding key of negative axis y stick.
+@export var _left_stick_key_negative_y: Key = Key.KEY_W:
+	set(value):
+		_left_stick_key_negative_y = value
+## Corresponding key of positive axis y stick.
+@export var _left_stick_key_positive_y: Key = Key.KEY_S:
+	set(value):
+		_left_stick_key_positive_y = value
+
+@export_subgroup("Right Stick")
+## Right Stick action name
+@export_placeholder("Right Stick action name") var _right_stick_action_name = "right_stick":
+	set(value):
+		_actions_sticks.erase(_right_stick_action_name)
+		_right_stick_action_name = value
+		if value != "":
+			_actions_sticks[_right_stick_action_name] = get_right_stick
+## Corresponding key of negative axis x stick.
+@export var _right_stick_key_negative_x: Key = Key.KEY_J:
+	set(value):
+		_right_stick_key_negative_x = value
+## Corresponding key of positive axis x stick.
+@export var _right_stick_key_positive_x: Key = Key.KEY_L:
+	set(value):
+		_right_stick_key_positive_x = value
+## Corresponding key of negative axis y stick.
+@export var _right_stick_key_negative_y: Key = Key.KEY_I:
+	set(value):
+		_right_stick_key_negative_y = value
+## Corresponding key of positive axis y stick.
+@export var _right_stick_key_positive_y: Key = Key.KEY_K:
+	set(value):
+		_right_stick_key_positive_y = value
+
+@export_subgroup("Action Button A")
 ## Button A of joystick action name
-@export_placeholder("Button A action name") var _button_a_action_name = "":
+@export_placeholder("Button A action name") var _button_a_action_name = "jump":
 	set(value):
 		_actions_buttons.erase(_button_a_action_name)
 		_button_a_action_name = value
 		if value != "":
 			_actions_buttons[_button_a_action_name] = get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT else get_button_a_toggle
-
 ## Button A event action
 @export var _button_a_type: _event_type_enum = _event_type_enum.PRESSED:
 	set(value):
 		_actions_buttons.erase(_button_a_action_name)
 		_button_a_type = value
 		_actions_buttons[_button_a_action_name] = get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT else get_button_a_toggle
-
-@export_subgroup("Left Stick")
-## Left Stick action name
-@export_placeholder("Left Stick action name") var _left_stick_action_name = "":
+## Corresponding key.
+@export var _button_a_key: Key = Key.KEY_NONE:
 	set(value):
-		_actions_sticks.erase(_left_stick_action_name)
-		_left_stick_action_name = value
-		if value != "":
-			_actions_sticks[_left_stick_action_name] = get_left_stick
+		_button_a_key = value
+
 
 @export_subgroup("Left Trigger")
 ## Left Trigger action name
-@export_placeholder("Left Trigger action name") var _left_trigger_action_name = "":
+@export_placeholder("Left Trigger action name") var _left_trigger_action_name = "aim":
 	set(value):
 		_actions_triggers.erase(_left_trigger_action_name)
 		_left_trigger_action_name = value
@@ -120,6 +165,7 @@ var _right_stick: Vector2 = Vector2.ZERO:
 		if value != _right_stick:
 			_right_stick = value
 			on_right_stick_changed.emit(get_right_stick(), get_right_stick_length())
+			on_action_stick.emit(_right_stick_action_name, get_right_stick()) # TODO: Fazer nos outros
 var _right_axis_h: float = 0.0:
 	set(value):
 		if _right_axis_h != value:
@@ -317,9 +363,12 @@ var _key_l_pressed: bool = false:
 
 # ENGINE METHODS ***************************************************
 func _init() -> void:
-	_actions_buttons[_button_a_action_name] = get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT else get_button_a_toggle
-	_actions_triggers[_left_trigger_action_name] = get_left_trigger
 	_actions_sticks[_left_stick_action_name] = get_left_stick
+	_actions_sticks[_right_stick_action_name] = get_right_stick
+
+	_actions_buttons[_button_a_action_name] = get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT else get_button_a_toggle
+
+	_actions_triggers[_left_trigger_action_name] = get_left_trigger
 
 func _ready():
 	Input.joy_connection_changed.connect(func(device, connected): on_device_changed.emit(device, connected))
@@ -869,21 +918,21 @@ func _check_right_stick_button(event: InputEventJoypadButton) -> void:
 
 func _check_keyboard(event: InputEventKey) -> void:
 	match event.keycode:
-		KEY_W:
+		_left_stick_key_negative_y:
 			_key_w_pressed = event.pressed
-		KEY_S:
+		_left_stick_key_positive_y:
 			_key_s_pressed = event.pressed
-		KEY_A:
+		_left_stick_key_negative_x:
 			_key_a_pressed = event.pressed
-		KEY_D:
+		_left_stick_key_positive_x:
 			_key_d_pressed = event.pressed
-		KEY_I:
+		_right_stick_key_negative_y:
 			_key_i_pressed = event.pressed
-		KEY_J:
+		_right_stick_key_negative_x:
 			_key_j_pressed = event.pressed
-		KEY_K:
+		_right_stick_key_positive_y:
 			_key_k_pressed = event.pressed
-		KEY_L:
+		_right_stick_key_positive_x:
 			_key_l_pressed = event.pressed
 		KEY_Q:
 			_left_trigger = 1.0 if event.pressed else 0.0
@@ -933,7 +982,7 @@ func _check_keyboard(event: InputEventKey) -> void:
 					_right_stick_button_oneshot = false
 					_right_stick_button_realesed = true
 					_right_stick_button_pressed = false
-		KEY_SPACE:
+		_button_a_key: # TODO:
 			if event.pressed != _button_a_pressed:
 				if event.pressed:
 					_button_a_oneshot = true
