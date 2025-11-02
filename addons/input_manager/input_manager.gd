@@ -18,35 +18,35 @@ class_name InputManager extends Node
 ## Button A of joystick action name
 @export_placeholder("Button A action name") var _button_a_action_name = "":
 	set(value):
+		_actions_buttons.erase(_button_a_action_name)
+		_button_a_action_name = value
 		if value != "":
-			_actions.erase(_button_a_action_name)
-			_button_a_action_name = value
-			_actions[_button_a_action_name] = get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT else get_button_a_toggle
+			_actions_buttons[_button_a_action_name] = get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT else get_button_a_toggle
+
 ## Button A event action
 @export var _button_a_type: _event_type_enum = _event_type_enum.PRESSED:
 	set(value):
+		_actions_buttons.erase(_button_a_action_name)
 		_button_a_type = value
-		_actions.erase(_button_a_action_name)
-		_actions[_button_a_action_name] = get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT else get_button_a_toggle
+		_actions_buttons[_button_a_action_name] = get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT else get_button_a_toggle
 
 @export_subgroup("Left Stick")
 ## Left Stick action name
 @export_placeholder("Left Stick action name") var _left_stick_action_name = "":
 	set(value):
+		_actions_sticks.erase(_left_stick_action_name)
+		_left_stick_action_name = value
 		if value != "":
-			_actions.erase(_left_stick_action_name)
-			_left_stick_action_name = value
-			_actions[_left_stick_action_name] = get_left_stick
+			_actions_sticks[_left_stick_action_name] = get_left_stick
 
-@export_subgroup("Button Left Trigger")
-## Button A of joystick action name
-@export_placeholder("Button Left Trigger action name") var _button_left_trigger_action_name = "":
+@export_subgroup("Left Trigger")
+## Left Trigger action name
+@export_placeholder("Left Trigger action name") var _left_trigger_action_name = "":
 	set(value):
+		_actions_triggers.erase(_left_trigger_action_name)
+		_left_trigger_action_name = value
 		if value != "":
-			_actions.erase(_button_left_trigger_action_name)
-			_button_left_trigger_action_name = value
-			_actions[_button_left_trigger_action_name] = get_left_trigger
-
+			_actions_triggers[_left_trigger_action_name] = get_left_trigger
 
 # EXPORTS **********************************************************
 
@@ -76,7 +76,9 @@ signal on_action_trigger(action_name: String, value: float)
 signal on_action_stick(action_name: String, value: Vector2)
 # SIGNALS **********************************************************
 
-var _actions: Dictionary[String, Callable] = {}
+var _actions_buttons: Dictionary[String, Callable] = {}
+var _actions_sticks: Dictionary[String, Callable] = {}
+var _actions_triggers: Dictionary[String, Callable] = {}
 enum _event_type_enum {
 	## When the button is pressed.
 	PRESSED,
@@ -135,7 +137,7 @@ var _left_trigger: float = 0.0:
 		if _left_trigger != value:
 			_left_trigger = value
 			on_left_trigger_changed.emit(_left_trigger)
-			on_action_trigger.emit(_button_left_trigger_action_name, value) # TODO: Fazer nos outros
+			on_action_trigger.emit(_left_trigger_action_name, value) # TODO: Fazer nos outros
 var _right_trigger: float = 0.0:
 	set(value):
 		if _right_trigger != value:
@@ -315,8 +317,9 @@ var _key_l_pressed: bool = false:
 
 # ENGINE METHODS ***************************************************
 func _init() -> void:
-	_actions[_button_a_action_name] = get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT else get_button_a_toggle
-
+	_actions_buttons[_button_a_action_name] = get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT else get_button_a_toggle
+	_actions_triggers[_left_trigger_action_name] = get_left_trigger
+	_actions_sticks[_left_stick_action_name] = get_left_stick
 
 func _ready():
 	Input.joy_connection_changed.connect(func(device, connected): on_device_changed.emit(device, connected))
@@ -355,22 +358,24 @@ func _input(event: InputEvent) -> void:
 # PUBLIC METHODS ***************************************************
 # ACTIONS NAME
 func get_action_button(action_name: String) -> bool:
-	if not action_name in _actions:
+	if not action_name in _actions_buttons:
 		push_warning("%s mapping does not exist."%action_name)
 		return false
-	var result = _actions[action_name].call()
+	var result = _actions_buttons[action_name].call()
 	return result
+
 func get_action_stick(action_name: String) -> Vector2:
-	if not action_name in _actions:
+	if not action_name in _actions_sticks:
 		push_warning("%s mapping does not exist."%action_name)
 		return Vector2.ZERO
-	var result = _actions[action_name].call()
+	var result = _actions_sticks[action_name].call()
 	return result
+
 func get_action_trigger(action_name: String) -> float:
-	if not action_name in _actions:
+	if not action_name in _actions_triggers:
 		push_warning("%s mapping does not exist."%action_name)
 		return 0.0
-	var result = _actions[action_name].call()
+	var result = _actions_triggers[action_name].call()
 	return result
 
 # LEFT STICK GETTER
