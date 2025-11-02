@@ -64,26 +64,6 @@ class_name InputManager extends Node
 	set(value):
 		_right_stick_key_positive_y = value
 
-@export_subgroup("Action Button A")
-## Button A of joystick action name
-@export_placeholder("Button A action name") var _button_a_action_name = "jump":
-	set(value):
-		_actions_buttons.erase(_button_a_action_name)
-		_button_a_action_name = value
-		if value != "":
-			_actions_buttons[_button_a_action_name] = get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT else get_button_a_toggle
-## Button A event action
-@export var _button_a_type: _event_type_enum = _event_type_enum.PRESSED:
-	set(value):
-		_actions_buttons.erase(_button_a_action_name)
-		_button_a_type = value
-		_actions_buttons[_button_a_action_name] = get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT else get_button_a_toggle
-## Corresponding key.
-@export var _button_a_key: Key = Key.KEY_NONE:
-	set(value):
-		_button_a_key = value
-
-
 @export_subgroup("Left Trigger")
 ## Left Trigger action name
 @export_placeholder("Left Trigger action name") var _left_trigger_action_name = "aim":
@@ -92,6 +72,110 @@ class_name InputManager extends Node
 		_left_trigger_action_name = value
 		if value != "":
 			_actions_triggers[_left_trigger_action_name] = get_left_trigger
+## Corresponding key.
+@export var _left_trigger_key: Key = Key.KEY_Q:
+	set(value):
+		_left_trigger_key = value
+
+@export_subgroup("Right Trigger")
+## Right Trigger action name
+@export_placeholder("Right Trigger action name") var _right_trigger_action_name = "acceleration":
+	set(value):
+		_actions_triggers.erase(_right_trigger_action_name)
+		_right_trigger_action_name = value
+		if value != "":
+			_actions_triggers[_right_trigger_action_name] = get_right_trigger
+## Corresponding key.
+@export var _right_trigger_key: Key = Key.KEY_E:
+	set(value):
+		_right_trigger_key = value
+
+@export_subgroup("Left Shoulder")
+## Button Left Shoulder of joystick action name
+@export_placeholder("Left Shoulder action name") var _button_left_shoulder_action_name = "push":
+	set(value):
+		_actions_buttons.erase(_button_left_shoulder_action_name)
+		_button_left_shoulder_action_name = value
+		if value != "":
+			_actions_buttons[_button_left_shoulder_action_name] = \
+			get_left_shoulder_pressed if _button_left_shoulder_type == _event_type_enum.PRESSED \
+			else get_left_shoulder_realesed if _button_left_shoulder_type == _event_type_enum.RELESED \
+			else get_left_shoulder_oneshot if _button_left_shoulder_type == _event_type_enum.ONE_SHOT \
+			else get_left_shoulder_toggle
+## Button Left Shoulder event action
+@export var _button_left_shoulder_type: _event_type_enum = _event_type_enum.PRESSED:
+	set(value):
+		_actions_buttons.erase(_button_left_shoulder_action_name)
+		_button_left_shoulder_type = value
+		if _button_left_shoulder_action_name != "":
+			_actions_buttons[_button_left_shoulder_action_name] = \
+			get_left_shoulder_pressed if _button_left_shoulder_type == _event_type_enum.PRESSED \
+			else get_left_shoulder_realesed if _button_left_shoulder_type == _event_type_enum.RELESED \
+			else get_left_shoulder_oneshot if _button_left_shoulder_type == _event_type_enum.ONE_SHOT \
+			else get_left_shoulder_toggle
+## Corresponding key.
+@export var _button_left_shoulder_key: Key = Key.KEY_U:
+	set(value):
+		_button_left_shoulder_key = value
+
+@export_subgroup("Right Shoulder")
+## Button Right Shoulder of joystick action name
+@export_placeholder("Right Shoulder action name") var _button_right_shoulder_action_name = "grab":
+	set(value):
+		_actions_buttons.erase(_button_right_shoulder_action_name)
+		_button_right_shoulder_action_name = value
+		if value != "":
+			_actions_buttons[_button_right_shoulder_action_name] = \
+			get_right_shoulder_pressed if _button_right_shoulder_type == _event_type_enum.PRESSED \
+			else get_right_shoulder_realesed if _button_right_shoulder_type == _event_type_enum.RELESED \
+			else get_right_shoulder_oneshot if _button_right_shoulder_type == _event_type_enum.ONE_SHOT \
+			else get_right_shoulder_toggle
+## Button Right Shoulder event action
+@export var _button_right_shoulder_type: _event_type_enum = _event_type_enum.PRESSED:
+	set(value):
+		_actions_buttons.erase(_button_right_shoulder_action_name)
+		_button_right_shoulder_type = value
+		if _button_right_shoulder_action_name != "":
+			_actions_buttons[_button_right_shoulder_action_name] = \
+			get_right_shoulder_pressed if _button_right_shoulder_type == _event_type_enum.PRESSED \
+			else get_right_shoulder_realesed if _button_right_shoulder_type == _event_type_enum.RELESED \
+			else get_right_shoulder_oneshot if _button_right_shoulder_type == _event_type_enum.ONE_SHOT \
+			else get_right_shoulder_toggle
+## Corresponding key.
+@export var _button_right_shoulder_key: Key = Key.KEY_O:
+	set(value):
+		_button_right_shoulder_key = value
+
+
+@export_subgroup("Action Button A")
+## Button A of joystick action name
+@export_placeholder("Button A action name") var _button_a_action_name = "jump":
+	set(value):
+		_actions_buttons.erase(_button_a_action_name)
+		_button_a_action_name = value
+		if value != "":
+			_actions_buttons[_button_a_action_name] = \
+			get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED \
+			else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED \
+			else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT \
+			else get_button_a_toggle
+## Button A event action
+@export var _button_a_type: _event_type_enum = _event_type_enum.PRESSED:
+	set(value):
+		_actions_buttons.erase(_button_a_action_name)
+		_button_a_type = value
+		if _button_a_action_name != "":
+			_actions_buttons[_button_a_action_name] = \
+			get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED \
+			else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED \
+			else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT \
+			else get_button_a_toggle
+## Corresponding key.
+@export var _button_a_key: Key = Key.KEY_SPACE:
+	set(value):
+		_button_a_key = value
+
+# TODO: Continuar aqui
 
 # EXPORTS **********************************************************
 
@@ -140,6 +224,8 @@ var _shift_pressed: bool = false:
 		_shift_pressed = value
 		_left_stick.x = (sign(_left_stick.x) * (0.5 if not _shift_pressed else 1.0))
 		_left_stick.y = (sign(_left_stick.y) * (0.5 if not _shift_pressed else 1.0))
+
+# TODO: Colocar os signals nas propriedades abaixo:
 
 # LEFT STICKS
 var _left_stick: Vector2 = Vector2.ZERO:
@@ -363,13 +449,40 @@ var _key_l_pressed: bool = false:
 
 # ENGINE METHODS ***************************************************
 func _init() -> void:
-	_actions_sticks[_left_stick_action_name] = get_left_stick
-	_actions_sticks[_right_stick_action_name] = get_right_stick
+	if _left_stick_action_name != "":
+		_actions_sticks[_left_stick_action_name] = get_left_stick
 
-	_actions_buttons[_button_a_action_name] = get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT else get_button_a_toggle
+	if _right_stick_action_name != "":
+		_actions_sticks[_right_stick_action_name] = get_right_stick
 
-	_actions_triggers[_left_trigger_action_name] = get_left_trigger
+	if _left_trigger_action_name != "":
+		_actions_triggers[_left_trigger_action_name] = get_left_trigger
 
+	if _right_trigger_action_name != "":
+		_actions_triggers[_right_trigger_action_name] = get_right_trigger
+
+	if _button_left_shoulder_action_name != "":
+		_actions_buttons[_button_left_shoulder_action_name] = \
+		get_left_shoulder_pressed if _button_left_shoulder_type == _event_type_enum.PRESSED \
+		else get_left_shoulder_realesed if _button_left_shoulder_type == _event_type_enum.RELESED \
+		else get_left_shoulder_oneshot if _button_left_shoulder_type == _event_type_enum.ONE_SHOT \
+		else get_left_shoulder_toggle
+
+	if _button_right_shoulder_action_name != "":
+		_actions_buttons[_button_right_shoulder_action_name] = \
+		get_right_shoulder_pressed if _button_right_shoulder_type == _event_type_enum.PRESSED \
+		else get_right_shoulder_realesed if _button_right_shoulder_type == _event_type_enum.RELESED \
+		else get_right_shoulder_oneshot if _button_right_shoulder_type == _event_type_enum.ONE_SHOT \
+		else get_right_shoulder_toggle
+
+	if _button_a_action_name != "":
+		_actions_buttons[_button_a_action_name] = \
+		get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED \
+		else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED \
+		else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT \
+		else get_button_a_toggle
+
+		# TODO: Continuar aqui
 func _ready():
 	Input.joy_connection_changed.connect(func(device, connected): on_device_changed.emit(device, connected))
 	pass
@@ -917,6 +1030,7 @@ func _check_right_stick_button(event: InputEventJoypadButton) -> void:
 	pass
 
 func _check_keyboard(event: InputEventKey) -> void:
+	# TODO: Continuar aqui
 	match event.keycode:
 		_left_stick_key_negative_y:
 			_key_w_pressed = event.pressed
@@ -934,11 +1048,11 @@ func _check_keyboard(event: InputEventKey) -> void:
 			_key_k_pressed = event.pressed
 		_right_stick_key_positive_x:
 			_key_l_pressed = event.pressed
-		KEY_Q:
+		_left_trigger_key:
 			_left_trigger = 1.0 if event.pressed else 0.0
-		KEY_E:
+		_right_trigger_key:
 			_right_trigger = 1.0 if event.pressed else 0.0
-		KEY_U:
+		_button_left_shoulder_key:
 			if event.pressed != _left_shoulder_pressed:
 				if event.pressed:
 					_left_shoulder_oneshot = true
@@ -949,7 +1063,7 @@ func _check_keyboard(event: InputEventKey) -> void:
 					_left_shoulder_oneshot = false
 					_left_shoulder_realesed = true
 					_left_shoulder_pressed = false
-		KEY_O:
+		_button_right_shoulder_key:
 			if event.pressed != _right_shoulder_pressed:
 				if event.pressed:
 					_right_shoulder_oneshot = true
