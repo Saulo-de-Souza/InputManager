@@ -3,3 +3,4 @@ gp.bat export-ignore
 .gitattributes export-ignore
 README.md export-ignore
 LICENSE.md export-ignore
+addons/input_manager/icon.png
