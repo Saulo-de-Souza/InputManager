@@ -1,3 +1,4 @@
+@tool
 class_name InputManager extends Node
 
 # EXPORTS **********************************************************
@@ -11,6 +12,42 @@ class_name InputManager extends Node
 @export_range(0.0, 1.0, 0.01) var _left_trigger_deadzone: float = 0.0
 ## Right Trigger deadzone
 @export_range(0.0, 1.0, 0.01) var _right_trigger_deadzone: float = 0.0
+
+@export_group("Mapping")
+@export_subgroup("Button A")
+## Button A of joystick action name
+@export_placeholder("Button A action name") var _button_a_action_name = "":
+	set(value):
+		if value != "":
+			_actions.erase(_button_a_action_name)
+			_button_a_action_name = value
+			_actions[_button_a_action_name] = get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT else get_button_a_toggle
+## Button A event action
+@export var _button_a_type: _event_type_enum = _event_type_enum.PRESSED:
+	set(value):
+		_button_a_type = value
+		_actions.erase(_button_a_action_name)
+		_actions[_button_a_action_name] = get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT else get_button_a_toggle
+
+@export_subgroup("Left Stick")
+## Left Stick action name
+@export_placeholder("Left Stick action name") var _left_stick_action_name = "":
+	set(value):
+		if value != "":
+			_actions.erase(_left_stick_action_name)
+			_left_stick_action_name = value
+			_actions[_left_stick_action_name] = get_left_stick
+
+@export_subgroup("Button Left Trigger")
+## Button A of joystick action name
+@export_placeholder("Button Left Trigger action name") var _button_left_trigger_action_name = "":
+	set(value):
+		if value != "":
+			_actions.erase(_button_left_trigger_action_name)
+			_button_left_trigger_action_name = value
+			_actions[_button_left_trigger_action_name] = get_left_trigger
+
+
 # EXPORTS **********************************************************
 
 # SIGNALS **********************************************************
@@ -34,7 +71,22 @@ signal on_dpad_left_changed(pressed: bool)
 signal on_dpad_right_changed(pressed: bool)
 signal on_start_changed(pressed: bool)
 signal on_select_changed(pressed: bool)
+signal on_action_button(action_name: String, pressed: bool)
+signal on_action_trigger(action_name: String, value: float)
+signal on_action_stick(action_name: String, value: Vector2)
 # SIGNALS **********************************************************
+
+var _actions: Dictionary[String, Callable] = {}
+enum _event_type_enum {
+	## When the button is pressed.
+	PRESSED,
+	## When the button is released.
+	RELESED,
+	## Only one shot can be fired when pressing or holding the button.
+	ONE_SHOT,
+	## It alternates every time you press it. Ideal for changing states, such as lowering a character, etc.
+	TOGGLE
+	}
 
 var _shift_pressed: bool = false:
 	set(value):
@@ -48,6 +100,7 @@ var _left_stick: Vector2 = Vector2.ZERO:
 		if value != _left_stick:
 			_left_stick = value
 			on_left_stick_changed.emit(get_left_stick(), get_left_stick_length())
+			on_action_stick.emit(_left_stick_action_name, get_left_stick()) # TODO: Fazer nos outros
 var _left_axis_h: float = 0.0:
 	set(value):
 		if _left_axis_h != value:
@@ -82,6 +135,7 @@ var _left_trigger: float = 0.0:
 		if _left_trigger != value:
 			_left_trigger = value
 			on_left_trigger_changed.emit(_left_trigger)
+			on_action_trigger.emit(_button_left_trigger_action_name, value) # TODO: Fazer nos outros
 var _right_trigger: float = 0.0:
 	set(value):
 		if _right_trigger != value:
@@ -129,6 +183,7 @@ var _button_a_pressed: bool = false:
 	set(value):
 		_button_a_pressed = value
 		on_button_a_changed.emit(value)
+		on_action_button.emit(_button_a_action_name, value) # TODO: Fazer nos outros
 var _button_a_realesed: bool = false
 var _button_a_oneshot: bool = false
 var _button_a_toggle: bool = false
@@ -259,6 +314,10 @@ var _key_l_pressed: bool = false:
 			_right_stick.x = 1.0 if value else 0.0
 
 # ENGINE METHODS ***************************************************
+func _init() -> void:
+	_actions[_button_a_action_name] = get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT else get_button_a_toggle
+
+
 func _ready():
 	Input.joy_connection_changed.connect(func(device, connected): on_device_changed.emit(device, connected))
 	pass
@@ -294,6 +353,26 @@ func _input(event: InputEvent) -> void:
 # ENGINE METHODS ***************************************************
 
 # PUBLIC METHODS ***************************************************
+# ACTIONS NAME
+func get_action_button(action_name: String) -> bool:
+	if not action_name in _actions:
+		push_warning("%s mapping does not exist."%action_name)
+		return false
+	var result = _actions[action_name].call()
+	return result
+func get_action_stick(action_name: String) -> Vector2:
+	if not action_name in _actions:
+		push_warning("%s mapping does not exist."%action_name)
+		return Vector2.ZERO
+	var result = _actions[action_name].call()
+	return result
+func get_action_trigger(action_name: String) -> float:
+	if not action_name in _actions:
+		push_warning("%s mapping does not exist."%action_name)
+		return 0.0
+	var result = _actions[action_name].call()
+	return result
+
 # LEFT STICK GETTER
 func get_left_stick() -> Vector2:
 	return _left_stick
