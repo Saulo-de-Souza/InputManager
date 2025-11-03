@@ -122,6 +122,7 @@ var _left_stick_button_pressed: bool = false:
 	set(value):
 		_left_stick_button_pressed = value
 		on_left_stick_button_changed.emit(value)
+		on_action_button.emit(input_manager_data._button_left_stick_action_name, value)
 var _left_stick_button_realesed: bool = false
 var _left_stick_button_oneshot: bool = false
 var _left_stick_button_toggle: bool = false
@@ -131,6 +132,7 @@ var _right_stick_button_pressed: bool = false:
 	set(value):
 		_right_stick_button_pressed = value
 		on_right_stick_button_changed.emit(value)
+		on_action_button.emit(input_manager_data._button_right_stick_action_name, value)
 var _right_stick_button_realesed: bool = false
 var _right_stick_button_oneshot: bool = false
 var _right_stick_button_toggle: bool = false

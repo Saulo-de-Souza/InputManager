@@ -23,6 +23,7 @@ var owner: InputManager
 		if owner == null:
 			_left_stick_action_name = value
 			return
+		_verify_duplicate(owner._actions_sticks, value)
 		owner._actions_sticks.erase(_left_stick_action_name)
 		_left_stick_action_name = value
 		if value != "":
@@ -43,6 +44,7 @@ var owner: InputManager
 		if owner == null:
 			_right_stick_action_name = value
 			return
+		_verify_duplicate(owner._actions_sticks, value)
 		owner._actions_sticks.erase(_right_stick_action_name)
 		_right_stick_action_name = value
 		if value != "":
@@ -63,6 +65,7 @@ var owner: InputManager
 		if owner == null:
 			_left_trigger_action_name = value
 			return
+		_verify_duplicate(owner._actions_triggers, value)
 		owner._actions_triggers.erase(_left_trigger_action_name)
 		_left_trigger_action_name = value
 		if value != "":
@@ -79,6 +82,7 @@ var owner: InputManager
 		if owner == null:
 			_right_trigger_action_name = value
 			return
+		_verify_duplicate(owner._actions_triggers, value)
 		owner._actions_triggers.erase(_right_trigger_action_name)
 		_right_trigger_action_name = value
 		if value != "":
@@ -95,6 +99,7 @@ var owner: InputManager
 		if owner == null:
 			_button_left_shoulder_action_name = value
 			return
+		_verify_duplicate(owner._actions_buttons, value)
 		owner._actions_buttons.erase(_button_left_shoulder_action_name)
 		_button_left_shoulder_action_name = value
 		if value != "":
@@ -109,6 +114,7 @@ var owner: InputManager
 		if owner == null:
 			_button_left_shoulder_type = value
 			return
+		_verify_duplicate(owner._actions_buttons, _button_left_shoulder_action_name)
 		owner._actions_buttons.erase(_button_left_shoulder_action_name)
 		_button_left_shoulder_type = value
 		if _button_left_shoulder_action_name != "":
@@ -127,6 +133,7 @@ var owner: InputManager
 		if owner == null:
 			_button_right_shoulder_action_name = value
 			return
+		_verify_duplicate(owner._actions_buttons, value)
 		owner._actions_buttons.erase(_button_right_shoulder_action_name)
 		_button_right_shoulder_action_name = value
 		if value != "":
@@ -141,6 +148,7 @@ var owner: InputManager
 		if owner == null:
 			_button_right_shoulder_type = value
 			return
+		_verify_duplicate(owner._actions_buttons, _button_right_shoulder_action_name)
 		owner._actions_buttons.erase(_button_right_shoulder_action_name)
 		_button_right_shoulder_type = value
 		if _button_right_shoulder_action_name != "":
@@ -159,6 +167,7 @@ var owner: InputManager
 		if owner == null:
 			_button_left_stick_action_name = value
 			return
+		_verify_duplicate(owner._actions_buttons, value)
 		owner._actions_buttons.erase(_button_left_stick_action_name)
 		_button_left_stick_action_name = value
 		if value != "":
@@ -173,6 +182,7 @@ var owner: InputManager
 		if owner == null:
 			_button_left_stick_type = value
 			return
+		_verify_duplicate(owner._actions_buttons, _button_left_stick_action_name)
 		owner._actions_buttons.erase(_button_left_stick_action_name)
 		_button_left_stick_type = value
 		if _button_left_stick_action_name != "":
@@ -191,6 +201,7 @@ var owner: InputManager
 		if owner == null:
 			_button_right_stick_action_name = value
 			return
+		_verify_duplicate(owner._actions_buttons, value)
 		owner._actions_buttons.erase(_button_right_stick_action_name)
 		_button_right_stick_action_name = value
 		if value != "":
@@ -205,6 +216,7 @@ var owner: InputManager
 		if owner == null:
 			_button_right_stick_type = value
 			return
+		_verify_duplicate(owner._actions_buttons, _button_right_stick_action_name)
 		owner._actions_buttons.erase(_button_right_stick_action_name)
 		_button_right_stick_type = value
 		if _button_right_stick_action_name != "":
@@ -223,6 +235,7 @@ var owner: InputManager
 		if owner == null:
 			_button_a_action_name = value
 			return
+		_verify_duplicate(owner._actions_buttons, value)
 		owner._actions_buttons.erase(_button_a_action_name)
 		_button_a_action_name = value
 		if value != "":
@@ -237,6 +250,7 @@ var owner: InputManager
 		if owner == null:
 			_button_a_type = value
 			return
+		_verify_duplicate(owner._actions_buttons, _button_a_action_name)
 		owner._actions_buttons.erase(_button_a_action_name)
 		_button_a_type = value
 		if _button_a_action_name != "":
@@ -255,6 +269,7 @@ var owner: InputManager
 		if owner == null:
 			_button_b_action_name = value
 			return
+		_verify_duplicate(owner._actions_buttons, value)
 		owner._actions_buttons.erase(_button_b_action_name)
 		_button_b_action_name = value
 		if value != "":
@@ -269,6 +284,7 @@ var owner: InputManager
 		if owner == null:
 			_button_b_type = value
 			return
+		_verify_duplicate(owner._actions_buttons, _button_b_action_name)
 		owner._actions_buttons.erase(_button_b_action_name)
 		_button_b_type = value
 		if _button_b_action_name != "":
@@ -287,6 +303,7 @@ var owner: InputManager
 		if owner == null:
 			_button_x_action_name = value
 			return
+		_verify_duplicate(owner._actions_buttons, value)
 		owner._actions_buttons.erase(_button_x_action_name)
 		_button_x_action_name = value
 		if value != "":
@@ -301,6 +318,7 @@ var owner: InputManager
 		if owner == null:
 			_button_x_type = value
 			return
+		_verify_duplicate(owner._actions_buttons, _button_x_action_name)
 		owner._actions_buttons.erase(_button_x_action_name)
 		_button_x_type = value
 		if _button_x_action_name != "":
@@ -319,6 +337,7 @@ var owner: InputManager
 		if owner == null:
 			_button_y_action_name = value
 			return
+		_verify_duplicate(owner._actions_buttons, value)
 		owner._actions_buttons.erase(_button_y_action_name)
 		_button_y_action_name = value
 		if value != "":
@@ -333,6 +352,7 @@ var owner: InputManager
 		if owner == null:
 			_button_y_type = value
 			return
+		_verify_duplicate(owner._actions_buttons, _button_y_action_name)
 		owner._actions_buttons.erase(_button_y_action_name)
 		_button_y_type = value
 		if _button_y_action_name != "":
@@ -351,6 +371,7 @@ var owner: InputManager
 		if owner == null:
 			_button_dpad_up_action_name = value
 			return
+		_verify_duplicate(owner._actions_buttons, value)
 		owner._actions_buttons.erase(_button_dpad_up_action_name)
 		_button_dpad_up_action_name = value
 		if value != "":
@@ -365,6 +386,7 @@ var owner: InputManager
 		if owner == null:
 			_button_dpad_up_type = value
 			return
+		_verify_duplicate(owner._actions_buttons, _button_dpad_up_action_name)
 		owner._actions_buttons.erase(_button_dpad_up_action_name)
 		_button_dpad_up_type = value
 		if _button_dpad_up_action_name != "":
@@ -383,6 +405,7 @@ var owner: InputManager
 		if owner == null:
 			_button_dpad_down_action_name = value
 			return
+		_verify_duplicate(owner._actions_buttons, value)
 		owner._actions_buttons.erase(_button_dpad_down_action_name)
 		_button_dpad_down_action_name = value
 		if value != "":
@@ -397,6 +420,7 @@ var owner: InputManager
 		if owner == null:
 			_button_dpad_down_type = value
 			return
+		_verify_duplicate(owner._actions_buttons, _button_dpad_down_action_name)
 		owner._actions_buttons.erase(_button_dpad_down_action_name)
 		_button_dpad_down_type = value
 		if _button_dpad_down_action_name != "":
@@ -415,6 +439,7 @@ var owner: InputManager
 		if owner == null:
 			_button_dpad_left_action_name = value
 			return
+		_verify_duplicate(owner._actions_buttons, value)
 		owner._actions_buttons.erase(_button_dpad_left_action_name)
 		_button_dpad_left_action_name = value
 		if value != "":
@@ -429,6 +454,7 @@ var owner: InputManager
 		if owner == null:
 			_button_dpad_left_type = value
 			return
+		_verify_duplicate(owner._actions_buttons, _button_dpad_left_action_name)
 		owner._actions_buttons.erase(_button_dpad_left_action_name)
 		_button_dpad_left_type = value
 		if _button_dpad_left_action_name != "":
@@ -447,6 +473,7 @@ var owner: InputManager
 		if owner == null:
 			_button_dpad_right_action_name = value
 			return
+		_verify_duplicate(owner._actions_buttons, value)
 		owner._actions_buttons.erase(_button_dpad_right_action_name)
 		_button_dpad_right_action_name = value
 		if value != "":
@@ -461,6 +488,7 @@ var owner: InputManager
 		if owner == null:
 			_button_dpad_right_type = value
 			return
+		_verify_duplicate(owner._actions_buttons, _button_dpad_right_action_name)
 		owner._actions_buttons.erase(_button_dpad_right_action_name)
 		_button_dpad_right_type = value
 		if _button_dpad_right_action_name != "":
@@ -479,6 +507,7 @@ var owner: InputManager
 		if owner == null:
 			_button_start_action_name = value
 			return
+		_verify_duplicate(owner._actions_buttons, value)
 		owner._actions_buttons.erase(_button_start_action_name)
 		_button_start_action_name = value
 		if value != "":
@@ -493,6 +522,7 @@ var owner: InputManager
 		if owner == null:
 			_button_start_type = value
 			return
+		_verify_duplicate(owner._actions_buttons, _button_start_action_name)
 		owner._actions_buttons.erase(_button_start_action_name)
 		_button_start_type = value
 		if _button_start_action_name != "":
@@ -511,6 +541,7 @@ var owner: InputManager
 		if owner == null:
 			_button_select_action_name = value
 			return
+		_verify_duplicate(owner._actions_buttons, value)
 		owner._actions_buttons.erase(_button_select_action_name)
 		_button_select_action_name = value
 		if value != "":
@@ -525,6 +556,7 @@ var owner: InputManager
 		if owner == null:
 			_button_select_type = value
 			return
+		_verify_duplicate(owner._actions_buttons, _button_select_action_name)
 		owner._actions_buttons.erase(_button_select_action_name)
 		_button_select_type = value
 		if _button_select_action_name != "":
@@ -545,6 +577,9 @@ var owner: InputManager
 
 func init(_owner: InputManager) -> void:
 	owner = _owner
+
+	if owner == null:
+		return
 
 	if _left_stick_action_name != "":
 		_verify_duplicate(owner._actions_sticks, _left_stick_action_name)
