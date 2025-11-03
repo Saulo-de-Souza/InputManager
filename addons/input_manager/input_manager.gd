@@ -355,6 +355,9 @@ func get_action_trigger(action_name: String) -> float:
 	var result = _actions_triggers[action_name].call()
 	return result
 
+func save() -> void:
+	_save_resource()
+	
 # LEFT STICK GETTER
 func get_left_stick() -> Vector2:
 	return _left_stick
