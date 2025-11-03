@@ -287,7 +287,6 @@ func _ready():
 		var resource = await ResourceLoader.load(RESOURCE_PATH)
 		if not resource:
 			resource = await InputManagerData.new()
-		resource.init(self)
 		input_manager_data = resource
 	input_manager_data.init(self)
 
