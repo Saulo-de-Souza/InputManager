@@ -1,182 +1,10 @@
-@tool
 class_name InputManager extends Node
 
 # EXPORTS **********************************************************
-## Device id
-@export_range(0, 10, 1, "or_greater") var _device: int = 0
-## Left Stick deadzone
-@export_range(0.0, 1.0, 0.01) var _left_stick_deadzone: float = 0.2
-## Right Stick deadzone
-@export_range(0.0, 1.0, 0.01) var _right_stick_deadzone: float = 0.2
-## Left Trigger deadzone
-@export_range(0.0, 1.0, 0.01) var _left_trigger_deadzone: float = 0.0
-## Right Trigger deadzone
-@export_range(0.0, 1.0, 0.01) var _right_trigger_deadzone: float = 0.0
-
-@export_category("Mapping")
-@export_subgroup("Left Stick")
-## Left Stick action name
-@export_placeholder("Left Stick action name") var _left_stick_action_name = "left_stick":
+@export var input_manager_data: InputManagerData:
 	set(value):
-		_actions_sticks.erase(_left_stick_action_name)
-		_left_stick_action_name = value
-		if value != "":
-			_actions_sticks[_left_stick_action_name] = get_left_stick
-## Corresponding key of negative axis x stick.
-@export var _left_stick_key_negative_x: Key = Key.KEY_A:
-	set(value):
-		_left_stick_key_negative_x = value
-## Corresponding key of positive axis x stick.
-@export var _left_stick_key_positive_x: Key = Key.KEY_D:
-	set(value):
-		_left_stick_key_positive_x = value
-## Corresponding key of negative axis y stick.
-@export var _left_stick_key_negative_y: Key = Key.KEY_W:
-	set(value):
-		_left_stick_key_negative_y = value
-## Corresponding key of positive axis y stick.
-@export var _left_stick_key_positive_y: Key = Key.KEY_S:
-	set(value):
-		_left_stick_key_positive_y = value
-
-@export_subgroup("Right Stick")
-## Right Stick action name
-@export_placeholder("Right Stick action name") var _right_stick_action_name = "right_stick":
-	set(value):
-		_actions_sticks.erase(_right_stick_action_name)
-		_right_stick_action_name = value
-		if value != "":
-			_actions_sticks[_right_stick_action_name] = get_right_stick
-## Corresponding key of negative axis x stick.
-@export var _right_stick_key_negative_x: Key = Key.KEY_J:
-	set(value):
-		_right_stick_key_negative_x = value
-## Corresponding key of positive axis x stick.
-@export var _right_stick_key_positive_x: Key = Key.KEY_L:
-	set(value):
-		_right_stick_key_positive_x = value
-## Corresponding key of negative axis y stick.
-@export var _right_stick_key_negative_y: Key = Key.KEY_I:
-	set(value):
-		_right_stick_key_negative_y = value
-## Corresponding key of positive axis y stick.
-@export var _right_stick_key_positive_y: Key = Key.KEY_K:
-	set(value):
-		_right_stick_key_positive_y = value
-
-@export_subgroup("Left Trigger")
-## Left Trigger action name
-@export_placeholder("Left Trigger action name") var _left_trigger_action_name = "aim":
-	set(value):
-		_actions_triggers.erase(_left_trigger_action_name)
-		_left_trigger_action_name = value
-		if value != "":
-			_actions_triggers[_left_trigger_action_name] = get_left_trigger
-## Corresponding key.
-@export var _left_trigger_key: Key = Key.KEY_Q:
-	set(value):
-		_left_trigger_key = value
-
-@export_subgroup("Right Trigger")
-## Right Trigger action name
-@export_placeholder("Right Trigger action name") var _right_trigger_action_name = "acceleration":
-	set(value):
-		_actions_triggers.erase(_right_trigger_action_name)
-		_right_trigger_action_name = value
-		if value != "":
-			_actions_triggers[_right_trigger_action_name] = get_right_trigger
-## Corresponding key.
-@export var _right_trigger_key: Key = Key.KEY_E:
-	set(value):
-		_right_trigger_key = value
-
-@export_subgroup("Left Shoulder")
-## Button Left Shoulder of joystick action name
-@export_placeholder("Left Shoulder action name") var _button_left_shoulder_action_name = "push":
-	set(value):
-		_actions_buttons.erase(_button_left_shoulder_action_name)
-		_button_left_shoulder_action_name = value
-		if value != "":
-			_actions_buttons[_button_left_shoulder_action_name] = \
-			get_left_shoulder_pressed if _button_left_shoulder_type == _event_type_enum.PRESSED \
-			else get_left_shoulder_realesed if _button_left_shoulder_type == _event_type_enum.RELESED \
-			else get_left_shoulder_oneshot if _button_left_shoulder_type == _event_type_enum.ONE_SHOT \
-			else get_left_shoulder_toggle
-## Button Left Shoulder event action
-@export var _button_left_shoulder_type: _event_type_enum = _event_type_enum.PRESSED:
-	set(value):
-		_actions_buttons.erase(_button_left_shoulder_action_name)
-		_button_left_shoulder_type = value
-		if _button_left_shoulder_action_name != "":
-			_actions_buttons[_button_left_shoulder_action_name] = \
-			get_left_shoulder_pressed if _button_left_shoulder_type == _event_type_enum.PRESSED \
-			else get_left_shoulder_realesed if _button_left_shoulder_type == _event_type_enum.RELESED \
-			else get_left_shoulder_oneshot if _button_left_shoulder_type == _event_type_enum.ONE_SHOT \
-			else get_left_shoulder_toggle
-## Corresponding key.
-@export var _button_left_shoulder_key: Key = Key.KEY_U:
-	set(value):
-		_button_left_shoulder_key = value
-
-@export_subgroup("Right Shoulder")
-## Button Right Shoulder of joystick action name
-@export_placeholder("Right Shoulder action name") var _button_right_shoulder_action_name = "grab":
-	set(value):
-		_actions_buttons.erase(_button_right_shoulder_action_name)
-		_button_right_shoulder_action_name = value
-		if value != "":
-			_actions_buttons[_button_right_shoulder_action_name] = \
-			get_right_shoulder_pressed if _button_right_shoulder_type == _event_type_enum.PRESSED \
-			else get_right_shoulder_realesed if _button_right_shoulder_type == _event_type_enum.RELESED \
-			else get_right_shoulder_oneshot if _button_right_shoulder_type == _event_type_enum.ONE_SHOT \
-			else get_right_shoulder_toggle
-## Button Right Shoulder event action
-@export var _button_right_shoulder_type: _event_type_enum = _event_type_enum.PRESSED:
-	set(value):
-		_actions_buttons.erase(_button_right_shoulder_action_name)
-		_button_right_shoulder_type = value
-		if _button_right_shoulder_action_name != "":
-			_actions_buttons[_button_right_shoulder_action_name] = \
-			get_right_shoulder_pressed if _button_right_shoulder_type == _event_type_enum.PRESSED \
-			else get_right_shoulder_realesed if _button_right_shoulder_type == _event_type_enum.RELESED \
-			else get_right_shoulder_oneshot if _button_right_shoulder_type == _event_type_enum.ONE_SHOT \
-			else get_right_shoulder_toggle
-## Corresponding key.
-@export var _button_right_shoulder_key: Key = Key.KEY_O:
-	set(value):
-		_button_right_shoulder_key = value
-
-
-@export_subgroup("Action Button A")
-## Button A of joystick action name
-@export_placeholder("Button A action name") var _button_a_action_name = "jump":
-	set(value):
-		_actions_buttons.erase(_button_a_action_name)
-		_button_a_action_name = value
-		if value != "":
-			_actions_buttons[_button_a_action_name] = \
-			get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED \
-			else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED \
-			else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT \
-			else get_button_a_toggle
-## Button A event action
-@export var _button_a_type: _event_type_enum = _event_type_enum.PRESSED:
-	set(value):
-		_actions_buttons.erase(_button_a_action_name)
-		_button_a_type = value
-		if _button_a_action_name != "":
-			_actions_buttons[_button_a_action_name] = \
-			get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED \
-			else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED \
-			else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT \
-			else get_button_a_toggle
-## Corresponding key.
-@export var _button_a_key: Key = Key.KEY_SPACE:
-	set(value):
-		_button_a_key = value
-
-# TODO: Continuar aqui
-
+		input_manager_data = value
+		input_manager_data.owner = self
 # EXPORTS **********************************************************
 
 # SIGNALS **********************************************************
@@ -208,16 +36,6 @@ signal on_action_stick(action_name: String, value: Vector2)
 var _actions_buttons: Dictionary[String, Callable] = {}
 var _actions_sticks: Dictionary[String, Callable] = {}
 var _actions_triggers: Dictionary[String, Callable] = {}
-enum _event_type_enum {
-	## When the button is pressed.
-	PRESSED,
-	## When the button is released.
-	RELESED,
-	## Only one shot can be fired when pressing or holding the button.
-	ONE_SHOT,
-	## It alternates every time you press it. Ideal for changing states, such as lowering a character, etc.
-	TOGGLE
-	}
 
 var _shift_pressed: bool = false:
 	set(value):
@@ -225,15 +43,13 @@ var _shift_pressed: bool = false:
 		_left_stick.x = (sign(_left_stick.x) * (0.5 if not _shift_pressed else 1.0))
 		_left_stick.y = (sign(_left_stick.y) * (0.5 if not _shift_pressed else 1.0))
 
-# TODO: Colocar os signals nas propriedades abaixo:
-
 # LEFT STICKS
 var _left_stick: Vector2 = Vector2.ZERO:
 	set(value):
 		if value != _left_stick:
 			_left_stick = value
 			on_left_stick_changed.emit(get_left_stick(), get_left_stick_length())
-			on_action_stick.emit(_left_stick_action_name, get_left_stick()) # TODO: Fazer nos outros
+			on_action_stick.emit(input_manager_data._left_stick_action_name, get_left_stick())
 var _left_axis_h: float = 0.0:
 	set(value):
 		if _left_axis_h != value:
@@ -251,7 +67,7 @@ var _right_stick: Vector2 = Vector2.ZERO:
 		if value != _right_stick:
 			_right_stick = value
 			on_right_stick_changed.emit(get_right_stick(), get_right_stick_length())
-			on_action_stick.emit(_right_stick_action_name, get_right_stick()) # TODO: Fazer nos outros
+			on_action_stick.emit(input_manager_data._right_stick_action_name, get_right_stick())
 var _right_axis_h: float = 0.0:
 	set(value):
 		if _right_axis_h != value:
@@ -269,18 +85,20 @@ var _left_trigger: float = 0.0:
 		if _left_trigger != value:
 			_left_trigger = value
 			on_left_trigger_changed.emit(_left_trigger)
-			on_action_trigger.emit(_left_trigger_action_name, value) # TODO: Fazer nos outros
+			on_action_trigger.emit(input_manager_data._left_trigger_action_name, value)
 var _right_trigger: float = 0.0:
 	set(value):
 		if _right_trigger != value:
 			_right_trigger = value
 			on_right_trigger_changed.emit(_right_trigger)
+			on_action_trigger.emit(input_manager_data._right_trigger_action_name, value)
 
 # LEFT SHOULDER
 var _left_shoulder_pressed: bool = false:
 	set(value):
 		_left_shoulder_pressed = value
 		on_left_shoulder_changed.emit(value)
+		on_action_button.emit(input_manager_data._button_left_shoulder_action_name, value)
 var _left_shoulder_realesed: bool = false
 var _left_shoulder_oneshot: bool = false
 var _left_shoulder_toggle: bool = false
@@ -290,6 +108,7 @@ var _right_shoulder_pressed: bool = false:
 	set(value):
 		_right_shoulder_pressed = value
 		on_right_shoulder_changed.emit(value)
+		on_action_button.emit(input_manager_data._button_right_shoulder_action_name, value)
 var _right_shoulder_realesed: bool = false
 var _right_shoulder_oneshot: bool = false
 var _right_shoulder_toggle: bool = false
@@ -317,7 +136,7 @@ var _button_a_pressed: bool = false:
 	set(value):
 		_button_a_pressed = value
 		on_button_a_changed.emit(value)
-		on_action_button.emit(_button_a_action_name, value) # TODO: Fazer nos outros
+		on_action_button.emit(input_manager_data._button_a_action_name, value)
 var _button_a_realesed: bool = false
 var _button_a_oneshot: bool = false
 var _button_a_toggle: bool = false
@@ -327,6 +146,7 @@ var _button_b_pressed: bool = false:
 	set(value):
 		_button_b_pressed = value
 		on_button_b_changed.emit(value)
+		on_action_button.emit(input_manager_data._button_b_action_name, value)
 var _button_b_realesed: bool = false
 var _button_b_oneshot: bool = false
 var _button_b_toggle: bool = false
@@ -336,6 +156,7 @@ var _button_x_pressed: bool = false:
 	set(value):
 		_button_x_pressed = value
 		on_button_x_changed.emit(value)
+		on_action_button.emit(input_manager_data._button_x_action_name, value)
 var _button_x_realesed: bool = false
 var _button_x_oneshot: bool = false
 var _button_x_toggle: bool = false
@@ -345,6 +166,7 @@ var _button_y_pressed: bool = false:
 	set(value):
 		_button_y_pressed = value
 		on_button_y_changed.emit(value)
+		on_action_button.emit(input_manager_data._button_y_action_name, value)
 var _button_y_realesed: bool = false
 var _button_y_oneshot: bool = false
 var _button_y_toggle: bool = false
@@ -354,6 +176,7 @@ var _dpad_up_pressed: bool = false:
 	set(value):
 		_dpad_up_pressed = value
 		on_dpad_up_changed.emit(value)
+		on_action_button.emit(input_manager_data._button_dpad_up_action_name, value)
 var _dpad_up_realesed: bool = false
 var _dpad_up_oneshot: bool = false
 var _dpad_up_toggle: bool = false
@@ -363,6 +186,7 @@ var _dpad_down_pressed: bool = false:
 	set(value):
 		_dpad_down_pressed = value
 		on_dpad_down_changed.emit(value)
+		on_action_button.emit(input_manager_data._button_dpad_down_action_name, value)
 var _dpad_down_realesed: bool = false
 var _dpad_down_oneshot: bool = false
 var _dpad_down_toggle: bool = false
@@ -372,6 +196,7 @@ var _dpad_left_pressed: bool = false:
 	set(value):
 		_dpad_left_pressed = value
 		on_dpad_left_changed.emit(value)
+		on_action_button.emit(input_manager_data._button_dpad_left_action_name, value)
 var _dpad_left_realesed: bool = false
 var _dpad_left_oneshot: bool = false
 var _dpad_left_toggle: bool = false
@@ -381,6 +206,7 @@ var _dpad_right_pressed: bool = false:
 	set(value):
 		_dpad_right_pressed = value
 		on_dpad_right_changed.emit(value)
+		on_action_button.emit(input_manager_data._button_dpad_right_action_name, value)
 var _dpad_right_realesed: bool = false
 var _dpad_right_oneshot: bool = false
 var _dpad_right_toggle: bool = false
@@ -390,6 +216,7 @@ var _start_pressed: bool = false:
 	set(value):
 		_start_pressed = value
 		on_start_changed.emit(value)
+		on_action_button.emit(input_manager_data._button_start_action_name, value)
 var _start_realesed: bool = false
 var _start_oneshot: bool = false
 var _start_toggle: bool = false
@@ -399,6 +226,7 @@ var _select_pressed: bool = false:
 	set(value):
 		_select_pressed = value
 		on_select_changed.emit(value)
+		on_action_button.emit(input_manager_data._button_select_action_name, value)
 var _select_realesed: bool = false
 var _select_oneshot: bool = false
 var _select_toggle: bool = false
@@ -448,41 +276,123 @@ var _key_l_pressed: bool = false:
 			_right_stick.x = 1.0 if value else 0.0
 
 # ENGINE METHODS ***************************************************
+
+
 func _init() -> void:
-	if _left_stick_action_name != "":
-		_actions_sticks[_left_stick_action_name] = get_left_stick
+	if not input_manager_data:
+		input_manager_data = ResourceLoader.load("res://addons/input_manager/resources/input_manager_data.tres")
+	input_manager_data.owner = self
 
-	if _right_stick_action_name != "":
-		_actions_sticks[_right_stick_action_name] = get_right_stick
+	if input_manager_data._left_stick_action_name != "":
+		_actions_sticks[input_manager_data._left_stick_action_name] = get_left_stick
 
-	if _left_trigger_action_name != "":
-		_actions_triggers[_left_trigger_action_name] = get_left_trigger
+	if input_manager_data._right_stick_action_name != "":
+		_actions_sticks[input_manager_data._right_stick_action_name] = get_right_stick
 
-	if _right_trigger_action_name != "":
-		_actions_triggers[_right_trigger_action_name] = get_right_trigger
+	if input_manager_data._left_trigger_action_name != "":
+		_actions_triggers[input_manager_data._left_trigger_action_name] = get_left_trigger
 
-	if _button_left_shoulder_action_name != "":
-		_actions_buttons[_button_left_shoulder_action_name] = \
-		get_left_shoulder_pressed if _button_left_shoulder_type == _event_type_enum.PRESSED \
-		else get_left_shoulder_realesed if _button_left_shoulder_type == _event_type_enum.RELESED \
-		else get_left_shoulder_oneshot if _button_left_shoulder_type == _event_type_enum.ONE_SHOT \
+	if input_manager_data._right_trigger_action_name != "":
+		_actions_triggers[input_manager_data._right_trigger_action_name] = get_right_trigger
+
+	if input_manager_data._button_left_shoulder_action_name != "":
+		_actions_buttons[input_manager_data._button_left_shoulder_action_name] = \
+		get_left_shoulder_pressed if input_manager_data._button_left_shoulder_type == InputManagerConst._event_type_enum.PRESSED \
+		else get_left_shoulder_realesed if input_manager_data._button_left_shoulder_type == InputManagerConst._event_type_enum.RELESED \
+		else get_left_shoulder_oneshot if input_manager_data._button_left_shoulder_type == InputManagerConst._event_type_enum.ONE_SHOT \
 		else get_left_shoulder_toggle
 
-	if _button_right_shoulder_action_name != "":
-		_actions_buttons[_button_right_shoulder_action_name] = \
-		get_right_shoulder_pressed if _button_right_shoulder_type == _event_type_enum.PRESSED \
-		else get_right_shoulder_realesed if _button_right_shoulder_type == _event_type_enum.RELESED \
-		else get_right_shoulder_oneshot if _button_right_shoulder_type == _event_type_enum.ONE_SHOT \
+	if input_manager_data._button_right_shoulder_action_name != "":
+		_actions_buttons[input_manager_data._button_right_shoulder_action_name] = \
+		get_right_shoulder_pressed if input_manager_data._button_right_shoulder_type == InputManagerConst._event_type_enum.PRESSED \
+		else get_right_shoulder_realesed if input_manager_data._button_right_shoulder_type == InputManagerConst._event_type_enum.RELESED \
+		else get_right_shoulder_oneshot if input_manager_data._button_right_shoulder_type == InputManagerConst._event_type_enum.ONE_SHOT \
 		else get_right_shoulder_toggle
 
-	if _button_a_action_name != "":
-		_actions_buttons[_button_a_action_name] = \
-		get_button_a_pressed if _button_a_type == _event_type_enum.PRESSED \
-		else get_button_a_realesed if _button_a_type == _event_type_enum.RELESED \
-		else get_button_a_oneshot if _button_a_type == _event_type_enum.ONE_SHOT \
+	if input_manager_data._button_left_stick_action_name != "":
+			_actions_buttons[input_manager_data._button_left_stick_action_name] = \
+			get_left_stick_button_pressed if input_manager_data._button_left_stick_type == InputManagerConst._event_type_enum.PRESSED \
+			else get_left_stick_button_realesed if input_manager_data._button_left_stick_type == InputManagerConst._event_type_enum.RELESED \
+			else get_left_stick_button_oneshot if input_manager_data._button_left_stick_type == InputManagerConst._event_type_enum.ONE_SHOT \
+			else get_left_stick_button_toggle
+	
+	if input_manager_data._button_right_stick_action_name != "":
+			_actions_buttons[input_manager_data._button_right_stick_action_name] = \
+			get_right_stick_button_pressed if input_manager_data._button_right_stick_type == InputManagerConst._event_type_enum.PRESSED \
+			else get_right_stick_button_realesed if input_manager_data._button_right_stick_type == InputManagerConst._event_type_enum.RELESED \
+			else get_right_stick_button_oneshot if input_manager_data._button_right_stick_type == InputManagerConst._event_type_enum.ONE_SHOT \
+			else get_right_stick_button_toggle
+
+	if input_manager_data._button_a_action_name != "":
+		_actions_buttons[input_manager_data._button_a_action_name] = \
+		get_button_a_pressed if input_manager_data._button_a_type == InputManagerConst._event_type_enum.PRESSED \
+		else get_button_a_realesed if input_manager_data._button_a_type == InputManagerConst._event_type_enum.RELESED \
+		else get_button_a_oneshot if input_manager_data._button_a_type == InputManagerConst._event_type_enum.ONE_SHOT \
 		else get_button_a_toggle
 
-		# TODO: Continuar aqui
+	if input_manager_data._button_b_action_name != "":
+		_actions_buttons[input_manager_data._button_b_action_name] = \
+		get_button_b_pressed if input_manager_data._button_b_type == InputManagerConst._event_type_enum.PRESSED \
+		else get_button_b_realesed if input_manager_data._button_b_type == InputManagerConst._event_type_enum.RELESED \
+		else get_button_b_oneshot if input_manager_data._button_b_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else get_button_b_toggle
+
+	if input_manager_data._button_x_action_name != "":
+		_actions_buttons[input_manager_data._button_x_action_name] = \
+		get_button_x_pressed if input_manager_data._button_x_type == InputManagerConst._event_type_enum.PRESSED \
+		else get_button_x_realesed if input_manager_data._button_x_type == InputManagerConst._event_type_enum.RELESED \
+		else get_button_x_oneshot if input_manager_data._button_x_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else get_button_x_toggle
+
+	if input_manager_data._button_y_action_name != "":
+		_actions_buttons[input_manager_data._button_y_action_name] = \
+		get_button_y_pressed if input_manager_data._button_y_type == InputManagerConst._event_type_enum.PRESSED \
+		else get_button_y_realesed if input_manager_data._button_y_type == InputManagerConst._event_type_enum.RELESED \
+		else get_button_y_oneshot if input_manager_data._button_y_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else get_button_y_toggle
+
+	if input_manager_data._button_dpad_up_action_name != "":
+		_actions_buttons[input_manager_data._button_dpad_up_action_name] = \
+		get_dpad_up_pressed if input_manager_data._button_dpad_up_type == InputManagerConst._event_type_enum.PRESSED \
+		else get_dpad_up_realesed if input_manager_data._button_dpad_up_type == InputManagerConst._event_type_enum.RELESED \
+		else get_dpad_up_oneshot if input_manager_data._button_dpad_up_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else get_dpad_up_toggle
+
+	if input_manager_data._button_dpad_down_action_name != "":
+		_actions_buttons[input_manager_data._button_dpad_down_action_name] = \
+		get_dpad_down_pressed if input_manager_data._button_dpad_down_type == InputManagerConst._event_type_enum.PRESSED \
+		else get_dpad_down_realesed if input_manager_data._button_dpad_down_type == InputManagerConst._event_type_enum.RELESED \
+		else get_dpad_down_oneshot if input_manager_data._button_dpad_down_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else get_dpad_down_toggle
+	
+	if input_manager_data._button_dpad_left_action_name != "":
+			_actions_buttons[input_manager_data._button_dpad_left_action_name] = \
+			get_dpad_left_pressed if input_manager_data._button_dpad_left_type == InputManagerConst._event_type_enum.PRESSED \
+			else get_dpad_left_realesed if input_manager_data._button_dpad_left_type == InputManagerConst._event_type_enum.RELESED \
+			else get_dpad_left_oneshot if input_manager_data._button_dpad_left_type == InputManagerConst._event_type_enum.ONE_SHOT \
+			else get_dpad_left_toggle
+	
+	if input_manager_data._button_dpad_right_action_name != "":
+		_actions_buttons[input_manager_data._button_dpad_right_action_name] = \
+		get_dpad_right_pressed if input_manager_data._button_dpad_right_type == InputManagerConst._event_type_enum.PRESSED \
+		else get_dpad_right_realesed if input_manager_data._button_dpad_right_type == InputManagerConst._event_type_enum.RELESED \
+		else get_dpad_right_oneshot if input_manager_data._button_dpad_right_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else get_dpad_right_toggle
+	
+	if input_manager_data._button_start_action_name != "":
+		_actions_buttons[input_manager_data._button_start_action_name] = \
+		get_start_pressed if input_manager_data._button_start_type == InputManagerConst._event_type_enum.PRESSED \
+		else get_start_realesed if input_manager_data._button_start_type == InputManagerConst._event_type_enum.RELESED \
+		else get_start_oneshot if input_manager_data._button_start_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else get_start_toggle
+
+	if input_manager_data._button_select_action_name != "":
+		_actions_buttons[input_manager_data._button_select_action_name] = \
+		get_select_pressed if input_manager_data._button_select_type == InputManagerConst._event_type_enum.PRESSED \
+		else get_select_realesed if input_manager_data._button_select_type == InputManagerConst._event_type_enum.RELESED \
+		else get_select_oneshot if input_manager_data._button_select_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else get_select_toggle
+
 func _ready():
 	Input.joy_connection_changed.connect(func(device, connected): on_device_changed.emit(device, connected))
 	pass
@@ -798,43 +708,43 @@ func _apply_deadzone_axis(value: float, deadzone: float) -> float:
 		return sign(value) * ((abs(value) - deadzone) / (1.0 - deadzone))
 
 func start_vibration(left_strength: float, right_strength: float, duration: float) -> void:
-	Input.start_joy_vibration(_device, right_strength, left_strength, duration)
+	Input.start_joy_vibration(input_manager_data._device, right_strength, left_strength, duration)
 	pass
 
 func stop_vibration() -> void:
-	Input.stop_joy_vibration(_device)
+	Input.stop_joy_vibration(input_manager_data._device)
 	pass
 
 func _check_left_stick(event: InputEventJoypadMotion) -> void:
-	if event.device == _device:
+	if event.device == input_manager_data._device:
 		if event.axis == JOY_AXIS_LEFT_X:
-			_left_axis_h = _apply_deadzone_axis(event.axis_value, _left_stick_deadzone)
+			_left_axis_h = _apply_deadzone_axis(event.axis_value, input_manager_data._left_stick_deadzone)
 		elif event.axis == JOY_AXIS_LEFT_Y:
-			_left_axis_v = _apply_deadzone_axis(event.axis_value, _left_stick_deadzone)
+			_left_axis_v = _apply_deadzone_axis(event.axis_value, input_manager_data._left_stick_deadzone)
 	pass
 
 func _check_right_stick(event: InputEventJoypadMotion) -> void:
-	if event.device == _device:
+	if event.device == input_manager_data._device:
 		if event.axis == JOY_AXIS_RIGHT_X:
-			_right_axis_h = _apply_deadzone_axis(event.axis_value, _right_stick_deadzone)
+			_right_axis_h = _apply_deadzone_axis(event.axis_value, input_manager_data._right_stick_deadzone)
 		elif event.axis == JOY_AXIS_RIGHT_Y:
-			_right_axis_v = _apply_deadzone_axis(event.axis_value, _right_stick_deadzone)
+			_right_axis_v = _apply_deadzone_axis(event.axis_value, input_manager_data._right_stick_deadzone)
 	pass
 
 func _check_left_trigger(event: InputEventJoypadMotion) -> void:
-	if event.device == _device:
+	if event.device == input_manager_data._device:
 		if event.axis == JOY_AXIS_TRIGGER_LEFT:
-			_left_trigger = _apply_deadzone_axis(event.axis_value, _left_trigger_deadzone)
+			_left_trigger = _apply_deadzone_axis(event.axis_value, input_manager_data._left_trigger_deadzone)
 	pass
 
 func _check_right_trigger(event: InputEventJoypadMotion) -> void:
-	if event.device == _device:
+	if event.device == input_manager_data._device:
 		if event.axis == JOY_AXIS_TRIGGER_RIGHT:
-			_right_trigger = _apply_deadzone_axis(event.axis_value, _right_trigger_deadzone)
+			_right_trigger = _apply_deadzone_axis(event.axis_value, input_manager_data._right_trigger_deadzone)
 	pass
 
 func _check_button_a(event: InputEventJoypadButton) -> void:
-	if _device == event.device:
+	if input_manager_data._device == event.device:
 			if event.button_index == JOY_BUTTON_A:
 				if event.pressed:
 					_button_a_oneshot = true
@@ -848,7 +758,7 @@ func _check_button_a(event: InputEventJoypadButton) -> void:
 	pass
 
 func _check_button_b(event: InputEventJoypadButton) -> void:
-	if _device == event.device:
+	if input_manager_data._device == event.device:
 			if event.button_index == JOY_BUTTON_B:
 				if event.pressed:
 					_button_b_oneshot = true
@@ -862,7 +772,7 @@ func _check_button_b(event: InputEventJoypadButton) -> void:
 	pass
 
 func _check_button_x(event: InputEventJoypadButton) -> void:
-	if _device == event.device:
+	if input_manager_data._device == event.device:
 			if event.button_index == JOY_BUTTON_X:
 				if event.pressed:
 					_button_x_oneshot = true
@@ -876,7 +786,7 @@ func _check_button_x(event: InputEventJoypadButton) -> void:
 	pass
 
 func _check_button_y(event: InputEventJoypadButton) -> void:
-	if _device == event.device:
+	if input_manager_data._device == event.device:
 			if event.button_index == JOY_BUTTON_Y:
 				if event.pressed:
 					_button_y_oneshot = true
@@ -890,7 +800,7 @@ func _check_button_y(event: InputEventJoypadButton) -> void:
 	pass
 
 func _check_dpad_up(event: InputEventJoypadButton) -> void:
-	if _device == event.device:
+	if input_manager_data._device == event.device:
 			if event.button_index == JOY_BUTTON_DPAD_UP:
 				if event.pressed:
 					_dpad_up_oneshot = true
@@ -904,7 +814,7 @@ func _check_dpad_up(event: InputEventJoypadButton) -> void:
 	pass
 
 func _check_dpad_down(event: InputEventJoypadButton) -> void:
-	if _device == event.device:
+	if input_manager_data._device == event.device:
 			if event.button_index == JOY_BUTTON_DPAD_DOWN:
 				if event.pressed:
 					_dpad_down_oneshot = true
@@ -918,7 +828,7 @@ func _check_dpad_down(event: InputEventJoypadButton) -> void:
 	pass
 
 func _check_dpad_left(event: InputEventJoypadButton) -> void:
-	if _device == event.device:
+	if input_manager_data._device == event.device:
 			if event.button_index == JOY_BUTTON_DPAD_LEFT:
 				if event.pressed:
 					_dpad_left_oneshot = true
@@ -932,7 +842,7 @@ func _check_dpad_left(event: InputEventJoypadButton) -> void:
 	pass
 
 func _check_dpad_right(event: InputEventJoypadButton) -> void:
-	if _device == event.device:
+	if input_manager_data._device == event.device:
 			if event.button_index == JOY_BUTTON_DPAD_RIGHT:
 				if event.pressed:
 					_dpad_right_oneshot = true
@@ -946,7 +856,7 @@ func _check_dpad_right(event: InputEventJoypadButton) -> void:
 	pass
 
 func _check_start(event: InputEventJoypadButton) -> void:
-	if _device == event.device:
+	if input_manager_data._device == event.device:
 			if event.button_index == JOY_BUTTON_START:
 				if event.pressed:
 					_start_oneshot = true
@@ -960,7 +870,7 @@ func _check_start(event: InputEventJoypadButton) -> void:
 	pass
 
 func _check_select(event: InputEventJoypadButton) -> void:
-	if _device == event.device:
+	if input_manager_data._device == event.device:
 			if event.button_index == JOY_BUTTON_BACK:
 				if event.pressed:
 					_select_oneshot = true
@@ -974,7 +884,7 @@ func _check_select(event: InputEventJoypadButton) -> void:
 	pass
 
 func _check_left_shoulder(event: InputEventJoypadButton) -> void:
-	if _device == event.device:
+	if input_manager_data._device == event.device:
 			if event.button_index == JOY_BUTTON_LEFT_SHOULDER:
 				if event.pressed:
 					_left_shoulder_oneshot = true
@@ -988,7 +898,7 @@ func _check_left_shoulder(event: InputEventJoypadButton) -> void:
 	pass
 
 func _check_right_shoulder(event: InputEventJoypadButton) -> void:
-	if _device == event.device:
+	if input_manager_data._device == event.device:
 			if event.button_index == JOY_BUTTON_RIGHT_SHOULDER:
 				if event.pressed:
 					_right_shoulder_oneshot = true
@@ -1002,7 +912,7 @@ func _check_right_shoulder(event: InputEventJoypadButton) -> void:
 	pass
 
 func _check_left_stick_button(event: InputEventJoypadButton) -> void:
-	if _device == event.device:
+	if input_manager_data._device == event.device:
 			if event.button_index == JOY_BUTTON_LEFT_STICK:
 				if event.pressed:
 					_left_stick_button_oneshot = true
@@ -1016,7 +926,7 @@ func _check_left_stick_button(event: InputEventJoypadButton) -> void:
 	pass
 
 func _check_right_stick_button(event: InputEventJoypadButton) -> void:
-	if _device == event.device:
+	if input_manager_data._device == event.device:
 			if event.button_index == JOY_BUTTON_RIGHT_STICK:
 				if event.pressed:
 					_right_stick_button_oneshot = true
@@ -1030,29 +940,28 @@ func _check_right_stick_button(event: InputEventJoypadButton) -> void:
 	pass
 
 func _check_keyboard(event: InputEventKey) -> void:
-	# TODO: Continuar aqui
 	match event.keycode:
-		_left_stick_key_negative_y:
+		input_manager_data._left_stick_key_negative_y:
 			_key_w_pressed = event.pressed
-		_left_stick_key_positive_y:
+		input_manager_data._left_stick_key_positive_y:
 			_key_s_pressed = event.pressed
-		_left_stick_key_negative_x:
+		input_manager_data._left_stick_key_negative_x:
 			_key_a_pressed = event.pressed
-		_left_stick_key_positive_x:
+		input_manager_data._left_stick_key_positive_x:
 			_key_d_pressed = event.pressed
-		_right_stick_key_negative_y:
+		input_manager_data._right_stick_key_negative_y:
 			_key_i_pressed = event.pressed
-		_right_stick_key_negative_x:
+		input_manager_data._right_stick_key_negative_x:
 			_key_j_pressed = event.pressed
-		_right_stick_key_positive_y:
+		input_manager_data._right_stick_key_positive_y:
 			_key_k_pressed = event.pressed
-		_right_stick_key_positive_x:
+		input_manager_data._right_stick_key_positive_x:
 			_key_l_pressed = event.pressed
-		_left_trigger_key:
+		input_manager_data._left_trigger_key:
 			_left_trigger = 1.0 if event.pressed else 0.0
-		_right_trigger_key:
+		input_manager_data._right_trigger_key:
 			_right_trigger = 1.0 if event.pressed else 0.0
-		_button_left_shoulder_key:
+		input_manager_data._button_left_shoulder_key:
 			if event.pressed != _left_shoulder_pressed:
 				if event.pressed:
 					_left_shoulder_oneshot = true
@@ -1063,7 +972,7 @@ func _check_keyboard(event: InputEventKey) -> void:
 					_left_shoulder_oneshot = false
 					_left_shoulder_realesed = true
 					_left_shoulder_pressed = false
-		_button_right_shoulder_key:
+		input_manager_data._button_right_shoulder_key:
 			if event.pressed != _right_shoulder_pressed:
 				if event.pressed:
 					_right_shoulder_oneshot = true
@@ -1074,7 +983,7 @@ func _check_keyboard(event: InputEventKey) -> void:
 					_right_shoulder_oneshot = false
 					_right_shoulder_realesed = true
 					_right_shoulder_pressed = false
-		KEY_F:
+		input_manager_data._button_left_stick_key:
 			if event.pressed != _left_stick_button_pressed:
 				if event.pressed:
 					_left_stick_button_oneshot = true
@@ -1085,7 +994,7 @@ func _check_keyboard(event: InputEventKey) -> void:
 					_left_stick_button_oneshot = false
 					_left_stick_button_realesed = true
 					_left_stick_button_pressed = false
-		KEY_G:
+		input_manager_data._button_right_stick_key:
 			if event.pressed != _right_stick_button_pressed:
 				if event.pressed:
 					_right_stick_button_oneshot = true
@@ -1096,7 +1005,7 @@ func _check_keyboard(event: InputEventKey) -> void:
 					_right_stick_button_oneshot = false
 					_right_stick_button_realesed = true
 					_right_stick_button_pressed = false
-		_button_a_key: # TODO:
+		input_manager_data._button_a_key:
 			if event.pressed != _button_a_pressed:
 				if event.pressed:
 					_button_a_oneshot = true
@@ -1107,7 +1016,7 @@ func _check_keyboard(event: InputEventKey) -> void:
 					_button_a_oneshot = false
 					_button_a_realesed = true
 					_button_a_pressed = false
-		KEY_Z:
+		input_manager_data._button_b_key:
 			if event.pressed != _button_b_pressed:
 				if event.pressed:
 					_button_b_oneshot = true
@@ -1118,7 +1027,7 @@ func _check_keyboard(event: InputEventKey) -> void:
 					_button_b_oneshot = false
 					_button_b_realesed = true
 					_button_b_pressed = false
-		KEY_X:
+		input_manager_data._button_x_key:
 			if event.pressed != _button_x_pressed:
 				if event.pressed:
 					_button_x_oneshot = true
@@ -1129,7 +1038,7 @@ func _check_keyboard(event: InputEventKey) -> void:
 					_button_x_oneshot = false
 					_button_x_realesed = true
 					_button_x_pressed = false
-		KEY_C:
+		input_manager_data._button_y_key:
 			if event.pressed != _button_y_pressed:
 				if event.pressed:
 					_button_y_oneshot = true
@@ -1140,7 +1049,7 @@ func _check_keyboard(event: InputEventKey) -> void:
 					_button_y_oneshot = false
 					_button_y_realesed = true
 					_button_y_pressed = false
-		KEY_UP:
+		input_manager_data._button_dpad_up_key:
 			if event.pressed != _dpad_up_pressed:
 				if event.pressed:
 					_dpad_up_oneshot = true
@@ -1151,7 +1060,7 @@ func _check_keyboard(event: InputEventKey) -> void:
 					_dpad_up_oneshot = false
 					_dpad_up_realesed = true
 					_dpad_up_pressed = false
-		KEY_DOWN:
+		input_manager_data._button_dpad_down_key:
 			if event.pressed != _dpad_down_pressed:
 				if event.pressed:
 					_dpad_down_oneshot = true
@@ -1162,7 +1071,7 @@ func _check_keyboard(event: InputEventKey) -> void:
 					_dpad_down_oneshot = false
 					_dpad_down_realesed = true
 					_dpad_down_pressed = false
-		KEY_LEFT:
+		input_manager_data._button_dpad_left_key:
 			if event.pressed != _dpad_left_pressed:
 				if event.pressed:
 					_dpad_left_oneshot = true
@@ -1173,7 +1082,7 @@ func _check_keyboard(event: InputEventKey) -> void:
 					_dpad_left_oneshot = false
 					_dpad_left_realesed = true
 					_dpad_left_pressed = false
-		KEY_RIGHT:
+		input_manager_data._button_dpad_right_key:
 			if event.pressed != _dpad_right_pressed:
 				if event.pressed:
 					_dpad_right_oneshot = true
@@ -1184,7 +1093,7 @@ func _check_keyboard(event: InputEventKey) -> void:
 					_dpad_right_oneshot = false
 					_dpad_right_realesed = true
 					_dpad_right_pressed = false
-		KEY_ENTER:
+		input_manager_data._button_start_key:
 			if event.pressed != _start_pressed:
 				if event.pressed:
 					_start_oneshot = true
@@ -1195,7 +1104,7 @@ func _check_keyboard(event: InputEventKey) -> void:
 					_start_oneshot = false
 					_start_realesed = true
 					_start_pressed = false
-		KEY_BACKSPACE:
+		input_manager_data._button_select_key:
 			if event.pressed != _select_pressed:
 				if event.pressed:
 					_select_oneshot = true
@@ -1226,7 +1135,9 @@ func _check_mouse_button(event: InputEventMouseButton) -> void:
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			on_left_trigger_changed.emit(1.0 if event.pressed else 0.0)
+			on_action_trigger.emit(input_manager_data._left_trigger_action_name, 1.0 if event.pressed else 0.0)
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			on_right_trigger_changed.emit(1.0 if event.pressed else 0.0)
+			on_action_trigger.emit(input_manager_data._right_trigger_action_name, 1.0 if event.pressed else 0.0)
 	pass
 # PRIVATE METHODS **************************************************
