@@ -20,6 +20,9 @@ var owner: InputManager
 ## Left Stick action name
 @export_placeholder("Left Stick action name") var _left_stick_action_name = "left_stick":
 	set(value):
+		if owner == null:
+			_left_stick_action_name = value
+			return
 		owner._actions_sticks.erase(_left_stick_action_name)
 		_left_stick_action_name = value
 		if value != "":
@@ -37,6 +40,9 @@ var owner: InputManager
 ## Right Stick action name
 @export_placeholder("Right Stick action name") var _right_stick_action_name = "right_stick":
 	set(value):
+		if owner == null:
+			_right_stick_action_name = value
+			return
 		owner._actions_sticks.erase(_right_stick_action_name)
 		_right_stick_action_name = value
 		if value != "":
@@ -54,6 +60,9 @@ var owner: InputManager
 ## Left Trigger action name
 @export_placeholder("Left Trigger action name") var _left_trigger_action_name = "aim":
 	set(value):
+		if owner == null:
+			_left_trigger_action_name = value
+			return
 		owner._actions_triggers.erase(_left_trigger_action_name)
 		_left_trigger_action_name = value
 		if value != "":
@@ -67,6 +76,9 @@ var owner: InputManager
 ## Right Trigger action name
 @export_placeholder("Right Trigger action name") var _right_trigger_action_name = "acceleration":
 	set(value):
+		if owner == null:
+			_right_trigger_action_name = value
+			return
 		owner._actions_triggers.erase(_right_trigger_action_name)
 		_right_trigger_action_name = value
 		if value != "":
@@ -80,6 +92,9 @@ var owner: InputManager
 ## Button Left Shoulder of joystick action name
 @export_placeholder("Left Shoulder action name") var _button_left_shoulder_action_name = "push":
 	set(value):
+		if owner == null:
+			_button_left_shoulder_action_name = value
+			return
 		owner._actions_buttons.erase(_button_left_shoulder_action_name)
 		_button_left_shoulder_action_name = value
 		if value != "":
@@ -91,6 +106,9 @@ var owner: InputManager
 ## Button Left Shoulder event action
 @export var _button_left_shoulder_type: InputManagerConst._event_type_enum = InputManagerConst._event_type_enum.PRESSED:
 	set(value):
+		if owner == null:
+			_button_left_shoulder_type = value
+			return
 		owner._actions_buttons.erase(_button_left_shoulder_action_name)
 		_button_left_shoulder_type = value
 		if _button_left_shoulder_action_name != "":
@@ -106,6 +124,9 @@ var owner: InputManager
 ## Button Right Shoulder of joystick action name
 @export_placeholder("Right Shoulder action name") var _button_right_shoulder_action_name = "grab":
 	set(value):
+		if owner == null:
+			_button_right_shoulder_action_name = value
+			return
 		owner._actions_buttons.erase(_button_right_shoulder_action_name)
 		_button_right_shoulder_action_name = value
 		if value != "":
@@ -117,6 +138,9 @@ var owner: InputManager
 ## Button Right Shoulder event action
 @export var _button_right_shoulder_type: InputManagerConst._event_type_enum = InputManagerConst._event_type_enum.PRESSED:
 	set(value):
+		if owner == null:
+			_button_right_shoulder_type = value
+			return
 		owner._actions_buttons.erase(_button_right_shoulder_action_name)
 		_button_right_shoulder_type = value
 		if _button_right_shoulder_action_name != "":
@@ -132,6 +156,9 @@ var owner: InputManager
 ## Button L3 of joystick action name
 @export_placeholder("Button L3 action name") var _button_left_stick_action_name = "crounch":
 	set(value):
+		if owner == null:
+			_button_left_stick_action_name = value
+			return
 		owner._actions_buttons.erase(_button_left_stick_action_name)
 		_button_left_stick_action_name = value
 		if value != "":
@@ -143,6 +170,9 @@ var owner: InputManager
 ## Button L3 event action
 @export var _button_left_stick_type: InputManagerConst._event_type_enum = InputManagerConst._event_type_enum.PRESSED:
 	set(value):
+		if owner == null:
+			_button_left_stick_type = value
+			return
 		owner._actions_buttons.erase(_button_left_stick_action_name)
 		_button_left_stick_type = value
 		if _button_left_stick_action_name != "":
@@ -158,6 +188,9 @@ var owner: InputManager
 ## Button R3 of joystick action name
 @export_placeholder("Button R3 action name") var _button_right_stick_action_name = "run":
 	set(value):
+		if owner == null:
+			_button_right_stick_action_name = value
+			return
 		owner._actions_buttons.erase(_button_right_stick_action_name)
 		_button_right_stick_action_name = value
 		if value != "":
@@ -166,9 +199,12 @@ var owner: InputManager
 			else owner.get_right_stick_button_realesed if _button_right_stick_type == InputManagerConst._event_type_enum.RELESED \
 			else owner.get_right_stick_button_oneshot if _button_right_stick_type == InputManagerConst._event_type_enum.ONE_SHOT \
 			else owner.get_right_stick_button_toggle
-## Button L3 event action
+## Button R3 event action
 @export var _button_right_stick_type: InputManagerConst._event_type_enum = InputManagerConst._event_type_enum.PRESSED:
 	set(value):
+		if owner == null:
+			_button_right_stick_type = value
+			return
 		owner._actions_buttons.erase(_button_right_stick_action_name)
 		_button_right_stick_type = value
 		if _button_right_stick_action_name != "":
@@ -184,6 +220,9 @@ var owner: InputManager
 ## Button A of joystick action name
 @export_placeholder("Button A action name") var _button_a_action_name = "jump":
 	set(value):
+		if owner == null:
+			_button_a_action_name = value
+			return
 		owner._actions_buttons.erase(_button_a_action_name)
 		_button_a_action_name = value
 		if value != "":
@@ -195,6 +234,9 @@ var owner: InputManager
 ## Button A event action
 @export var _button_a_type: InputManagerConst._event_type_enum = InputManagerConst._event_type_enum.PRESSED:
 	set(value):
+		if owner == null:
+			_button_a_type = value
+			return
 		owner._actions_buttons.erase(_button_a_action_name)
 		_button_a_type = value
 		if _button_a_action_name != "":
@@ -210,6 +252,9 @@ var owner: InputManager
 ## Button B of joystick action name
 @export_placeholder("Button B action name") var _button_b_action_name = "cancel":
 	set(value):
+		if owner == null:
+			_button_b_action_name = value
+			return
 		owner._actions_buttons.erase(_button_b_action_name)
 		_button_b_action_name = value
 		if value != "":
@@ -221,6 +266,9 @@ var owner: InputManager
 ## Button B event action
 @export var _button_b_type: InputManagerConst._event_type_enum = InputManagerConst._event_type_enum.PRESSED:
 	set(value):
+		if owner == null:
+			_button_b_type = value
+			return
 		owner._actions_buttons.erase(_button_b_action_name)
 		_button_b_type = value
 		if _button_b_action_name != "":
@@ -236,8 +284,9 @@ var owner: InputManager
 ## Button X of joystick action name
 @export_placeholder("Button X action name") var _button_x_action_name = "fire":
 	set(value):
-		# FIXME: OWNER não está sendo enviado para resource
-		print(owner)
+		if owner == null:
+			_button_x_action_name = value
+			return
 		owner._actions_buttons.erase(_button_x_action_name)
 		_button_x_action_name = value
 		if value != "":
@@ -249,6 +298,9 @@ var owner: InputManager
 ## Button X event action
 @export var _button_x_type: InputManagerConst._event_type_enum = InputManagerConst._event_type_enum.PRESSED:
 	set(value):
+		if owner == null:
+			_button_x_type = value
+			return
 		owner._actions_buttons.erase(_button_x_action_name)
 		_button_x_type = value
 		if _button_x_action_name != "":
@@ -264,6 +316,9 @@ var owner: InputManager
 ## Button Y of joystick action name
 @export_placeholder("Button Y action name") var _button_y_action_name = "punch":
 	set(value):
+		if owner == null:
+			_button_y_action_name = value
+			return
 		owner._actions_buttons.erase(_button_y_action_name)
 		_button_y_action_name = value
 		if value != "":
@@ -275,6 +330,9 @@ var owner: InputManager
 ## Button Y event action
 @export var _button_y_type: InputManagerConst._event_type_enum = InputManagerConst._event_type_enum.PRESSED:
 	set(value):
+		if owner == null:
+			_button_y_type = value
+			return
 		owner._actions_buttons.erase(_button_y_action_name)
 		_button_y_type = value
 		if _button_y_action_name != "":
@@ -290,6 +348,9 @@ var owner: InputManager
 ## Button DPAD UP of joystick action name
 @export_placeholder("Button DPAD UP action name") var _button_dpad_up_action_name = "to_up":
 	set(value):
+		if owner == null:
+			_button_dpad_up_action_name = value
+			return
 		owner._actions_buttons.erase(_button_dpad_up_action_name)
 		_button_dpad_up_action_name = value
 		if value != "":
@@ -301,6 +362,9 @@ var owner: InputManager
 ## Button DPAD UP event action
 @export var _button_dpad_up_type: InputManagerConst._event_type_enum = InputManagerConst._event_type_enum.PRESSED:
 	set(value):
+		if owner == null:
+			_button_dpad_up_type = value
+			return
 		owner._actions_buttons.erase(_button_dpad_up_action_name)
 		_button_dpad_up_type = value
 		if _button_dpad_up_action_name != "":
@@ -316,6 +380,9 @@ var owner: InputManager
 ## Button DPAD DOWN of joystick action name
 @export_placeholder("Button DPAD DOWN action name") var _button_dpad_down_action_name = "to_down":
 	set(value):
+		if owner == null:
+			_button_dpad_down_action_name = value
+			return
 		owner._actions_buttons.erase(_button_dpad_down_action_name)
 		_button_dpad_down_action_name = value
 		if value != "":
@@ -327,6 +394,9 @@ var owner: InputManager
 ## Button DPAD DOWN event action
 @export var _button_dpad_down_type: InputManagerConst._event_type_enum = InputManagerConst._event_type_enum.PRESSED:
 	set(value):
+		if owner == null:
+			_button_dpad_down_type = value
+			return
 		owner._actions_buttons.erase(_button_dpad_down_action_name)
 		_button_dpad_down_type = value
 		if _button_dpad_down_action_name != "":
@@ -342,6 +412,9 @@ var owner: InputManager
 ## Button DPAD LEFT of joystick action name
 @export_placeholder("Button DPAD LEFT action name") var _button_dpad_left_action_name = "to_left":
 	set(value):
+		if owner == null:
+			_button_dpad_left_action_name = value
+			return
 		owner._actions_buttons.erase(_button_dpad_left_action_name)
 		_button_dpad_left_action_name = value
 		if value != "":
@@ -353,6 +426,9 @@ var owner: InputManager
 ## Button DPAD LEFT event action
 @export var _button_dpad_left_type: InputManagerConst._event_type_enum = InputManagerConst._event_type_enum.PRESSED:
 	set(value):
+		if owner == null:
+			_button_dpad_left_type = value
+			return
 		owner._actions_buttons.erase(_button_dpad_left_action_name)
 		_button_dpad_left_type = value
 		if _button_dpad_left_action_name != "":
@@ -368,6 +444,9 @@ var owner: InputManager
 ## Button DPAD RIGHT of joystick action name
 @export_placeholder("Button DPAD RIGHT action name") var _button_dpad_right_action_name = "to_right":
 	set(value):
+		if owner == null:
+			_button_dpad_right_action_name = value
+			return
 		owner._actions_buttons.erase(_button_dpad_right_action_name)
 		_button_dpad_right_action_name = value
 		if value != "":
@@ -379,6 +458,9 @@ var owner: InputManager
 ## Button DPAD RIGHT event action
 @export var _button_dpad_right_type: InputManagerConst._event_type_enum = InputManagerConst._event_type_enum.PRESSED:
 	set(value):
+		if owner == null:
+			_button_dpad_right_type = value
+			return
 		owner._actions_buttons.erase(_button_dpad_right_action_name)
 		_button_dpad_right_type = value
 		if _button_dpad_right_action_name != "":
@@ -394,6 +476,9 @@ var owner: InputManager
 ## Button Start of joystick action name
 @export_placeholder("Button Start action name") var _button_start_action_name = "start":
 	set(value):
+		if owner == null:
+			_button_start_action_name = value
+			return
 		owner._actions_buttons.erase(_button_start_action_name)
 		_button_start_action_name = value
 		if value != "":
@@ -405,6 +490,9 @@ var owner: InputManager
 ## Button Start event action
 @export var _button_start_type: InputManagerConst._event_type_enum = InputManagerConst._event_type_enum.PRESSED:
 	set(value):
+		if owner == null:
+			_button_start_type = value
+			return
 		owner._actions_buttons.erase(_button_start_action_name)
 		_button_start_type = value
 		if _button_start_action_name != "":
@@ -420,6 +508,9 @@ var owner: InputManager
 ## Button Select of joystick action name
 @export_placeholder("Button Select action name") var _button_select_action_name = "select":
 	set(value):
+		if owner == null:
+			_button_select_action_name = value
+			return
 		owner._actions_buttons.erase(_button_select_action_name)
 		_button_select_action_name = value
 		if value != "":
@@ -431,6 +522,9 @@ var owner: InputManager
 ## Button Select event action
 @export var _button_select_type: InputManagerConst._event_type_enum = InputManagerConst._event_type_enum.PRESSED:
 	set(value):
+		if owner == null:
+			_button_select_type = value
+			return
 		owner._actions_buttons.erase(_button_select_action_name)
 		_button_select_type = value
 		if _button_select_action_name != "":
@@ -447,3 +541,141 @@ var owner: InputManager
 @export var _mouse_capture_key: Key = Key.KEY_TAB
 ## Button mouse visible
 @export var _mouse_visble_key: Key = Key.KEY_ESCAPE
+
+
+func init(_owner: InputManager) -> void:
+	print("init: ", _owner)
+	owner = _owner
+
+	if _left_stick_action_name != "":
+		_verify_duplicate(owner._actions_sticks, _left_stick_action_name)
+		owner._actions_sticks[_left_stick_action_name] = owner.get_left_stick
+
+	if _right_stick_action_name != "":
+		_verify_duplicate(owner._actions_sticks, _right_stick_action_name)
+		owner._actions_sticks[_right_stick_action_name] = owner.get_right_stick
+
+	if _left_trigger_action_name != "":
+		_verify_duplicate(owner._actions_triggers, _left_trigger_action_name)
+		owner._actions_triggers[_left_trigger_action_name] = owner.get_left_trigger
+
+	if _right_trigger_action_name != "":
+		_verify_duplicate(owner._actions_triggers, _right_trigger_action_name)
+		owner._actions_triggers[_right_trigger_action_name] = owner.get_right_trigger
+
+	if _button_left_shoulder_action_name != "":
+		_verify_duplicate(owner._actions_buttons, _button_left_shoulder_action_name)
+		owner._actions_buttons[_button_left_shoulder_action_name] = \
+		owner.get_left_shoulder_pressed if _button_left_shoulder_type == InputManagerConst._event_type_enum.PRESSED \
+		else owner.get_left_shoulder_realesed if _button_left_shoulder_type == InputManagerConst._event_type_enum.RELESED \
+		else owner.get_left_shoulder_oneshot if _button_left_shoulder_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else owner.get_left_shoulder_toggle
+
+	if _button_right_shoulder_action_name != "":
+		_verify_duplicate(owner._actions_buttons, _button_right_shoulder_action_name)
+		owner._actions_buttons[_button_right_shoulder_action_name] = \
+		owner.get_right_shoulder_pressed if _button_right_shoulder_type == InputManagerConst._event_type_enum.PRESSED \
+		else owner.get_right_shoulder_realesed if _button_right_shoulder_type == InputManagerConst._event_type_enum.RELESED \
+		else owner.get_right_shoulder_oneshot if _button_right_shoulder_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else owner.get_right_shoulder_toggle
+
+	if _button_left_stick_action_name != "":
+		_verify_duplicate(owner._actions_buttons, _button_left_stick_action_name)
+		owner._actions_buttons[_button_left_stick_action_name] = \
+		owner.get_left_stick_button_pressed if _button_left_stick_type == InputManagerConst._event_type_enum.PRESSED \
+		else owner.get_left_stick_button_realesed if _button_left_stick_type == InputManagerConst._event_type_enum.RELESED \
+		else owner.get_left_stick_button_oneshot if _button_left_stick_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else owner.get_left_stick_button_toggle
+
+	if _button_right_stick_action_name != "":
+		_verify_duplicate(owner._actions_buttons, _button_right_stick_action_name)
+		owner._actions_buttons[_button_right_stick_action_name] = \
+		owner.get_right_stick_button_pressed if _button_right_stick_type == InputManagerConst._event_type_enum.PRESSED \
+		else owner.get_right_stick_button_realesed if _button_right_stick_type == InputManagerConst._event_type_enum.RELESED \
+		else owner.get_right_stick_button_oneshot if _button_right_stick_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else owner.get_right_stick_button_toggle
+
+	if _button_a_action_name != "":
+		_verify_duplicate(owner._actions_buttons, _button_a_action_name)
+		owner._actions_buttons[_button_a_action_name] = \
+		owner.get_button_a_pressed if _button_a_type == InputManagerConst._event_type_enum.PRESSED \
+		else owner.get_button_a_realesed if _button_a_type == InputManagerConst._event_type_enum.RELESED \
+		else owner.get_button_a_oneshot if _button_a_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else owner.get_button_a_toggle
+
+	if _button_b_action_name != "":
+		_verify_duplicate(owner._actions_buttons, _button_b_action_name)
+		owner._actions_buttons[_button_b_action_name] = \
+		owner.get_button_b_pressed if _button_b_type == InputManagerConst._event_type_enum.PRESSED \
+		else owner.get_button_b_realesed if _button_b_type == InputManagerConst._event_type_enum.RELESED \
+		else owner.get_button_b_oneshot if _button_b_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else owner.get_button_b_toggle
+
+	if _button_x_action_name != "":
+		_verify_duplicate(owner._actions_buttons, _button_x_action_name)
+		owner._actions_buttons[_button_x_action_name] = \
+		owner.get_button_x_pressed if _button_x_type == InputManagerConst._event_type_enum.PRESSED \
+		else owner.get_button_x_realesed if _button_x_type == InputManagerConst._event_type_enum.RELESED \
+		else owner.get_button_x_oneshot if _button_x_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else owner.get_button_x_toggle
+
+	if _button_y_action_name != "":
+		_verify_duplicate(owner._actions_buttons, _button_y_action_name)
+		owner._actions_buttons[_button_y_action_name] = \
+		owner.get_button_y_pressed if _button_y_type == InputManagerConst._event_type_enum.PRESSED \
+		else owner.get_button_y_realesed if _button_y_type == InputManagerConst._event_type_enum.RELESED \
+		else owner.get_button_y_oneshot if _button_y_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else owner.get_button_y_toggle
+
+	if _button_dpad_up_action_name != "":
+		_verify_duplicate(owner._actions_buttons, _button_dpad_up_action_name)
+		owner._actions_buttons[_button_dpad_up_action_name] = \
+		owner.get_dpad_up_pressed if _button_dpad_up_type == InputManagerConst._event_type_enum.PRESSED \
+		else owner.get_dpad_up_realesed if _button_dpad_up_type == InputManagerConst._event_type_enum.RELESED \
+		else owner.get_dpad_up_oneshot if _button_dpad_up_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else owner.get_dpad_up_toggle
+
+	if _button_dpad_down_action_name != "":
+		_verify_duplicate(owner._actions_buttons, _button_dpad_down_action_name)
+		owner._actions_buttons[_button_dpad_down_action_name] = \
+		owner.get_dpad_down_pressed if _button_dpad_down_type == InputManagerConst._event_type_enum.PRESSED \
+		else owner.get_dpad_down_realesed if _button_dpad_down_type == InputManagerConst._event_type_enum.RELESED \
+		else owner.get_dpad_down_oneshot if _button_dpad_down_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else owner.get_dpad_down_toggle
+
+	if _button_dpad_left_action_name != "":
+		_verify_duplicate(owner._actions_buttons, _button_dpad_left_action_name)
+		owner._actions_buttons[_button_dpad_left_action_name] = \
+		owner.get_dpad_left_pressed if _button_dpad_left_type == InputManagerConst._event_type_enum.PRESSED \
+		else owner.get_dpad_left_realesed if _button_dpad_left_type == InputManagerConst._event_type_enum.RELESED \
+		else owner.get_dpad_left_oneshot if _button_dpad_left_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else owner.get_dpad_left_toggle
+
+	if _button_dpad_right_action_name != "":
+		_verify_duplicate(owner._actions_buttons, _button_dpad_right_action_name)
+		owner._actions_buttons[_button_dpad_right_action_name] = \
+		owner.get_dpad_right_pressed if _button_dpad_right_type == InputManagerConst._event_type_enum.PRESSED \
+		else owner.get_dpad_right_realesed if _button_dpad_right_type == InputManagerConst._event_type_enum.RELESED \
+		else owner.get_dpad_right_oneshot if _button_dpad_right_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else owner.get_dpad_right_toggle
+
+	if _button_start_action_name != "":
+		_verify_duplicate(owner._actions_buttons, _button_start_action_name)
+		owner._actions_buttons[_button_start_action_name] = \
+		owner.get_start_pressed if _button_start_type == InputManagerConst._event_type_enum.PRESSED \
+		else owner.get_start_realesed if _button_start_type == InputManagerConst._event_type_enum.RELESED \
+		else owner.get_start_oneshot if _button_start_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else owner.get_start_toggle
+
+	if _button_select_action_name != "":
+		_verify_duplicate(owner._actions_buttons, _button_select_action_name)
+		owner._actions_buttons[_button_select_action_name] = \
+		owner.get_select_pressed if _button_select_type == InputManagerConst._event_type_enum.PRESSED \
+		else owner.get_select_realesed if _button_select_type == InputManagerConst._event_type_enum.RELESED \
+		else owner.get_select_oneshot if _button_select_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else owner.get_select_toggle
+
+
+func _verify_duplicate(_actions_source: Dictionary, value: String) -> void:
+	if _actions_source.has(value):
+		push_error("Action name %s duplicate."%value)
