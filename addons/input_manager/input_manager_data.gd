@@ -544,7 +544,6 @@ var owner: InputManager
 
 
 func init(_owner: InputManager) -> void:
-	print("init: ", _owner)
 	owner = _owner
 
 	if _left_stick_action_name != "":
