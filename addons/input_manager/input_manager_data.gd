@@ -13,6 +13,8 @@ var owner: InputManager
 @export_range(0.0, 1.0, 0.01) var _left_trigger_deadzone: float = 0.0
 ## Right Trigger deadzone
 @export_range(0.0, 1.0, 0.01) var _right_trigger_deadzone: float = 0.0
+## Key to run
+@export var _run_key: Key = Key.KEY_SHIFT
 
 @export_subgroup("Left Stick")
 ## Left Stick action name
@@ -437,3 +439,9 @@ var owner: InputManager
 			else owner.get_select_toggle
 ## Corresponding key.
 @export var _button_select_key: Key = Key.KEY_BACKSPACE
+
+@export_subgroup("Mouse")
+## Button capture mouse
+@export var _mouse_capture_key: Key = Key.KEY_TAB
+## Button mouse visible
+@export var _mouse_visble_key: Key = Key.KEY_ESCAPE

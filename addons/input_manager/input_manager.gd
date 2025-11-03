@@ -1,10 +1,14 @@
+@tool
 class_name InputManager extends Node
+
+const RESOURCE_PATH: String = "res://addons/input_manager/resources/input_manager_data.tres"
 
 # EXPORTS **********************************************************
 @export var input_manager_data: InputManagerData:
 	set(value):
 		input_manager_data = value
-		input_manager_data.owner = self
+		update_configuration_warnings()
+@export_tool_button("Save Resource") var _btn_save_resource = _save_resource
 # EXPORTS **********************************************************
 
 # SIGNALS **********************************************************
@@ -279,8 +283,15 @@ var _key_l_pressed: bool = false:
 
 
 func _init() -> void:
+	# FIXME: Fazer a lógica para verificar se existe algo duplicado nos Dictionarys
+	if Engine.is_editor_hint(): return
+
 	if not input_manager_data:
-		input_manager_data = ResourceLoader.load("res://addons/input_manager/resources/input_manager_data.tres")
+		var resource = ResourceLoader.load(RESOURCE_PATH)
+		if not resource:
+			resource = InputManagerData.new()
+		input_manager_data = resource
+
 	input_manager_data.owner = self
 
 	if input_manager_data._left_stick_action_name != "":
@@ -394,10 +405,14 @@ func _init() -> void:
 		else get_select_toggle
 
 func _ready():
+	if Engine.is_editor_hint(): return
+
 	Input.joy_connection_changed.connect(func(device, connected): on_device_changed.emit(device, connected))
 	pass
 
 func _input(event: InputEvent) -> void:
+	if Engine.is_editor_hint(): return
+
 	if event is InputEventJoypadMotion:
 		_check_left_stick(event)
 		_check_right_stick(event)
@@ -425,6 +440,12 @@ func _input(event: InputEvent) -> void:
 	elif event is InputEventMouseButton:
 		_check_mouse_button(event)
 	pass
+
+func _get_configuration_warnings() -> PackedStringArray:
+	var warnings = []
+	if not input_manager_data:
+		warnings.append("Please configure the Input Manager Data property in the inspector.")
+	return warnings
 # ENGINE METHODS ***************************************************
 
 # PUBLIC METHODS ***************************************************
@@ -695,6 +716,10 @@ func get_select_toggle() -> bool:
 # PUBLIC METHODS ***************************************************
 
 # PRIVATE METHODS **************************************************
+func _save_resource() -> void:
+	if input_manager_data:
+		ResourceSaver.save(input_manager_data, RESOURCE_PATH)
+
 func _get_toggle(toggle: bool) -> bool:
 	if toggle:
 		return true
@@ -1115,13 +1140,13 @@ func _check_keyboard(event: InputEventKey) -> void:
 					_select_oneshot = false
 					_select_realesed = true
 					_select_pressed = false
-		KEY_TAB:
+		input_manager_data._mouse_capture_key:
 			if event.pressed:
 				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		KEY_ESCAPE:
+		input_manager_data._mouse_visble_key:
 			if event.pressed:
 				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		KEY_SHIFT:
+		input_manager_data._run_key:
 			if _shift_pressed != event.pressed:
 				_shift_pressed = event.pressed
 	pass
@@ -1133,10 +1158,10 @@ func _check_mouse_motion(event: InputEventMouseMotion) -> void:
 
 func _check_mouse_button(event: InputEventMouseButton) -> void:
 	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		if event.button_index == MOUSE_BUTTON_LEFT:
+		if event.button_index == input_manager_data._left_trigger_mouse_button:
 			on_left_trigger_changed.emit(1.0 if event.pressed else 0.0)
 			on_action_trigger.emit(input_manager_data._left_trigger_action_name, 1.0 if event.pressed else 0.0)
-		elif event.button_index == MOUSE_BUTTON_RIGHT:
+		elif event.button_index == input_manager_data._right_trigger_mouse_button:
 			on_right_trigger_changed.emit(1.0 if event.pressed else 0.0)
 			on_action_trigger.emit(input_manager_data._right_trigger_action_name, 1.0 if event.pressed else 0.0)
 	pass

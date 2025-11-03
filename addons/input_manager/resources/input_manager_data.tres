@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="InputManagerData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="InputManagerData" load_steps=2 format=3 uid="uid://dwp84ju3rv7hx"]
 
-[ext_resource type="Script" path="res://addons/input_manager/input_manager_data.gd" id="1_sxdit"]
+[ext_resource type="Script" uid="uid://bu4repa5lryd" path="res://addons/input_manager/input_manager_data.gd" id="1_sxdit"]
 
 [resource]
 script = ExtResource("1_sxdit")
+metadata/_custom_type_script = "uid://bu4repa5lryd"
