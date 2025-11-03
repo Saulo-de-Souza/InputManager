@@ -283,30 +283,36 @@ var _key_l_pressed: bool = false:
 
 
 func _init() -> void:
-	# FIXME: Fazer a lógica para verificar se existe algo duplicado nos Dictionarys
 	if Engine.is_editor_hint(): return
 
 	if not input_manager_data:
-		var resource = ResourceLoader.load(RESOURCE_PATH)
+		var resource: InputManagerData = ResourceLoader.load(RESOURCE_PATH)
 		if not resource:
 			resource = InputManagerData.new()
+		# FIXME: OWNER não está sendo enviado para resource
+		resource.owner = self
 		input_manager_data = resource
 
 	input_manager_data.owner = self
 
 	if input_manager_data._left_stick_action_name != "":
+		_verify_duplicate(_actions_sticks, input_manager_data._left_stick_action_name)
 		_actions_sticks[input_manager_data._left_stick_action_name] = get_left_stick
 
 	if input_manager_data._right_stick_action_name != "":
+		_verify_duplicate(_actions_sticks, input_manager_data._right_stick_action_name)
 		_actions_sticks[input_manager_data._right_stick_action_name] = get_right_stick
 
 	if input_manager_data._left_trigger_action_name != "":
+		_verify_duplicate(_actions_triggers, input_manager_data._left_trigger_action_name)
 		_actions_triggers[input_manager_data._left_trigger_action_name] = get_left_trigger
 
 	if input_manager_data._right_trigger_action_name != "":
+		_verify_duplicate(_actions_triggers, input_manager_data._right_trigger_action_name)
 		_actions_triggers[input_manager_data._right_trigger_action_name] = get_right_trigger
 
 	if input_manager_data._button_left_shoulder_action_name != "":
+		_verify_duplicate(_actions_buttons, input_manager_data._button_left_shoulder_action_name)
 		_actions_buttons[input_manager_data._button_left_shoulder_action_name] = \
 		get_left_shoulder_pressed if input_manager_data._button_left_shoulder_type == InputManagerConst._event_type_enum.PRESSED \
 		else get_left_shoulder_realesed if input_manager_data._button_left_shoulder_type == InputManagerConst._event_type_enum.RELESED \
@@ -314,6 +320,7 @@ func _init() -> void:
 		else get_left_shoulder_toggle
 
 	if input_manager_data._button_right_shoulder_action_name != "":
+		_verify_duplicate(_actions_buttons, input_manager_data._button_right_shoulder_action_name)
 		_actions_buttons[input_manager_data._button_right_shoulder_action_name] = \
 		get_right_shoulder_pressed if input_manager_data._button_right_shoulder_type == InputManagerConst._event_type_enum.PRESSED \
 		else get_right_shoulder_realesed if input_manager_data._button_right_shoulder_type == InputManagerConst._event_type_enum.RELESED \
@@ -321,20 +328,23 @@ func _init() -> void:
 		else get_right_shoulder_toggle
 
 	if input_manager_data._button_left_stick_action_name != "":
-			_actions_buttons[input_manager_data._button_left_stick_action_name] = \
-			get_left_stick_button_pressed if input_manager_data._button_left_stick_type == InputManagerConst._event_type_enum.PRESSED \
-			else get_left_stick_button_realesed if input_manager_data._button_left_stick_type == InputManagerConst._event_type_enum.RELESED \
-			else get_left_stick_button_oneshot if input_manager_data._button_left_stick_type == InputManagerConst._event_type_enum.ONE_SHOT \
-			else get_left_stick_button_toggle
+		_verify_duplicate(_actions_buttons, input_manager_data._button_left_stick_action_name)
+		_actions_buttons[input_manager_data._button_left_stick_action_name] = \
+		get_left_stick_button_pressed if input_manager_data._button_left_stick_type == InputManagerConst._event_type_enum.PRESSED \
+		else get_left_stick_button_realesed if input_manager_data._button_left_stick_type == InputManagerConst._event_type_enum.RELESED \
+		else get_left_stick_button_oneshot if input_manager_data._button_left_stick_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else get_left_stick_button_toggle
 	
 	if input_manager_data._button_right_stick_action_name != "":
-			_actions_buttons[input_manager_data._button_right_stick_action_name] = \
-			get_right_stick_button_pressed if input_manager_data._button_right_stick_type == InputManagerConst._event_type_enum.PRESSED \
-			else get_right_stick_button_realesed if input_manager_data._button_right_stick_type == InputManagerConst._event_type_enum.RELESED \
-			else get_right_stick_button_oneshot if input_manager_data._button_right_stick_type == InputManagerConst._event_type_enum.ONE_SHOT \
-			else get_right_stick_button_toggle
+		_verify_duplicate(_actions_buttons, input_manager_data._button_right_stick_action_name)
+		_actions_buttons[input_manager_data._button_right_stick_action_name] = \
+		get_right_stick_button_pressed if input_manager_data._button_right_stick_type == InputManagerConst._event_type_enum.PRESSED \
+		else get_right_stick_button_realesed if input_manager_data._button_right_stick_type == InputManagerConst._event_type_enum.RELESED \
+		else get_right_stick_button_oneshot if input_manager_data._button_right_stick_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else get_right_stick_button_toggle
 
 	if input_manager_data._button_a_action_name != "":
+		_verify_duplicate(_actions_buttons, input_manager_data._button_a_action_name)
 		_actions_buttons[input_manager_data._button_a_action_name] = \
 		get_button_a_pressed if input_manager_data._button_a_type == InputManagerConst._event_type_enum.PRESSED \
 		else get_button_a_realesed if input_manager_data._button_a_type == InputManagerConst._event_type_enum.RELESED \
@@ -342,6 +352,7 @@ func _init() -> void:
 		else get_button_a_toggle
 
 	if input_manager_data._button_b_action_name != "":
+		_verify_duplicate(_actions_buttons, input_manager_data._button_b_action_name)
 		_actions_buttons[input_manager_data._button_b_action_name] = \
 		get_button_b_pressed if input_manager_data._button_b_type == InputManagerConst._event_type_enum.PRESSED \
 		else get_button_b_realesed if input_manager_data._button_b_type == InputManagerConst._event_type_enum.RELESED \
@@ -349,6 +360,7 @@ func _init() -> void:
 		else get_button_b_toggle
 
 	if input_manager_data._button_x_action_name != "":
+		_verify_duplicate(_actions_buttons, input_manager_data._button_x_action_name)
 		_actions_buttons[input_manager_data._button_x_action_name] = \
 		get_button_x_pressed if input_manager_data._button_x_type == InputManagerConst._event_type_enum.PRESSED \
 		else get_button_x_realesed if input_manager_data._button_x_type == InputManagerConst._event_type_enum.RELESED \
@@ -356,6 +368,7 @@ func _init() -> void:
 		else get_button_x_toggle
 
 	if input_manager_data._button_y_action_name != "":
+		_verify_duplicate(_actions_buttons, input_manager_data._button_y_action_name)
 		_actions_buttons[input_manager_data._button_y_action_name] = \
 		get_button_y_pressed if input_manager_data._button_y_type == InputManagerConst._event_type_enum.PRESSED \
 		else get_button_y_realesed if input_manager_data._button_y_type == InputManagerConst._event_type_enum.RELESED \
@@ -363,6 +376,7 @@ func _init() -> void:
 		else get_button_y_toggle
 
 	if input_manager_data._button_dpad_up_action_name != "":
+		_verify_duplicate(_actions_buttons, input_manager_data._button_dpad_up_action_name)
 		_actions_buttons[input_manager_data._button_dpad_up_action_name] = \
 		get_dpad_up_pressed if input_manager_data._button_dpad_up_type == InputManagerConst._event_type_enum.PRESSED \
 		else get_dpad_up_realesed if input_manager_data._button_dpad_up_type == InputManagerConst._event_type_enum.RELESED \
@@ -370,6 +384,7 @@ func _init() -> void:
 		else get_dpad_up_toggle
 
 	if input_manager_data._button_dpad_down_action_name != "":
+		_verify_duplicate(_actions_buttons, input_manager_data._button_dpad_down_action_name)
 		_actions_buttons[input_manager_data._button_dpad_down_action_name] = \
 		get_dpad_down_pressed if input_manager_data._button_dpad_down_type == InputManagerConst._event_type_enum.PRESSED \
 		else get_dpad_down_realesed if input_manager_data._button_dpad_down_type == InputManagerConst._event_type_enum.RELESED \
@@ -377,13 +392,15 @@ func _init() -> void:
 		else get_dpad_down_toggle
 	
 	if input_manager_data._button_dpad_left_action_name != "":
-			_actions_buttons[input_manager_data._button_dpad_left_action_name] = \
-			get_dpad_left_pressed if input_manager_data._button_dpad_left_type == InputManagerConst._event_type_enum.PRESSED \
-			else get_dpad_left_realesed if input_manager_data._button_dpad_left_type == InputManagerConst._event_type_enum.RELESED \
-			else get_dpad_left_oneshot if input_manager_data._button_dpad_left_type == InputManagerConst._event_type_enum.ONE_SHOT \
-			else get_dpad_left_toggle
+		_verify_duplicate(_actions_buttons, input_manager_data._button_dpad_left_action_name)
+		_actions_buttons[input_manager_data._button_dpad_left_action_name] = \
+		get_dpad_left_pressed if input_manager_data._button_dpad_left_type == InputManagerConst._event_type_enum.PRESSED \
+		else get_dpad_left_realesed if input_manager_data._button_dpad_left_type == InputManagerConst._event_type_enum.RELESED \
+		else get_dpad_left_oneshot if input_manager_data._button_dpad_left_type == InputManagerConst._event_type_enum.ONE_SHOT \
+		else get_dpad_left_toggle
 	
 	if input_manager_data._button_dpad_right_action_name != "":
+		_verify_duplicate(_actions_buttons, input_manager_data._button_dpad_right_action_name)
 		_actions_buttons[input_manager_data._button_dpad_right_action_name] = \
 		get_dpad_right_pressed if input_manager_data._button_dpad_right_type == InputManagerConst._event_type_enum.PRESSED \
 		else get_dpad_right_realesed if input_manager_data._button_dpad_right_type == InputManagerConst._event_type_enum.RELESED \
@@ -391,6 +408,7 @@ func _init() -> void:
 		else get_dpad_right_toggle
 	
 	if input_manager_data._button_start_action_name != "":
+		_verify_duplicate(_actions_buttons, input_manager_data._button_start_action_name)
 		_actions_buttons[input_manager_data._button_start_action_name] = \
 		get_start_pressed if input_manager_data._button_start_type == InputManagerConst._event_type_enum.PRESSED \
 		else get_start_realesed if input_manager_data._button_start_type == InputManagerConst._event_type_enum.RELESED \
@@ -398,6 +416,7 @@ func _init() -> void:
 		else get_start_toggle
 
 	if input_manager_data._button_select_action_name != "":
+		_verify_duplicate(_actions_buttons, input_manager_data._button_select_action_name)
 		_actions_buttons[input_manager_data._button_select_action_name] = \
 		get_select_pressed if input_manager_data._button_select_type == InputManagerConst._event_type_enum.PRESSED \
 		else get_select_realesed if input_manager_data._button_select_type == InputManagerConst._event_type_enum.RELESED \
@@ -719,6 +738,10 @@ func get_select_toggle() -> bool:
 func _save_resource() -> void:
 	if input_manager_data:
 		ResourceSaver.save(input_manager_data, RESOURCE_PATH)
+
+func _verify_duplicate(_actions_source: Dictionary, value: String) -> void:
+	if _actions_source.has(value):
+		push_error("Action name %s duplicate."%value)
 
 func _get_toggle(toggle: bool) -> bool:
 	if toggle:

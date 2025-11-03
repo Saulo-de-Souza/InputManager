@@ -236,6 +236,8 @@ var owner: InputManager
 ## Button X of joystick action name
 @export_placeholder("Button X action name") var _button_x_action_name = "fire":
 	set(value):
+		# FIXME: OWNER não está sendo enviado para resource
+		print(owner)
 		owner._actions_buttons.erase(_button_x_action_name)
 		_button_x_action_name = value
 		if value != "":
