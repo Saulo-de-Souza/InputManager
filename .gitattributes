@@ -4,3 +4,4 @@ gp.bat export-ignore
 README.md export-ignore
 LICENSE.md export-ignore
 addons/input_manager/icon.png
+addons/input_manager/screenshots

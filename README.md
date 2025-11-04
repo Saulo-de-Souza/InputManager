@@ -148,3 +148,9 @@ input_manager.save()
 | `on_action_changed(action_name: String, valur: Variant)` | Emitted when any stick, button, or trigger on the gamepad is moved or pressed.                 |
 
 ---
+
+## Screenshots
+
+**Screenshot InputManager**
+
+![Screenshot 1](./addons/audio_manager/images/screenshots/screenshot_1.png)
