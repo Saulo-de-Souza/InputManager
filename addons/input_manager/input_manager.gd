@@ -211,7 +211,7 @@ var _button_y_realesed: bool = false
 var _button_y_oneshot: bool = false
 var _button_y_toggle: bool = false
 
-# DPAD UP
+# D-PAD UP
 var _dpad_up_pressed: bool = false:
 	set(value):
 		_dpad_up_pressed = value
@@ -221,7 +221,7 @@ var _dpad_up_realesed: bool = false
 var _dpad_up_oneshot: bool = false
 var _dpad_up_toggle: bool = false
 
-# DPAD DOW
+# D-PAD DOW
 var _dpad_down_pressed: bool = false:
 	set(value):
 		_dpad_down_pressed = value
@@ -231,7 +231,7 @@ var _dpad_down_realesed: bool = false
 var _dpad_down_oneshot: bool = false
 var _dpad_down_toggle: bool = false
 
-# DPAD LEFT
+# D-PAD LEFT
 var _dpad_left_pressed: bool = false:
 	set(value):
 		_dpad_left_pressed = value
@@ -241,7 +241,7 @@ var _dpad_left_realesed: bool = false
 var _dpad_left_oneshot: bool = false
 var _dpad_left_toggle: bool = false
 
-# DPAD RIGHT
+# D-PAD RIGHT
 var _dpad_right_pressed: bool = false:
 	set(value):
 		_dpad_right_pressed = value
@@ -554,7 +554,7 @@ func get_button_y_oneshot() -> bool:
 func get_button_y_toggle() -> bool:
 	return _button_y_toggle
 
-# DPAD UP
+# D-PAD UP
 func get_dpad_up_pressed() -> bool:
 	return _dpad_up_pressed
 func get_dpad_up_realesed() -> bool:
@@ -570,7 +570,7 @@ func get_dpad_up_oneshot() -> bool:
 func get_dpad_up_toggle() -> bool:
 	return _dpad_up_toggle
 
-# DPAD DOWN
+# D-PAD DOWN
 func get_dpad_down_pressed() -> bool:
 	return _dpad_down_pressed
 func get_dpad_down_realesed() -> bool:
@@ -586,7 +586,7 @@ func get_dpad_down_oneshot() -> bool:
 func get_dpad_down_toggle() -> bool:
 	return _dpad_down_toggle
 
-# DPAD LEFT
+# D-PAD LEFT
 func get_dpad_left_pressed() -> bool:
 	return _dpad_left_pressed
 func get_dpad_left_realesed() -> bool:
@@ -602,7 +602,7 @@ func get_dpad_left_oneshot() -> bool:
 func get_dpad_left_toggle() -> bool:
 	return _dpad_left_toggle
 
-# DPAD RIGHT
+# D-PAD RIGHT
 func get_dpad_right_pressed() -> bool:
 	return _dpad_right_pressed
 func get_dpad_right_realesed() -> bool:

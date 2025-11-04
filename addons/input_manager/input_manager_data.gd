@@ -225,7 +225,7 @@ var owner: InputManager
 @export var _button_right_stick_key: Key = Key.KEY_G
 
 @export_subgroup("Action Button A")
-## Button A of joystick action name
+## Button A (Xbox) or X (PS) of joystick action name
 @export_placeholder("Button A action name") var _button_a_action_name = "jump":
 	set(value):
 		if owner == null:
@@ -258,7 +258,7 @@ var owner: InputManager
 @export var _button_a_key: Key = Key.KEY_SPACE
 
 @export_subgroup("Action Button B")
-## Button B of joystick action name
+## Button B (Xbox) or Circle (PS) of joystick action name
 @export_placeholder("Button B action name") var _button_b_action_name = "cancel":
 	set(value):
 		if owner == null:
@@ -291,7 +291,7 @@ var owner: InputManager
 @export var _button_b_key: Key = Key.KEY_Z
 
 @export_subgroup("Action Button X")
-## Button X of joystick action name
+## Button X (Xbox) or Square (PS) of joystick action name
 @export_placeholder("Button X action name") var _button_x_action_name = "fire":
 	set(value):
 		if owner == null:
@@ -324,7 +324,7 @@ var owner: InputManager
 @export var _button_x_key: Key = Key.KEY_X
 
 @export_subgroup("Action Button Y")
-## Button Y of joystick action name
+## Button Y (Xbox) or Triangle (PS) of joystick action name
 @export_placeholder("Button Y action name") var _button_y_action_name = "punch":
 	set(value):
 		if owner == null:
@@ -356,9 +356,9 @@ var owner: InputManager
 ## Corresponding key.
 @export var _button_y_key: Key = Key.KEY_C
 
-@export_subgroup("Action Button DPAD UP")
-## Button DPAD UP of joystick action name
-@export_placeholder("Button DPAD UP action name") var _button_dpad_up_action_name = "to_up":
+@export_subgroup("Action Button D-PAD UP")
+## Button D-PAD UP of joystick action name
+@export_placeholder("Button D-PAD UP action name") var _button_dpad_up_action_name = "to_up":
 	set(value):
 		if owner == null:
 			_button_dpad_up_action_name = value
@@ -372,7 +372,7 @@ var owner: InputManager
 			else owner.get_dpad_up_realesed if _button_dpad_up_type == InputManagerConst._event_type_enum.RELESED \
 			else owner.get_dpad_up_oneshot if _button_dpad_up_type == InputManagerConst._event_type_enum.ONE_SHOT \
 			else owner.get_dpad_up_toggle
-## Button DPAD UP event action
+## Button D-PAD UP event action
 @export var _button_dpad_up_type: InputManagerConst._event_type_enum = InputManagerConst._event_type_enum.PRESSED:
 	set(value):
 		if owner == null:
@@ -389,9 +389,9 @@ var owner: InputManager
 ## Corresponding key.
 @export var _button_dpad_up_key: Key = Key.KEY_UP
 
-@export_subgroup("Action Button DPAD DOWN")
-## Button DPAD DOWN of joystick action name
-@export_placeholder("Button DPAD DOWN action name") var _button_dpad_down_action_name = "to_down":
+@export_subgroup("Action Button D-PAD DOWN")
+## Button D-PAD DOWN of joystick action name
+@export_placeholder("Button D-PAD DOWN action name") var _button_dpad_down_action_name = "to_down":
 	set(value):
 		if owner == null:
 			_button_dpad_down_action_name = value
@@ -405,7 +405,7 @@ var owner: InputManager
 			else owner.get_dpad_down_realesed if _button_dpad_down_type == InputManagerConst._event_type_enum.RELESED \
 			else owner.get_dpad_down_oneshot if _button_dpad_down_type == InputManagerConst._event_type_enum.ONE_SHOT \
 			else owner.get_dpad_down_toggle
-## Button DPAD DOWN event action
+## Button D-PAD DOWN event action
 @export var _button_dpad_down_type: InputManagerConst._event_type_enum = InputManagerConst._event_type_enum.PRESSED:
 	set(value):
 		if owner == null:
@@ -422,9 +422,9 @@ var owner: InputManager
 ## Corresponding key.
 @export var _button_dpad_down_key: Key = Key.KEY_DOWN
 
-@export_subgroup("Action Button DPAD LEFT")
-## Button DPAD LEFT of joystick action name
-@export_placeholder("Button DPAD LEFT action name") var _button_dpad_left_action_name = "to_left":
+@export_subgroup("Action Button D-PAD LEFT")
+## Button D-PAD LEFT of joystick action name
+@export_placeholder("Button D-PAD LEFT action name") var _button_dpad_left_action_name = "to_left":
 	set(value):
 		if owner == null:
 			_button_dpad_left_action_name = value
@@ -438,7 +438,7 @@ var owner: InputManager
 			else owner.get_dpad_left_realesed if _button_dpad_left_type == InputManagerConst._event_type_enum.RELESED \
 			else owner.get_dpad_left_oneshot if _button_dpad_left_type == InputManagerConst._event_type_enum.ONE_SHOT \
 			else owner.get_dpad_left_toggle
-## Button DPAD LEFT event action
+## Button D-PAD LEFT event action
 @export var _button_dpad_left_type: InputManagerConst._event_type_enum = InputManagerConst._event_type_enum.PRESSED:
 	set(value):
 		if owner == null:
@@ -455,9 +455,9 @@ var owner: InputManager
 ## Corresponding key.
 @export var _button_dpad_left_key: Key = Key.KEY_LEFT
 
-@export_subgroup("Action Button DPAD RIGHT")
-## Button DPAD RIGHT of joystick action name
-@export_placeholder("Button DPAD RIGHT action name") var _button_dpad_right_action_name = "to_right":
+@export_subgroup("Action Button D-PAD RIGHT")
+## Button D-PAD RIGHT of joystick action name
+@export_placeholder("Button D-PAD RIGHT action name") var _button_dpad_right_action_name = "to_right":
 	set(value):
 		if owner == null:
 			_button_dpad_right_action_name = value
@@ -471,7 +471,7 @@ var owner: InputManager
 			else owner.get_dpad_right_realesed if _button_dpad_right_type == InputManagerConst._event_type_enum.RELESED \
 			else owner.get_dpad_right_oneshot if _button_dpad_right_type == InputManagerConst._event_type_enum.ONE_SHOT \
 			else owner.get_dpad_right_toggle
-## Button DPAD RIGHT event action
+## Button D-PAD RIGHT event action
 @export var _button_dpad_right_type: InputManagerConst._event_type_enum = InputManagerConst._event_type_enum.PRESSED:
 	set(value):
 		if owner == null:
