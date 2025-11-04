@@ -12,54 +12,64 @@ const RESOURCE_PATH: String = "res://addons/input_manager/resources/input_manage
 # EXPORTS **********************************************************
 
 # SIGNALS **********************************************************
-## Emitted when a joystick is connected or disconnected via USB, Wi-Fi, or Bluetooth.
+## Emitted when a gamepad is connected or disconnected via USB, Wi-Fi, or Bluetooth.
 signal on_device_changed(device: int, connected: bool)
 
 ## Emitted when you move the mouse on the screen.
 signal on_mouse_motion_changed(value: Vector2)
 
-## Emitted when the left joystick stick (L) is moved.
+## Emitted when the left stick gamepad (L) is moved.
 signal on_left_stick_changed(value: Vector2, length: float)
 
-## Emitted when the right joystick stick (R) is moved.
+## Emitted when the right stick gamepad (R) is moved.
 signal on_right_stick_changed(value: Vector2, length: float)
 
-## Emitted when the left trigger button on the joystick (L2) is pressed.
+## Emitted when the left trigger button on the gamepad (L2) is pressed.
 signal on_left_trigger_changed(length: float)
 
-## Emitted when the left trigger button on the joystick (R2) is pressed.
+## Emitted when the left trigger button on the gamepad (R2) is pressed.
 signal on_right_trigger_changed(length: float)
 
-## Emitted when the left shoulder button on the joystick (L1) is pressed.
+## Emitted when the left shoulder button on the gamepad (L1) is pressed.
 signal on_left_shoulder_changed(pressed: bool)
 
-## Emitted when the right shoulder button on the joystick (R1) is pressed.
+## Emitted when the right shoulder button on the gamepad (R1) is pressed.
 signal on_right_shoulder_changed(pressed: bool)
 
-## Emitted when the left joystick button (L3) is pressed.
+## Emitted when the left stick button gamepad (L3) is pressed.
 signal on_left_stick_button_changed(pressed: bool)
 
-## Emitted when the right joystick button (R3) is pressed.
+## Emitted when the right stick button gamepad (R3) is pressed.
 signal on_right_stick_button_changed(pressed: bool)
 
+## Emitted when the A button (Xbox) or X button (PS) on the controller is pressed.
 signal on_button_a_changed(pressed: bool)
 
+## Emitted when the B button (Xbox) or Circle button (PS) on the controller is pressed.
 signal on_button_b_changed(pressed: bool)
 
+## Emitted when the X button (Xbox) or Square button (PS) on the controller is pressed.
 signal on_button_x_changed(pressed: bool)
 
+## Emitted when the Y button (Xbox) or Triangle button (PS) on the controller is pressed.
 signal on_button_y_changed(pressed: bool)
 
+## Emitted when the diagonal up button on the gamepad is pressed.
 signal on_dpad_up_changed(pressed: bool)
 
+## Emitted when the diagonal down button on the gamepad is pressed.
 signal on_dpad_down_changed(pressed: bool)
 
+## Emitted when the diagonal left button on the gamepad is pressed.
 signal on_dpad_left_changed(pressed: bool)
 
+## Emitted when the diagonal right button on the gamepad is pressed.
 signal on_dpad_right_changed(pressed: bool)
 
+## Emitted when the Menu (Xbox) or Options (PS) button on the controller is pressed.
 signal on_start_changed(pressed: bool)
 
+## Issued when the View (Xbox) or Share (PS) button on the gamepad is pressed.
 signal on_select_changed(pressed: bool)
 
 signal on_action_button(action_name: String, pressed: bool)

@@ -94,32 +94,32 @@ InputManager.vibrate(0, 0.5, 0.5, 0.3)
 
 ## Signals
 
-| Signal                                                   | Description                                                                        |
-| -------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `on_device_changed(device: int, connected: bool)`        | Emitted when a joystick is connected or disconnected via USB, Wi-Fi, or Bluetooth. |
-| `on_mouse_motion_changed(value: Vector2)`                | Emitted when you move the mouse on the screen.                                     |
-| `on_left_stick_changed(value: Vector2, length: float)`   | Emitted when the left joystick stick (L) is moved.                                 |
-| `on_right_stick_changed(value: Vector2, length: float)`  | Emitted when the right joystick stick (R) is moved.                                |
-| `on_left_trigger_changed(length: float)`                 | Emitted when the left trigger button on the joystick (L2) is pressed.              |
-| `on_right_trigger_changed(length: float)`                | Emitted when the right trigger button on the joystick (R2) is pressed.             |
-| `on_left_shoulder_changed(pressed: bool)`                | Emitted when the left shoulder button on the joystick (L1) is pressed.             |
-| `on_right_shoulder_changed(pressed: bool)`               | Emitted when the right shoulder button on the joystick (R1) is pressed.            |
-| `on_left_stick_button_changed(pressed: bool)`            | Emitted when the left joystick button (L3) is pressed.                             |
-| `on_right_stick_button_changed(pressed: bool)`           | Emitted when the right joystick button (R3) is pressed.                            |
-| `on_button_a_changed(pressed: bool)`                     | Description                                                                        |
-| `on_button_b_changed(pressed: bool)`                     | Description                                                                        |
-| `on_button_x_changed(pressed: bool)`                     | Description                                                                        |
-| `on_button_y_changed(pressed: bool)`                     | Description                                                                        |
-| `on_dpad_up_changed(pressed: bool)`                      | Description                                                                        |
-| `on_dpad_down_changed(pressed: bool)`                    | Description                                                                        |
-| `on_dpad_left_changed(pressed: bool)`                    | Description                                                                        |
-| `on_dpad_right_changed(pressed: bool)`                   | Description                                                                        |
-| `on_start_changed(pressed: bool)`                        | Description                                                                        |
-| `on_select_changed(pressed: bool)`                       | Description                                                                        |
-| `on_action_button(action_name: String, pressed: bool)`   | Description                                                                        |
-| `on_action_trigger(action_name: String, value: float)`   | Description                                                                        |
-| `on_action_stick(action_name: String, value: Vector2)`   | Description                                                                        |
-| `on_action_changed(action_name: String, valur: Variant)` | Description                                                                        |
+| Signal                                                   | Description                                                                            |
+| -------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `on_device_changed(device: int, connected: bool)`        | Emitted when a gamepad is connected or disconnected via USB, Wi-Fi, or Bluetooth.      |
+| `on_mouse_motion_changed(value: Vector2)`                | Emitted when you move the mouse on the screen.                                         |
+| `on_left_stick_changed(value: Vector2, length: float)`   | Emitted when the left stick gamepad (L) is moved.                                      |
+| `on_right_stick_changed(value: Vector2, length: float)`  | Emitted when the right stick gamepad (R) is moved.                                     |
+| `on_left_trigger_changed(length: float)`                 | Emitted when the left trigger button on the gamepad (L2) is pressed.                   |
+| `on_right_trigger_changed(length: float)`                | Emitted when the right trigger button on the gamepad (R2) is pressed.                  |
+| `on_left_shoulder_changed(pressed: bool)`                | Emitted when the left shoulder button on the gamepad (L1) is pressed.                  |
+| `on_right_shoulder_changed(pressed: bool)`               | Emitted when the right shoulder button on the gamepad (R1) is pressed.                 |
+| `on_left_stick_button_changed(pressed: bool)`            | Emitted when the left stick button gamepad (L3) is pressed.                            |
+| `on_right_stick_button_changed(pressed: bool)`           | Emitted when the right stick button gamepad (R3) is pressed.                           |
+| `on_button_a_changed(pressed: bool)`                     | Emitted when the A button (Xbox) or X button (PS) on the controller is pressed.        |
+| `on_button_b_changed(pressed: bool)`                     | Emitted when the B button (Xbox) or Circle button (PS) on the controller is pressed.   |
+| `on_button_x_changed(pressed: bool)`                     | Emitted when the X button (Xbox) or Square button (PS) on the controller is pressed.   |
+| `on_button_y_changed(pressed: bool)`                     | Emitted when the Y button (Xbox) or Triangle button (PS) on the controller is pressed. |
+| `on_dpad_up_changed(pressed: bool)`                      | Emitted when the diagonal up button on the gamepad is pressed.                         |
+| `on_dpad_down_changed(pressed: bool)`                    | Emitted when the diagonal down button on the gamepad is pressed.                       |
+| `on_dpad_left_changed(pressed: bool)`                    | Emitted when the diagonal left button on the gamepad is pressed.                       |
+| `on_dpad_right_changed(pressed: bool)`                   | Emitted when the diagonal right button on the gamepad is pressed.                      |
+| `on_start_changed(pressed: bool)`                        | Emitted when the Menu (Xbox) or Options (PS) button on the controller is pressed.      |
+| `on_select_changed(pressed: bool)`                       | Issued when the View (Xbox) or Share (PS) button on the gamepad is pressed.            |
+| `on_action_button(action_name: String, pressed: bool)`   | Description                                                                            |
+| `on_action_trigger(action_name: String, value: float)`   | Description                                                                            |
+| `on_action_stick(action_name: String, value: Vector2)`   | Description                                                                            |
+| `on_action_changed(action_name: String, valur: Variant)` | Description                                                                            |
 
 ---
 
