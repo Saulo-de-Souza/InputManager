@@ -72,12 +72,16 @@ signal on_start_changed(pressed: bool)
 ## Issued when the View (Xbox) or Share (PS) button on the gamepad is pressed.
 signal on_select_changed(pressed: bool)
 
+## Emitted when any action button on the gamepad is pressed. (buttons that return true or false).
 signal on_action_button(action_name: String, pressed: bool)
 
+## Emitted when any gamepad trigger button is pressed (buttons that return float like L2 and R2).
 signal on_action_trigger(action_name: String, value: float)
 
+## Emitted when the sticks of the gamepad is moved.
 signal on_action_stick(action_name: String, value: Vector2)
 
+## Emitted when any stick, button, or trigger on the gamepad is moved or pressed.
 signal on_action_changed(action_name: String, valur: Variant)
 # SIGNALS **********************************************************
 
