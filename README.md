@@ -154,6 +154,6 @@ input_manager.save()
 **Screenshot InputManager**
 
 ![Screenshot 1](./addons/input_manager/screenshots/all.png)
-![Screenshot 1](./addons/input_manager/screenshots/1.png)
-![Screenshot 1](./addons/input_manager/screenshots/2.png)
-![Screenshot 1](./addons/input_manager/screenshots/3.png)
+![Screenshot 2](./addons/input_manager/screenshots/1.png)
+![Screenshot 3](./addons/input_manager/screenshots/2.png)
+![Screenshot 4](./addons/input_manager/screenshots/3.png)
