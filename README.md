@@ -100,11 +100,20 @@ func _physics_process(delta: float) -> void:
 ## Controller Vibration
 
 ```gdscript
-# Start
+# Start vibration (left_strength: float, right_strength: float, duration: float)
 input_manager.start_vibration(0.0, 0.5, 0.3)
 
 # To stop a vibration in progress.
 input_manager.stop_vibration()
+```
+
+---
+
+## Save configurations
+
+```gdscript
+# Save configurations
+input_manager.save()
 ```
 
 ---
@@ -137,72 +146,5 @@ input_manager.stop_vibration()
 | `on_action_trigger(action_name: String, value: float)`   | Emitted when any gamepad trigger button is pressed (buttons that return float like L2 and R2). |
 | `on_action_stick(action_name: String, value: Vector2)`   | Emitted when the sticks of the gamepad is moved.                                               |
 | `on_action_changed(action_name: String, valur: Variant)` | Emitted when any stick, button, or trigger on the gamepad is moved or pressed.                 |
-
----
-
-## Optional Configuration
-
-```gdscript
-InputManager.deadzone = 0.15
-InputManager.enable_vibration = true
-InputManager.debug_mode = false
-```
-
----
-
-## Internal Structure
-
-`InputManager` operates using three layers:
-
-1. **Input Layer:** Reads system input events (keyboard, joypad, mouse).
-2. **State Layer:** Manages transitions (pressed, released, toggled, oneshot).
-3. **Emission Layer:** Sends signals and vibrations based on current state.
-
-This ensures **high performance and low coupling**, ready for integration with any gameplay or UI system.
-
----
-
-## Example (Player.gd)
-
-```gdscript
-extends CharacterBody3D
-
-func _physics_process(delta):
-    var dir = InputManager.get_vector("move_left", "move_right", "move_forward", "move_backward")
-    if dir.length() > 0:
-        velocity.x = dir.x * speed
-        velocity.z = dir.y * speed
-        move_and_slide()
-
-    if InputManager.is_action_oneshot("jump"):
-        jump()
-
-func jump():
-    velocity.y = jump_force
-```
-
----
-
-## UI / HUD Integration
-
-You can connect InputManager signals directly to buttons, animations, or menus:
-
-```gdscript
-func _ready():
-    InputManager.action_pressed.connect(_on_action_pressed)
-
-func _on_action_pressed(action_name):
-    if action_name == "pause":
-        toggle_pause_menu()
-```
-
----
-
-## Planned Extensions
-
-- Real-time **Input Remapping**
-- Saved profiles (JSON)
-- **Steam Input** compatibility
-- Built-in **Control Settings Menu** support
 
 ---
