@@ -29,7 +29,6 @@ Perfect for **3D or 2D games** of any genre — platformer, shooter, racing, RPG
 | Built-in Signals | Easily connect to scripts and nodes             |
 | Vibration        | Configurable controller rumble                  |
 | Auto Detection   | Detects devices and actions in real-time        |
-| Modular          | Works as global Autoload (Singleton)            |
 
 ---
 
@@ -43,43 +42,57 @@ Perfect for **3D or 2D games** of any genre — platformer, shooter, racing, RPG
 
 ## Basic Usage
 
+### Analog Control
+
+```gdscript
+@onready var input_manager: InputManager = $InputManager
+
+func _physics_process(delta: float) -> void:
+    if input_manager.get_left_stick().length() > 0.0:
+        var direction: Vector2 = input_manager.get_left_stick()
+		#var direction: Vector2 = input_manager.get_action_stick("move")
+		#var direction: Vector2 = input_manager.get_action("move") as Vector2
+		$Player.move(direction)
+```
+
+### Toggle
+
+```gdscript
+@onready var input_manager: InputManager = $InputManager
+
+func _physics_process(delta: float) -> void:
+    $Player.crouch = input_manager.get_left_shoulder_toggle()
+```
+
 ### Check if an action is pressed
 
 ```gdscript
-if InputManager.is_action_pressed("jump"):
-    player.jump()
+@onready var input_manager: InputManager = $InputManager
+
+func _physics_process(delta: float) -> void:
+    # Check if button A has been pressed and fire several shots while the button is held down.
+    if input_manager.get_button_a_pressed():
+        $Player.shoot()
 ```
 
 ### One-shot action
 
 ```gdscript
-if InputManager.is_action_oneshot("fire"):
-    player.shoot()
+@onready var input_manager: InputManager = $InputManager
+
+func _physics_process(delta: float) -> void:
+    if input_manager.get_button_a_oneshot():
+        $Player.shoot()
 ```
 
 ### Released action
 
 ```gdscript
-if InputManager.is_action_released("dash"):
-    player.stop_dash()
-```
+@onready var input_manager: InputManager = $InputManager
 
-### Toggle action
-
-```gdscript
-if InputManager.is_action_toggled("light"):
-    toggle_flashlight()
-```
-
----
-
-## Analog Control
-
-```gdscript
-var move_vector = InputManager.get_vector("move_left", "move_right", "move_up", "move_down")
-
-if move_vector.length() > 0:
-    player.move(move_vector)
+func _physics_process(delta: float) -> void:
+   	if input_manager.get_button_y_realesed():
+		$Player.stop_dash()
 ```
 
 ---
@@ -87,8 +100,11 @@ if move_vector.length() > 0:
 ## Controller Vibration
 
 ```gdscript
-# Controller ID 0, strength X/Y, duration (seconds)
-InputManager.vibrate(0, 0.5, 0.5, 0.3)
+# Start
+input_manager.start_vibration(0.0, 0.5, 0.3)
+
+# To stop a vibration in progress.
+input_manager.stop_vibration()
 ```
 
 ---
