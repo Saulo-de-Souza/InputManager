@@ -35,6 +35,7 @@ signal on_select_changed(pressed: bool)
 signal on_action_button(action_name: String, pressed: bool)
 signal on_action_trigger(action_name: String, value: float)
 signal on_action_stick(action_name: String, value: Vector2)
+signal on_action_changed(action_name: String, valur: Variant)
 # SIGNALS **********************************************************
 
 var _actions_buttons: Dictionary[String, Callable] = {}
@@ -293,6 +294,10 @@ func _ready():
 	input_manager_data.init(self)
 
 	Input.joy_connection_changed.connect(func(device, connected): on_device_changed.emit(device, connected))
+	
+	on_action_button.connect(_on_action_changed_intern)
+	on_action_stick.connect(_on_action_changed_intern)
+	on_action_trigger.connect(_on_action_changed_intern)
 	pass
 
 func _input(event: InputEvent) -> void:
@@ -335,29 +340,42 @@ func _get_configuration_warnings() -> PackedStringArray:
 
 # PUBLIC METHODS ***************************************************
 # ACTIONS NAME
+## Get an action name of type button. Returns a boolean value, and if it doesn't exist, returns false.
 func get_action_button(action_name: String) -> bool:
-	if not action_name in _actions_buttons:
+	if not _actions_buttons.has(action_name):
 		push_warning("%s mapping does not exist."%action_name)
 		return false
 	var result = _actions_buttons[action_name].call()
 	return result
 
+## Get an action name of type stick. Returns a Vector2, and if it doesn't exist, it will return a Vector.ZERO.
 func get_action_stick(action_name: String) -> Vector2:
-	if not action_name in _actions_sticks:
+	if not _actions_sticks.has(action_name):
 		push_warning("%s mapping does not exist."%action_name)
 		return Vector2.ZERO
 	var result = _actions_sticks[action_name].call()
 	return result
 
+## Get an action name of type trigger. Returns a float, and if it doesn't exist, it will return 0.0.
 func get_action_trigger(action_name: String) -> float:
-	if not action_name in _actions_triggers:
+	if not _actions_triggers.has(action_name):
 		push_warning("%s mapping does not exist."%action_name)
 		return 0.0
 	var result = _actions_triggers[action_name].call()
 	return result
 
-func save() -> void:
-	_save_resource()
+## Get any action name (button, trigger, or stick). Returns a boolean if it's an action button, a floating-point number if it's a trigger, or a Vector2 if it's a stick. Returns null if it doesn't exist.
+func get_action(action_name) -> Variant:
+	return get_action_button(action_name) if _actions_buttons.has(action_name) \
+	else \
+	get_action_stick(action_name) if _actions_sticks.has(action_name) \
+	else \
+	get_action_trigger(action_name) if _actions_triggers.has(action_name) \
+	else null
+	
+## Save the current settings. Return boolean if Saved successfully!
+func save() -> bool:
+	return _save_resource()
 	
 # LEFT STICK GETTER
 func get_left_stick() -> Vector2:
@@ -604,10 +622,18 @@ func get_select_toggle() -> bool:
 # PUBLIC METHODS ***************************************************
 
 # PRIVATE METHODS **************************************************
-func _save_resource() -> void:
+func _save_resource() -> bool:
 	if input_manager_data:
 		ResourceSaver.save(input_manager_data, RESOURCE_PATH)
+		if Engine.is_editor_hint(): print("Saved successfully!")
+		return true
+	else:
+		if Engine.is_editor_hint(): print("It was not possible to save because there is no InputManagerData configured in the inspector.")
+		return false
 
+func _on_action_changed_intern(action_name: String, value: Variant) -> void:
+	on_action_changed.emit(action_name, value)
+	
 func _get_toggle(toggle: bool) -> bool:
 	if toggle:
 		return true
