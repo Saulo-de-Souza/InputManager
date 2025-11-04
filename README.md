@@ -94,13 +94,32 @@ InputManager.vibrate(0, 0.5, 0.5, 0.3)
 
 ## Signals
 
-| Signal                                             | Description                                |
-| -------------------------------------------------- | ------------------------------------------ |
-| `action_pressed(action_name: String)`              | Emitted when an action is pressed          |
-| `action_released(action_name: String)`             | Emitted when an action is released         |
-| `action_toggled(action_name: String, state: bool)` | Emitted when a toggle action changes state |
-| `device_connected(device_id: int)`                 | Emitted when a controller is connected     |
-| `device_disconnected(device_id: int)`              | Emitted when a controller is disconnected  |
+| Signal                                                   | Description                                                                        |
+| -------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `on_device_changed(device: int, connected: bool)`        | Emitted when a joystick is connected or disconnected via USB, Wi-Fi, or Bluetooth. |
+| `on_mouse_motion_changed(value: Vector2)`                | Emitted when you move the mouse on the screen.                                     |
+| `on_left_stick_changed(value: Vector2, length: float)`   | Emitted when the left joystick stick (L) is moved.                                 |
+| `on_right_stick_changed(value: Vector2, length: float)`  | Emitted when the right joystick stick (R) is moved.                                |
+| `on_left_trigger_changed(length: float)`                 | Emitted when the left trigger button on the joystick (L2) is pressed.              |
+| `on_right_trigger_changed(length: float)`                | Emitted when the right trigger button on the joystick (R2) is pressed.             |
+| `on_left_shoulder_changed(pressed: bool)`                | Emitted when the left shoulder button on the joystick (L1) is pressed.             |
+| `on_right_shoulder_changed(pressed: bool)`               | Emitted when the right shoulder button on the joystick (R1) is pressed.            |
+| `on_left_stick_button_changed(pressed: bool)`            | Description                                                                        |
+| `on_right_stick_button_changed(pressed: bool)`           | Description                                                                        |
+| `on_button_a_changed(pressed: bool)`                     | Description                                                                        |
+| `on_button_b_changed(pressed: bool)`                     | Description                                                                        |
+| `on_button_x_changed(pressed: bool)`                     | Description                                                                        |
+| `on_button_y_changed(pressed: bool)`                     | Description                                                                        |
+| `on_dpad_up_changed(pressed: bool)`                      | Description                                                                        |
+| `on_dpad_down_changed(pressed: bool)`                    | Description                                                                        |
+| `on_dpad_left_changed(pressed: bool)`                    | Description                                                                        |
+| `on_dpad_right_changed(pressed: bool)`                   | Description                                                                        |
+| `on_start_changed(pressed: bool)`                        | Description                                                                        |
+| `on_select_changed(pressed: bool)`                       | Description                                                                        |
+| `on_action_button(action_name: String, pressed: bool)`   | Description                                                                        |
+| `on_action_trigger(action_name: String, value: float)`   | Description                                                                        |
+| `on_action_stick(action_name: String, value: Vector2)`   | Description                                                                        |
+| `on_action_changed(action_name: String, valur: Variant)` | Description                                                                        |
 
 ---
 
