@@ -691,10 +691,12 @@ func _apply_deadzone_axis(value: float, deadzone: float) -> float:
 	else:
 		return sign(value) * ((abs(value) - deadzone) / (1.0 - deadzone))
 
+## Starts gamepad vibration. You can choose the intensity for each side of the gamepad (left and right) and the duration.
 func start_vibration(left_strength: float, right_strength: float, duration: float) -> void:
 	Input.start_joy_vibration(input_manager_data._device, right_strength, left_strength, duration)
 	pass
 
+## Stop gamepad vibration.
 func stop_vibration() -> void:
 	Input.stop_joy_vibration(input_manager_data._device)
 	pass

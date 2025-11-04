@@ -2,11 +2,12 @@
 
 ## Description
 
-**InputManager** is a complete and extensible input management system for **Godot Engine 4.5+**, designed to provide **precise, unified, and configurable** control over keyboard, mouse, and gamepads.
+**InputManager** is a plugin for **Godot 4.5x** used to receive and handle gamepad events, as well as to configure inputs in an easier and more practical way. Each gamepad action can be named and assigned a key to be handled according to the player's actions. Action buttons can have their states changed to **PRESSED** (when held down), **RELEASED** (when the button is released), **ONESHOT** (for a single shot), and **TOGGLE** (to toggle the value).
 
 Features include:
 
-- **Configurable Deadzone** for analog sticks
+- **Select the device** connected to the pc
+- **Configurable Deadzone** for analog sticks and triggers buttons
 - **Toggle, Oneshot, and Release Events**
 - **Dynamic Action and Button Mapping**
 - **Support for Multiple Gamepads**
