@@ -287,9 +287,9 @@ func _ready():
 	if Engine.is_editor_hint(): return
 
 	if not input_manager_data:
-		var resource = await ResourceLoader.load(RESOURCE_PATH)
+		var resource = ResourceLoader.load(RESOURCE_PATH)
 		if not resource:
-			resource = await InputManagerData.new()
+			resource = InputManagerData.new()
 		input_manager_data = resource
 	input_manager_data.init(self)
 
@@ -366,12 +366,10 @@ func get_action_trigger(action_name: String) -> float:
 
 ## Get any action name (button, trigger, or stick). Returns a boolean if it's an action button, a floating-point number if it's a trigger, or a Vector2 if it's a stick. Returns null if it doesn't exist.
 func get_action(action_name) -> Variant:
-	return get_action_button(action_name) if _actions_buttons.has(action_name) \
-	else \
-	get_action_stick(action_name) if _actions_sticks.has(action_name) \
-	else \
-	get_action_trigger(action_name) if _actions_triggers.has(action_name) \
-	else null
+	var result_buttons = _actions_buttons.has(action_name)
+	var result_sticks = _actions_sticks.has(action_name)
+	var result_triggers = _actions_triggers.has(action_name)
+	return get_action_button(action_name) if result_buttons else get_action_stick(action_name) if result_sticks else get_action_trigger(action_name) if result_triggers else null
 	
 ## Save the current settings. Return boolean if Saved successfully!
 func save() -> bool:
