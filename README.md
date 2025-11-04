@@ -2,16 +2,17 @@
 
 ## Description
 
-**InputManager** is a complete and extensible input management system for **Godot Engine 4.5+**, designed to provide **precise, unified, and configurable** control over keyboard, mouse, and gamepads.  
+**InputManager** is a complete and extensible input management system for **Godot Engine 4.5+**, designed to provide **precise, unified, and configurable** control over keyboard, mouse, and gamepads.
 
 Features include:
-- **Configurable Deadzone** for analog sticks  
-- **Toggle, Oneshot, and Release Events**  
-- **Dynamic Action and Button Mapping**  
-- **Support for Multiple Gamepads**  
-- **Built-in Signals** for easy integration  
-- **Controller Vibration (Rumble)**  
-- **Script or Inspector Configuration**  
+
+- **Configurable Deadzone** for analog sticks
+- **Toggle, Oneshot, and Release Events**
+- **Dynamic Action and Button Mapping**
+- **Support for Multiple Gamepads**
+- **Built-in Signals** for easy integration
+- **Controller Vibration (Rumble)**
+- **Script or Inspector Configuration**
 
 Perfect for **3D or 2D games** of any genre — platformer, shooter, racing, RPG, and more.
 
@@ -19,15 +20,15 @@ Perfect for **3D or 2D games** of any genre — platformer, shooter, racing, RPG
 
 ## Key Features
 
-| Feature | Description |
-|----------|-------------|
-| Input Mapping | Supports keyboard, mouse, and multiple gamepads |
-| Deadzone | Defines analog stick neutral zone |
-| Toggle / Oneshot | Persistent and pulse-style events |
-| Built-in Signals | Easily connect to scripts and nodes |
-| Vibration | Configurable controller rumble |
-| Auto Detection | Detects devices and actions in real-time |
-| Modular | Works as global Autoload (Singleton) |
+| Feature          | Description                                     |
+| ---------------- | ----------------------------------------------- |
+| Input Mapping    | Supports keyboard, mouse, and multiple gamepads |
+| Deadzone         | Defines analog stick neutral zone               |
+| Toggle / Oneshot | Persistent and pulse-style events               |
+| Built-in Signals | Easily connect to scripts and nodes             |
+| Vibration        | Configurable controller rumble                  |
+| Auto Detection   | Detects devices and actions in real-time        |
+| Modular          | Works as global Autoload (Singleton)            |
 
 ---
 
@@ -37,30 +38,33 @@ Perfect for **3D or 2D games** of any genre — platformer, shooter, racing, RPG
 2. Extract the files into the `res://addons/` directory of your Godot project.
 3. Enable the plugin in Godot by going to `Project > Project Settings > Plugins` and activating **InputManager**.
 
-
 ---
 
 ## Basic Usage
 
 ### Check if an action is pressed
+
 ```gdscript
 if InputManager.is_action_pressed("jump"):
     player.jump()
 ```
 
 ### One-shot action
+
 ```gdscript
 if InputManager.is_action_oneshot("fire"):
     player.shoot()
 ```
 
 ### Released action
+
 ```gdscript
 if InputManager.is_action_released("dash"):
     player.stop_dash()
 ```
 
 ### Toggle action
+
 ```gdscript
 if InputManager.is_action_toggled("light"):
     toggle_flashlight()
@@ -90,13 +94,13 @@ InputManager.vibrate(0, 0.5, 0.5, 0.3)
 
 ## Signals
 
-| Signal | Description |
-|--------|-------------|
-| `action_pressed(action_name: String)` | Emitted when an action is pressed |
-| `action_released(action_name: String)` | Emitted when an action is released |
+| Signal                                             | Description                                |
+| -------------------------------------------------- | ------------------------------------------ |
+| `action_pressed(action_name: String)`              | Emitted when an action is pressed          |
+| `action_released(action_name: String)`             | Emitted when an action is released         |
 | `action_toggled(action_name: String, state: bool)` | Emitted when a toggle action changes state |
-| `device_connected(device_id: int)` | Emitted when a controller is connected |
-| `device_disconnected(device_id: int)` | Emitted when a controller is disconnected |
+| `device_connected(device_id: int)`                 | Emitted when a controller is connected     |
+| `device_disconnected(device_id: int)`              | Emitted when a controller is disconnected  |
 
 ---
 
@@ -114,8 +118,8 @@ InputManager.debug_mode = false
 
 `InputManager` operates using three layers:
 
-1. **Input Layer:** Reads system input events (keyboard, joypad, mouse).  
-2. **State Layer:** Manages transitions (pressed, released, toggled, oneshot).  
+1. **Input Layer:** Reads system input events (keyboard, joypad, mouse).
+2. **State Layer:** Manages transitions (pressed, released, toggled, oneshot).
 3. **Emission Layer:** Sends signals and vibrations based on current state.
 
 This ensures **high performance and low coupling**, ready for integration with any gameplay or UI system.
@@ -146,6 +150,7 @@ func jump():
 ## UI / HUD Integration
 
 You can connect InputManager signals directly to buttons, animations, or menus:
+
 ```gdscript
 func _ready():
     InputManager.action_pressed.connect(_on_action_pressed)
@@ -159,10 +164,9 @@ func _on_action_pressed(action_name):
 
 ## Planned Extensions
 
-- Real-time **Input Remapping**  
-- Saved profiles (JSON)  
-- **Steam Input** compatibility  
-- Built-in **Control Settings Menu** support  
+- Real-time **Input Remapping**
+- Saved profiles (JSON)
+- **Steam Input** compatibility
+- Built-in **Control Settings Menu** support
 
 ---
-
