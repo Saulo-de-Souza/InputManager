@@ -1,7 +1,7 @@
 gp.bat export-ignore
 .gitignore export-ignore
-.gitattributes export-ignore
 README.md export-ignore
 LICENSE.md export-ignore
-addons/input_manager/icon.png
-addons/input_manager/screenshots
+addons/input_manager/icon.png export-ignore
+addons/input_manager/screenshots export-ignore
+.gitattributes export-ignore
