@@ -36,8 +36,10 @@ signal on_left_shoulder_changed(pressed: bool)
 ## Emitted when the right shoulder button on the joystick (R1) is pressed.
 signal on_right_shoulder_changed(pressed: bool)
 
+## Emitted when the left joystick button (L3) is pressed.
 signal on_left_stick_button_changed(pressed: bool)
 
+## Emitted when the right joystick button (R3) is pressed.
 signal on_right_stick_button_changed(pressed: bool)
 
 signal on_button_a_changed(pressed: bool)
