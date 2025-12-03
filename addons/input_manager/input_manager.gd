@@ -1,4 +1,5 @@
 @tool
+@icon("res://addons/input_manager/icon.svg")
 class_name InputManager extends Node
 
 const RESOURCE_PATH: String = "res://addons/input_manager/resources/input_manager_data.tres"

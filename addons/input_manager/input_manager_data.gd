@@ -1,3 +1,4 @@
+@icon("res://addons/input_manager/icon.svg")
 class_name InputManagerData extends Resource
 
 var owner: InputManager

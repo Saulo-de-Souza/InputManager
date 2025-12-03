@@ -1,4 +1,10 @@
-# InputManager - Advanced Input System for Godot 4.5+
+<h1 align="center"> Input Manager </h1>
+
+<div align="center">
+<img src="addons/input_manager/icon.svg" widt="200" height="200">
+</div>
+
+<h3 align="center">Advanced Input System for Godot 4.5+</h3>
 
 ## Description
 

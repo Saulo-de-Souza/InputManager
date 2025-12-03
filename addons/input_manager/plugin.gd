@@ -1,7 +1,7 @@
 @tool
 extends EditorPlugin
 
-var icon: CompressedTexture2D = preload("res://addons/input_manager/icon-16x16.png")
+var icon: CompressedTexture2D = preload("res://addons/input_manager/icon.svg")
 var main_script: Script = preload("res://addons/input_manager/input_manager.gd")
 var input_manager_data_script: Script = preload("res://addons/input_manager/input_manager_data.gd")
 var input_manager_const_script: Script = preload("res://addons/input_manager/const.gd")
