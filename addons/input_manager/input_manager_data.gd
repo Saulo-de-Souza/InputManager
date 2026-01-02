@@ -62,6 +62,11 @@ var _STICK_TEXTURE_6 = preload("res://addons/input_manager/virtual_joystick/text
 @export var _left_stick_key_positive_y: Key = Key.KEY_S
 
 @export_group("Left Stick/UI", "_left_stick_ui")
+@export var _left_stick_ui_visible: bool = true:
+	set(value):
+		_left_stick_ui_visible = value
+		if is_instance_valid(owner):
+			owner._left_stick_ui.visible = _left_stick_ui_visible
 ## Enables or disables the joystick input.
 @export var _left_stick_ui_active: bool = true:
 	set(value):
@@ -81,6 +86,7 @@ var _STICK_TEXTURE_6 = preload("res://addons/input_manager/virtual_joystick/text
 		_left_stick_ui_position = value
 		if is_instance_valid(owner):
 			owner._left_stick_ui.global_position = owner._position_left_stick_ui()
+
 @export_range(0.1, 2.0, 0.001, "suffix:x", "or_greater") var _left_stick_ui_scale_factor: float = 1.0:
 	set(value):
 		_left_stick_ui_scale_factor = value
@@ -100,13 +106,29 @@ var _STICK_TEXTURE_6 = preload("res://addons/input_manager/virtual_joystick/text
 		_left_stick_ui_joystick_use_textures = value
 		if owner:
 			owner._left_stick_ui.joystick_use_textures = _left_stick_ui_joystick_use_textures
-			
+
 ## Select one of the available models. More models will be available soon.
 @export_enum("NONE", "PRESET_DEFAULT", "PRESET_2", "PRESET_3", "PRESET_4", "PRESET_5", "PRESET_6") var _left_stick_ui_joystick_preset_texture: int = 5:
 	set(value):
 		_left_stick_ui_joystick_preset_texture = value
 		if owner:
 			owner._left_stick_ui.joystick_preset_texture = _left_stick_ui_joystick_preset_texture
+			match (value):
+				1:
+					_left_stick_ui_joystick_texture = _DEFAULT_JOYSTICK_TEXTURE
+				2:
+					_left_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_2
+				3:
+					_left_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_3
+				4:
+					_left_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_4
+				55:
+					_left_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_5
+				6:
+					_left_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_6
+				0:
+					if _left_stick_ui_joystick_texture in [_DEFAULT_JOYSTICK_TEXTURE, _JOYSTICK_TEXTURE_2, _JOYSTICK_TEXTURE_3, _JOYSTICK_TEXTURE_4, _JOYSTICK_TEXTURE_5, _JOYSTICK_TEXTURE_6]:
+						_left_stick_ui_joystick_texture = null
 			
 ## Select a texture for the joystick figure.
 @export var _left_stick_ui_joystick_texture: Texture2D = _JOYSTICK_TEXTURE_5:
@@ -149,6 +171,23 @@ var _STICK_TEXTURE_6 = preload("res://addons/input_manager/virtual_joystick/text
 		_left_stick_ui_stick_preset_texture = value
 		if owner:
 			owner._left_stick_ui.stick_preset_texture = _left_stick_ui_stick_preset_texture
+			match (value):
+				1:
+					_left_stick_ui_stick_texture = _DEFAULT_STICK_TEXTURE
+				2:
+					_left_stick_ui_stick_texture = _STICK_TEXTURE_2
+				3:
+					_left_stick_ui_stick_texture = _STICK_TEXTURE_3
+				4:
+					_left_stick_ui_stick_texture = _STICK_TEXTURE_4
+				5:
+					_left_stick_ui_stick_texture = _STICK_TEXTURE_5
+				6:
+					_left_stick_ui_stick_texture = _STICK_TEXTURE_6
+				0:
+					if _left_stick_ui_stick_texture in [_DEFAULT_STICK_TEXTURE, _STICK_TEXTURE_2, _STICK_TEXTURE_3, _STICK_TEXTURE_4, _STICK_TEXTURE_5, _STICK_TEXTURE_6]:
+						_left_stick_ui_stick_texture = null
+
 			
 ## Select a texture for the stick figure.
 @export var _left_stick_ui_stick_texture: Texture2D = _STICK_TEXTURE_5:
@@ -195,6 +234,11 @@ var _STICK_TEXTURE_6 = preload("res://addons/input_manager/virtual_joystick/text
 
 
 @export_group("Right Stick/UI", "_right_stick_ui")
+@export var _right_stick_ui_visible: bool = true:
+	set(value):
+		_right_stick_ui_visible = value
+		if is_instance_valid(owner):
+			owner._right_stick_ui.visible = _right_stick_ui_visible
 ## Enables or disables the joystick input.
 @export var _right_stick_ui_active: bool = true:
 	set(value):
@@ -240,6 +284,22 @@ var _STICK_TEXTURE_6 = preload("res://addons/input_manager/virtual_joystick/text
 		_right_stick_ui_joystick_preset_texture = value
 		if owner:
 			owner._right_stick_ui.joystick_preset_texture = _right_stick_ui_joystick_preset_texture
+			match (value):
+				1:
+					_right_stick_ui_joystick_texture = _DEFAULT_JOYSTICK_TEXTURE
+				2:
+					_right_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_2
+				3:
+					_right_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_3
+				4:
+					_right_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_4
+				55:
+					_right_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_5
+				6:
+					_right_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_6
+				0:
+					if _right_stick_ui_joystick_texture in [_DEFAULT_JOYSTICK_TEXTURE, _JOYSTICK_TEXTURE_2, _JOYSTICK_TEXTURE_3, _JOYSTICK_TEXTURE_4, _JOYSTICK_TEXTURE_5, _JOYSTICK_TEXTURE_6]:
+						_right_stick_ui_joystick_texture = null
 			
 ## Select a texture for the joystick figure.
 @export var _right_stick_ui_joystick_texture: Texture2D = _JOYSTICK_TEXTURE_5:
@@ -282,6 +342,22 @@ var _STICK_TEXTURE_6 = preload("res://addons/input_manager/virtual_joystick/text
 		_right_stick_ui_stick_preset_texture = value
 		if owner:
 			owner._right_stick_ui.stick_preset_texture = _right_stick_ui_stick_preset_texture
+			match (value):
+				1:
+					_right_stick_ui_stick_texture = _DEFAULT_STICK_TEXTURE
+				2:
+					_right_stick_ui_stick_texture = _STICK_TEXTURE_2
+				3:
+					_right_stick_ui_stick_texture = _STICK_TEXTURE_3
+				4:
+					_right_stick_ui_stick_texture = _STICK_TEXTURE_4
+				5:
+					_right_stick_ui_stick_texture = _STICK_TEXTURE_5
+				6:
+					_right_stick_ui_stick_texture = _STICK_TEXTURE_6
+				0:
+					if _right_stick_ui_stick_texture in [_DEFAULT_STICK_TEXTURE, _STICK_TEXTURE_2, _STICK_TEXTURE_3, _STICK_TEXTURE_4, _STICK_TEXTURE_5, _STICK_TEXTURE_6]:
+						_right_stick_ui_stick_texture = null
 			
 ## Select a texture for the stick figure.
 @export var _right_stick_ui_stick_texture: Texture2D = _STICK_TEXTURE_5:

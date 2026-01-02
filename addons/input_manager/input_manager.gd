@@ -1931,6 +1931,7 @@ func _init_left_stick_ui() -> void:
 		_left_stick_ui.stick_texture = input_manager_data._left_stick_ui_stick_texture
 		_left_stick_ui.stick_color = input_manager_data._left_stick_ui_stick_color
 		_left_stick_ui.stick_opacity = input_manager_data._left_stick_ui_stick_opacity
+		_left_stick_ui.visible = input_manager_data._left_stick_ui_visible
 
 	if _left_stick_ui.is_inside_tree():
 		_left_stick_ui.get_parent().remove_child.call_deferred(_left_stick_ui)
@@ -1974,6 +1975,7 @@ func _init_right_stick_ui() -> void:
 		_right_stick_ui.stick_texture = input_manager_data._right_stick_ui_stick_texture
 		_right_stick_ui.stick_color = input_manager_data._right_stick_ui_stick_color
 		_right_stick_ui.stick_opacity = input_manager_data._right_stick_ui_stick_opacity
+		_right_stick_ui.visible = input_manager_data._right_stick_ui_visible
 
 	if _right_stick_ui.is_inside_tree():
 		_right_stick_ui.get_parent().remove_child.call_deferred(_right_stick_ui)
