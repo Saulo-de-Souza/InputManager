@@ -393,7 +393,6 @@ var _key_l_pressed: bool = false:
 
 #region ENGINE METHODS ***************************************************
 func _enter_tree() -> void:
-	print("enter")
 	if input_manager_data:
 		input_manager_data.init(self)
 
@@ -415,14 +414,8 @@ func _enter_tree() -> void:
 
 		_init_all_touch_buttons()
 		
-	
-func _ready():
-	print("ready")
-	pass
-	
 
 func _exit_tree() -> void:
-	print("exit")
 	_actions_buttons.clear()
 	_actions_sticks.clear()
 	_actions_triggers.clear()
