@@ -163,3 +163,10 @@ input_manager.save()
 ![Screenshot 2](./addons/input_manager/screenshots/1.png)
 ![Screenshot 3](./addons/input_manager/screenshots/2.png)
 ![Screenshot 4](./addons/input_manager/screenshots/3.png)
+
+---
+
+## ❤️ Support
+
+If this project helps you, consider supporting:
+https://github.com/sponsors/Saulo-de-Souza
