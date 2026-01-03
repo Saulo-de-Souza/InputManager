@@ -1,5 +1,6 @@
 gp.bat export-ignore
 .gitignore export-ignore
+.github export-ignore
 README.md export-ignore
 LICENSE.md export-ignore
 addons/input_manager/icon.png export-ignore
