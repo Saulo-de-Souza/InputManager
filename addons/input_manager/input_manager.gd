@@ -1997,6 +1997,7 @@ func _init_right_stick_ui() -> void:
 
 func _init_all_touch_buttons() -> void:
 	await get_tree().process_frame
+	if not is_inside_tree(): return
 	_init_button_a_touch()
 	_init_button_b_touch()
 	_init_button_x_touch()
@@ -2017,74 +2018,92 @@ func _init_all_touch_buttons() -> void:
 	_init_right_stick_ui()
 
 func _position_button_a_touch() -> Vector2:
-	var screen_size: Vector2 = owner.get_viewport().get_visible_rect().size
+	if not is_inside_tree(): return Vector2.ZERO
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	return screen_size - Vector2(100, 0) + input_manager_data._button_a_position + input_manager_data.POSITION_BUTTON_ABXY_OFFSET
 
 func _position_button_b_touch() -> Vector2:
-	var screen_size: Vector2 = owner.get_viewport().get_visible_rect().size
+	if not is_inside_tree(): return Vector2.ZERO
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	return screen_size - Vector2(150, 100) + input_manager_data._button_b_position + input_manager_data.POSITION_BUTTON_ABXY_OFFSET
 
 func _position_button_x_touch() -> Vector2:
-	var screen_size: Vector2 = owner.get_viewport().get_visible_rect().size
+	if not is_inside_tree(): return Vector2.ZERO
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	return screen_size - Vector2(50, 100) + input_manager_data._button_x_position + input_manager_data.POSITION_BUTTON_ABXY_OFFSET
 
 func _position_button_y_touch() -> Vector2:
-	var screen_size: Vector2 = owner.get_viewport().get_visible_rect().size
+	if not is_inside_tree(): return Vector2.ZERO
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	return screen_size - Vector2(0, 0) + input_manager_data._button_y_position + input_manager_data.POSITION_BUTTON_ABXY_OFFSET
 
 func _position_button_dpad_up_touch() -> Vector2:
-	var screen_size: Vector2 = owner.get_viewport().get_visible_rect().size
+	if not is_inside_tree(): return Vector2.ZERO
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	return Vector2(75, screen_size.y - 150) + input_manager_data._button_dpad_up_position + input_manager_data.POSITION_BUTTON_DPADS_OFFSET
 
 func _position_button_dpad_down_touch() -> Vector2:
-	var screen_size: Vector2 = owner.get_viewport().get_visible_rect().size
+	if not is_inside_tree(): return Vector2.ZERO
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	return Vector2(75, screen_size.y - 0) + input_manager_data._button_dpad_down_position + input_manager_data.POSITION_BUTTON_DPADS_OFFSET
 
 func _position_button_dpad_left_touch() -> Vector2:
-	var screen_size: Vector2 = owner.get_viewport().get_visible_rect().size
+	if not is_inside_tree(): return Vector2.ZERO
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	return Vector2(0, screen_size.y - 75) + input_manager_data._button_dpad_left_position + input_manager_data.POSITION_BUTTON_DPADS_OFFSET
 
 func _position_button_dpad_right_touch() -> Vector2:
-	var screen_size: Vector2 = owner.get_viewport().get_visible_rect().size
+	if not is_inside_tree(): return Vector2.ZERO
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	return Vector2(150, screen_size.y - 75) + input_manager_data._button_dpad_right_position + input_manager_data.POSITION_BUTTON_DPADS_OFFSET
 
 func _position_button_left_shoulder_touch() -> Vector2:
-	var screen_size: Vector2 = owner.get_viewport().get_visible_rect().size
+	if not is_inside_tree(): return Vector2.ZERO
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	return Vector2(150, screen_size.y - 675) + input_manager_data._left_shoulder_position + input_manager_data.POSITION_BUTTON_TRIGGERS_SHOULDERS_OFFSET
 
 func _position_button_right_shoulder_touch() -> Vector2:
-	var screen_size: Vector2 = owner.get_viewport().get_visible_rect().size
+	if not is_inside_tree(): return Vector2.ZERO
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	return Vector2(screen_size.x - 150, screen_size.y - 675) + input_manager_data._right_shoulder_position + input_manager_data.POSITION_BUTTON_TRIGGERS_SHOULDERS_OFFSET
 
 func _position_button_left_trigger_touch() -> Vector2:
-	var screen_size: Vector2 = owner.get_viewport().get_visible_rect().size
+	if not is_inside_tree(): return Vector2.ZERO
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	return Vector2(150, screen_size.y - 575) + input_manager_data._left_trigger_position + input_manager_data.POSITION_BUTTON_TRIGGERS_SHOULDERS_OFFSET
 
 func _position_button_right_trigger_touch() -> Vector2:
-	var screen_size: Vector2 = owner.get_viewport().get_visible_rect().size
+	if not is_inside_tree(): return Vector2.ZERO
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	return Vector2(screen_size.x - 150, screen_size.y - 575) + input_manager_data._right_trigger_position + input_manager_data.POSITION_BUTTON_TRIGGERS_SHOULDERS_OFFSET
 
 func _position_button_start_touch() -> Vector2:
-	var screen_size: Vector2 = owner.get_viewport().get_visible_rect().size
+	if not is_inside_tree(): return Vector2.ZERO
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	return Vector2(screen_size.x / 2 - 200, screen_size.y - 200) + input_manager_data._button_start_position + input_manager_data.POSITION_BUTTON_START_SELECT_OFFSET
 
 func _position_button_select_touch() -> Vector2:
-	var screen_size: Vector2 = owner.get_viewport().get_visible_rect().size
+	if not is_inside_tree(): return Vector2.ZERO
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	return Vector2(screen_size.x / 2 + 200, screen_size.y - 200) + input_manager_data._button_select_position + input_manager_data.POSITION_BUTTON_START_SELECT_OFFSET
 
 func _position_button_left_stick_touch() -> Vector2:
-	var screen_size: Vector2 = owner.get_viewport().get_visible_rect().size
+	if not is_inside_tree(): return Vector2.ZERO
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	return Vector2(350, screen_size.y - 675) + input_manager_data._left_stick_button_position + input_manager_data.POSITION_BUTTON_TRIGGERS_SHOULDERS_OFFSET
 
 func _position_button_right_stick_touch() -> Vector2:
-	var screen_size: Vector2 = owner.get_viewport().get_visible_rect().size
+	if not is_inside_tree(): return Vector2.ZERO
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	return Vector2(screen_size.x - 350, screen_size.y - 675) + input_manager_data._right_stick_button_position + input_manager_data.POSITION_BUTTON_TRIGGERS_SHOULDERS_OFFSET
 
 func _position_left_stick_ui() -> Vector2:
-	var screen_size: Vector2 = owner.get_viewport().get_visible_rect().size
+	if not is_inside_tree(): return Vector2.ZERO
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	return Vector2(150, screen_size.y - _left_stick_ui._joystick_radius * 2 - _left_stick_ui.joystick_border * 2 - 150) + input_manager_data._left_stick_ui_position
 
 func _position_right_stick_ui() -> Vector2:
-	var screen_size: Vector2 = owner.get_viewport().get_visible_rect().size
+	if not is_inside_tree(): return Vector2.ZERO
+	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	return Vector2(screen_size.x - _right_stick_ui._joystick_radius * 2 - _right_stick_ui.joystick_border * 2 - 150, screen_size.y - _right_stick_ui._joystick_radius * 2 - _right_stick_ui.joystick_border * 2 - 150) + input_manager_data._right_stick_ui_position
 #endregion PRIVATE METHODS ***********************************************
