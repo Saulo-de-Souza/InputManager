@@ -122,7 +122,7 @@ var _STICK_TEXTURE_6 = preload("res://addons/input_manager/virtual_joystick/text
 					_left_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_3
 				4:
 					_left_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_4
-				55:
+				5:
 					_left_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_5
 				6:
 					_left_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_6
@@ -293,7 +293,7 @@ var _STICK_TEXTURE_6 = preload("res://addons/input_manager/virtual_joystick/text
 					_right_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_3
 				4:
 					_right_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_4
-				55:
+				5:
 					_right_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_5
 				6:
 					_right_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_6
