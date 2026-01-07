@@ -40,6 +40,12 @@ signal on_device_changed(device: int, connected: bool)
 ## Emitted when you move the mouse on the screen.
 signal on_mouse_motion_changed(value: Vector2)
 
+## Signal emitted when the mouse scroll wheel is scrolled upwards.
+signal on_mouse_button_wheel_up_changed()
+
+## Signal emitted when the mouse scroll wheel is scrolled down.
+signal on_mouse_button_wheel_down_changed()
+
 ## Emitted when the left stick gamepad (L) is moved.
 signal on_left_stick_changed(value: Vector2, length: float)
 
@@ -1198,19 +1204,26 @@ func _check_keyboard(event: InputEventKey) -> void:
 	pass
 
 func _check_mouse_motion(event: InputEventMouseMotion) -> void:
-	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED or (input_manager_data and input_manager_data._mouse_enable_event_without_captured):
 		on_mouse_motion_changed.emit(event.relative)
 	pass
+	
 
 func _check_mouse_button(event: InputEventMouseButton) -> void:
 	if input_manager_data:
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED or (input_manager_data and input_manager_data._mouse_enable_event_without_captured):
 			if event.button_index == input_manager_data._left_trigger_mouse_button:
 				on_left_trigger_changed.emit(1.0 if event.pressed else 0.0)
 				on_action_trigger.emit(input_manager_data._left_trigger_action_name, 1.0 if event.pressed else 0.0)
 			elif event.button_index == input_manager_data._right_trigger_mouse_button:
 				on_right_trigger_changed.emit(1.0 if event.pressed else 0.0)
 				on_action_trigger.emit(input_manager_data._right_trigger_action_name, 1.0 if event.pressed else 0.0)
+			elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
+				if event.pressed:
+					on_mouse_button_wheel_up_changed.emit()
+			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				if event.pressed:
+					on_mouse_button_wheel_down_changed.emit()
 	pass
 
 func _init_button_a_touch() -> void:

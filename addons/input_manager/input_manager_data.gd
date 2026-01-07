@@ -1213,6 +1213,8 @@ var _STICK_TEXTURE_6 = preload("res://addons/input_manager/virtual_joystick/text
 			owner._button_select_touch.global_position = owner._position_button_select_touch()
 
 @export_group("Mouse", "_mouse")
+## If true, mouse events will be emitted, and if false, mouse-related events will only be triggered if the mouse is [b]captured[/b].
+@export var _mouse_enable_event_without_captured: bool = false
 ## Button capture mouse.
 @export var _mouse_capture_key: Key = Key.KEY_TAB
 ## Button mouse visible.
@@ -1367,4 +1369,207 @@ func _verify_duplicate(_actions_source: Dictionary, value: String) -> void:
 
 
 func _on_reset_button() -> void:
+	_device = 0
+	_left_stick_deadzone = 0.2
+	_right_stick_deadzone = 0.2
+	_left_trigger_deadzone = 0.0
+	_right_trigger_deadzone = 0.0
+	
+	if _left_stick_action_name != "LS":
+		_left_stick_action_name = "LS"
+	_left_stick_key_negative_x = KEY_A
+	_left_stick_key_positive_x = KEY_D
+	_left_stick_key_negative_y = KEY_W
+	_left_stick_key_positive_y = KEY_S
+	_left_stick_ui_active = true
+	_left_stick_ui_visible = true
+	_left_stick_ui_deadzone = 0.1
+	_left_stick_ui_position = Vector2.ZERO
+	_left_stick_ui_scale_factor = 1.0
+	_left_stick_ui_only_mobile = false
+	_left_stick_ui_joystick_use_textures = true
+	_left_stick_ui_joystick_preset_texture = 5
+	_left_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_5
+	_left_stick_ui_joystick_color = Color.WHITE
+	_left_stick_ui_joystick_opacity = 0.8
+	_left_stick_ui_joystick_border = 1.0
+	_left_stick_ui_stick_use_textures = true
+	_left_stick_ui_stick_preset_texture = 5
+	_left_stick_ui_stick_texture = _STICK_TEXTURE_5
+	_left_stick_ui_stick_color = Color.WHITE
+	_left_stick_ui_stick_opacity = 0.8
+	
+	if _right_stick_action_name != "RS":
+		_right_stick_action_name = "RS"
+	_right_stick_key_negative_x = KEY_J
+	_right_stick_key_positive_x = KEY_L
+	_right_stick_key_negative_y = KEY_I
+	_right_stick_key_positive_y = KEY_K
+	_right_stick_ui_active = true
+	_right_stick_ui_visible = true
+	_right_stick_ui_deadzone = 0.1
+	_right_stick_ui_position = Vector2.ZERO
+	_right_stick_ui_scale_factor = 1.0
+	_right_stick_ui_only_mobile = false
+	_right_stick_ui_joystick_use_textures = true
+	_right_stick_ui_joystick_preset_texture = 5
+	_right_stick_ui_joystick_texture = _JOYSTICK_TEXTURE_5
+	_right_stick_ui_joystick_color = Color.WHITE
+	_right_stick_ui_joystick_opacity = 0.8
+	_right_stick_ui_joystick_border = 1.0
+	_right_stick_ui_stick_use_textures = true
+	_right_stick_ui_stick_preset_texture = 5
+	_right_stick_ui_stick_texture = _STICK_TEXTURE_5
+	_right_stick_ui_stick_color = Color.WHITE
+	_right_stick_ui_stick_opacity = 0.8
+	
+	if _left_trigger_action_name != "LT":
+		_left_trigger_action_name = "LT"
+	_left_trigger_key = Key.KEY_Q
+	_left_trigger_mouse_button = MouseButton.MOUSE_BUTTON_LEFT
+	_left_trigger_touch_visible = true
+	_left_trigger_texture_normal = load("res://addons/input_manager/textures/lt_normal.png")
+	_left_trigger_texture_pressed = load("res://addons/input_manager/textures/lt_pressed.png")
+	_left_trigger_position = Vector2.ZERO
+		
+	if _right_trigger_action_name != "RT":
+		_right_trigger_action_name = "RT"
+	_right_trigger_key = Key.KEY_E
+	_right_trigger_mouse_button = MouseButton.MOUSE_BUTTON_RIGHT
+	_right_trigger_touch_visible = true
+	_right_trigger_texture_normal = load("res://addons/input_manager/textures/rt_normal.png")
+	_right_trigger_texture_pressed = load("res://addons/input_manager/textures/rt_pressed.png")
+	_right_trigger_position = Vector2.ZERO
+	
+	if _left_shoulder_action_name != "LB":
+		_left_shoulder_action_name = "LB"
+	_left_shoulder_type = InputManagerConst._event_type_enum.PRESSED
+	_left_shoulder_key = KEY_U
+	_left_shoulder_touch_visible = true
+	_left_shoulder_texture_normal = load("res://addons/input_manager/textures/lb_normal.png")
+	_left_shoulder_texture_pressed = load("res://addons/input_manager/textures/lb_pressed.png")
+	_left_shoulder_position = Vector2.ZERO
+		
+	if _right_shoulder_action_name != "RB":
+		_right_shoulder_action_name = "RB"
+	_right_shoulder_type = InputManagerConst._event_type_enum.PRESSED
+	_right_shoulder_key = KEY_O
+	_right_shoulder_touch_visible = true
+	_right_shoulder_texture_normal = load("res://addons/input_manager/textures/rb_normal.png")
+	_right_shoulder_texture_pressed = load("res://addons/input_manager/textures/rb_pressed.png")
+	_right_shoulder_position = Vector2.ZERO
+	
+	if _left_stick_button_action_name != "LSB":
+		_left_stick_button_action_name = "LSB"
+	_left_stick_button_type = InputManagerConst._event_type_enum.PRESSED
+	_left_stick_button_key = KEY_F
+	_left_stick_button_touch_visible = true
+	_left_stick_button_texture_normal = load("res://addons/input_manager/textures/left_stick_button_normal.png")
+	_left_stick_button_texture_pressed = load("res://addons/input_manager/textures/left_stick_button_normal.png")
+	_left_stick_button_position = Vector2.ZERO
+	
+	if _right_stick_button_action_name != "RSB":
+		_right_stick_button_action_name = "RSB"
+	_right_stick_button_type = InputManagerConst._event_type_enum.PRESSED
+	_right_stick_button_key = KEY_G
+	_right_stick_button_touch_visible = true
+	_right_stick_button_texture_normal = load("res://addons/input_manager/textures/right_stick_button_normal.png")
+	_right_stick_button_texture_pressed = load("res://addons/input_manager/textures/right_stick_button_normal.png")
+	_right_stick_button_position = Vector2.ZERO
+	
+	if _button_a_action_name != "A":
+		_button_a_action_name = "A"
+	_button_a_type = InputManagerConst._event_type_enum.PRESSED
+	_button_a_key = KEY_SPACE
+	_button_a_touch_visible = true
+	_button_a_texture_normal = load("res://addons/input_manager/textures/a_normal.png")
+	_button_a_texture_pressed = load("res://addons/input_manager/textures/a_pressed.png")
+	_button_a_position = Vector2.ZERO
+	
+	if _button_b_action_name != "B":
+		_button_b_action_name = "B"
+	_button_b_type = InputManagerConst._event_type_enum.PRESSED
+	_button_b_key = KEY_Z
+	_button_b_touch_visible = true
+	_button_b_texture_normal = load("res://addons/input_manager/textures/b_normal.png")
+	_button_b_texture_pressed = load("res://addons/input_manager/textures/b_pressed.png")
+	_button_b_position = Vector2.ZERO
+
+	if _button_x_action_name != "X":
+		_button_x_action_name = "X"
+	_button_x_type = InputManagerConst._event_type_enum.PRESSED
+	_button_x_key = KEY_X
+	_button_x_touch_visible = true
+	_button_x_texture_normal = load("res://addons/input_manager/textures/x_normal.png")
+	_button_x_texture_pressed = load("res://addons/input_manager/textures/x_pressed.png")
+	_button_x_position = Vector2.ZERO
+
+	if _button_y_action_name != "Y":
+		_button_y_action_name = "Y"
+	_button_y_type = InputManagerConst._event_type_enum.PRESSED
+	_button_y_key = KEY_C
+	_button_y_touch_visible = true
+	_button_y_texture_normal = load("res://addons/input_manager/textures/y_normal.png")
+	_button_y_texture_pressed = load("res://addons/input_manager/textures/y_pressed.png")
+	_button_y_position = Vector2.ZERO
+
+	if _button_dpad_up_action_name != "D_PAD_UP":
+		_button_dpad_up_action_name = "D_PAD_UP"
+	_button_dpad_up_type = InputManagerConst._event_type_enum.PRESSED
+	_button_dpad_up_key = KEY_UP
+	_button_dpad_up_touch_visible = true
+	_button_dpad_up_texture_normal = load("res://addons/input_manager/textures/d_pad_up_normal.png")
+	_button_dpad_up_texture_pressed = load("res://addons/input_manager/textures/d_pad_up_pressed.png")
+	_button_dpad_up_position = Vector2.ZERO
+
+	if _button_dpad_down_action_name != "D_PAD_DOWN":
+		_button_dpad_down_action_name = "D_PAD_DOWN"
+	_button_dpad_down_type = InputManagerConst._event_type_enum.PRESSED
+	_button_dpad_down_key = KEY_DOWN
+	_button_dpad_down_touch_visible = true
+	_button_dpad_down_texture_normal = load("res://addons/input_manager/textures/d_pad_down_normal.png")
+	_button_dpad_down_texture_pressed = load("res://addons/input_manager/textures/d_pad_down_pressed.png")
+	_button_dpad_down_position = Vector2.ZERO
+
+	if _button_dpad_left_action_name != "D_PAD_LEFT":
+		_button_dpad_left_action_name = "D_PAD_LEFT"
+	_button_dpad_left_type = InputManagerConst._event_type_enum.PRESSED
+	_button_dpad_left_key = KEY_LEFT
+	_button_dpad_left_touch_visible = true
+	_button_dpad_left_texture_normal = load("res://addons/input_manager/textures/d_pad_left_normal.png")
+	_button_dpad_left_texture_pressed = load("res://addons/input_manager/textures/d_pad_left_pressed.png")
+	_button_dpad_left_position = Vector2.ZERO
+
+	if _button_dpad_right_action_name != "D_PAD_RIGHT":
+		_button_dpad_right_action_name = "D_PAD_RIGHT"
+	_button_dpad_right_type = InputManagerConst._event_type_enum.PRESSED
+	_button_dpad_right_key = KEY_RIGHT
+	_button_dpad_right_touch_visible = true
+	_button_dpad_right_texture_normal = load("res://addons/input_manager/textures/d_pad_right_normal.png")
+	_button_dpad_right_texture_pressed = load("res://addons/input_manager/textures/d_pad_right_pressed.png")
+	_button_dpad_right_position = Vector2.ZERO
+
+	if _button_start_action_name != "START":
+		_button_start_action_name = "START"
+	_button_start_type = InputManagerConst._event_type_enum.PRESSED
+	_button_start_key = KEY_ENTER
+	_button_start_touch_visible = true
+	_button_start_texture_normal = load("res://addons/input_manager/textures/start_normal.png")
+	_button_start_texture_pressed = load("res://addons/input_manager/textures/start_pressed.png")
+	_button_start_position = Vector2.ZERO
+
+	if _button_select_action_name != "BACK":
+		_button_select_action_name = "BACK"
+	_button_select_type = InputManagerConst._event_type_enum.PRESSED
+	_button_select_key = KEY_BACKSPACE
+	_button_select_touch_visible = true
+	_button_select_texture_normal = load("res://addons/input_manager/textures/menu_normal.png")
+	_button_select_texture_pressed = load("res://addons/input_manager/textures/menu_normal.png")
+	_button_select_position = Vector2.ZERO
+	
+	_mouse_enable_event_without_captured = false
+	_mouse_capture_key = KEY_TAB
+	_mouse_visble_key = KEY_ESCAPE
+	
+	
 	pass
