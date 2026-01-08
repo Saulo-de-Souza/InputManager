@@ -1,0 +1,148 @@
+[gd_scene format=3 uid="uid://be3yf6taiye7c"]
+
+[ext_resource type="Script" uid="uid://dlm0fs1ty4mgq" path="res://addons/input_manager/scenes/input_manager_default_touch.gd" id="1_0yytx"]
+[ext_resource type="Texture2D" uid="uid://c8c53yxputerh" path="res://addons/input_manager/textures/a_normal.png" id="2_5rer1"]
+[ext_resource type="Texture2D" uid="uid://cxgstk3fyne5j" path="res://addons/input_manager/textures/a_pressed.png" id="3_eq7pn"]
+[ext_resource type="Texture2D" uid="uid://beak0nfk0e8pa" path="res://addons/input_manager/textures/b_normal.png" id="4_coq4m"]
+[ext_resource type="Texture2D" uid="uid://d117bd88hmsmm" path="res://addons/input_manager/textures/b_pressed.png" id="5_g3fgc"]
+[ext_resource type="Texture2D" uid="uid://bq20v8oc2r5xu" path="res://addons/input_manager/textures/x_normal.png" id="6_q13vs"]
+[ext_resource type="Texture2D" uid="uid://b57vbhma23l45" path="res://addons/input_manager/textures/x_pressed.png" id="7_hhv7n"]
+[ext_resource type="Texture2D" uid="uid://cswxhbu7bhg5t" path="res://addons/input_manager/textures/y_normal.png" id="8_a4to5"]
+[ext_resource type="Texture2D" uid="uid://b0ep1f1jrmw0n" path="res://addons/input_manager/textures/y_pressed.png" id="9_fy5lf"]
+[ext_resource type="Texture2D" uid="uid://cdcyv7jjabbld" path="res://addons/input_manager/textures/lt_normal.png" id="10_irapc"]
+[ext_resource type="Texture2D" uid="uid://bg88nt13vxsj7" path="res://addons/input_manager/textures/lt_pressed.png" id="11_gx7d8"]
+[ext_resource type="Texture2D" uid="uid://cigvqok17ra0b" path="res://addons/input_manager/textures/rt_normal.png" id="12_7oeu1"]
+[ext_resource type="Texture2D" uid="uid://daeoyxuvt7xgk" path="res://addons/input_manager/textures/rt_pressed.png" id="13_kp4gx"]
+[ext_resource type="Texture2D" uid="uid://bw4lc2keepmai" path="res://addons/input_manager/textures/lb_normal.png" id="14_isnk2"]
+[ext_resource type="Texture2D" uid="uid://ba7eo345o34yr" path="res://addons/input_manager/textures/lb_pressed.png" id="15_ujokv"]
+[ext_resource type="Texture2D" uid="uid://lji8ef8dyoef" path="res://addons/input_manager/textures/rb_normal.png" id="16_hfjkq"]
+[ext_resource type="Texture2D" uid="uid://b8w86i56ka5cc" path="res://addons/input_manager/textures/rb_pressed.png" id="17_oriid"]
+[ext_resource type="Texture2D" uid="uid://dc7mxcccd74lw" path="res://addons/input_manager/textures/d_pad_up_normal.png" id="18_24fnc"]
+[ext_resource type="Texture2D" uid="uid://druuydkpkyysl" path="res://addons/input_manager/textures/d_pad_up_pressed.png" id="19_1fcdr"]
+[ext_resource type="Texture2D" uid="uid://uwysdl1o7124" path="res://addons/input_manager/textures/d_pad_down_normal.png" id="20_ksbkn"]
+[ext_resource type="Texture2D" uid="uid://dr8cq73shgmul" path="res://addons/input_manager/textures/d_pad_down_pressed.png" id="21_11tkk"]
+[ext_resource type="Texture2D" uid="uid://bbeddg7ngujor" path="res://addons/input_manager/textures/d_pad_left_normal.png" id="22_erm8q"]
+[ext_resource type="Texture2D" uid="uid://bbkm5o66kvhfg" path="res://addons/input_manager/textures/d_pad_left_pressed.png" id="23_k0s6a"]
+[ext_resource type="Texture2D" uid="uid://d2oir2v6d003" path="res://addons/input_manager/textures/d_pad_right_normal.png" id="24_2ww1u"]
+[ext_resource type="Texture2D" uid="uid://cw3c8tnpf7vxr" path="res://addons/input_manager/textures/d_pad_right_pressed.png" id="25_ii7nv"]
+[ext_resource type="Texture2D" uid="uid://c5pl3hbxlw6tw" path="res://addons/input_manager/textures/start_normal.png" id="26_olp0f"]
+[ext_resource type="Texture2D" uid="uid://b3wp7lpu4pfoo" path="res://addons/input_manager/textures/start_pressed.png" id="27_nj2jr"]
+[ext_resource type="Texture2D" uid="uid://b0g8ahhe8kwey" path="res://addons/input_manager/textures/select_normal.png" id="28_8v4x7"]
+[ext_resource type="Script" uid="uid://bg0p1uphg1h86" path="res://addons/input_manager/virtual_joystick/virtual_joystick.gd" id="29_2sqwv"]
+[ext_resource type="Texture2D" uid="uid://dioab8l3lulsp" path="res://addons/input_manager/virtual_joystick/textures/joystick_texture_5.png" id="30_jeifm"]
+[ext_resource type="Texture2D" uid="uid://dfc0cgs71yyg3" path="res://addons/input_manager/virtual_joystick/textures/stick_texture_5.png" id="31_0d6du"]
+[ext_resource type="Texture2D" uid="uid://cpfmrx03qw54d" path="res://addons/input_manager/textures/lsb.png" id="32_eq7pn"]
+[ext_resource type="Texture2D" uid="uid://ydi1ncp37rtj" path="res://addons/input_manager/textures/rsb.png" id="33_coq4m"]
+
+[node name="InputManagerDefaultTouch" type="CanvasLayer" unique_id=2110435959]
+script = ExtResource("1_0yytx")
+
+[node name="A" type="TouchScreenButton" parent="." unique_id=1676674895]
+position = Vector2(1255, 930)
+texture_normal = ExtResource("2_5rer1")
+texture_pressed = ExtResource("3_eq7pn")
+
+[node name="B" type="TouchScreenButton" parent="." unique_id=676361607]
+position = Vector2(1381, 935)
+texture_normal = ExtResource("4_coq4m")
+texture_pressed = ExtResource("5_g3fgc")
+
+[node name="X" type="TouchScreenButton" parent="." unique_id=120806808]
+position = Vector2(1302, 825)
+texture_normal = ExtResource("6_q13vs")
+texture_pressed = ExtResource("7_hhv7n")
+
+[node name="Y" type="TouchScreenButton" parent="." unique_id=892166137]
+position = Vector2(1431, 827)
+texture_normal = ExtResource("8_a4to5")
+texture_pressed = ExtResource("9_fy5lf")
+
+[node name="LT" type="TouchScreenButton" parent="." unique_id=1797043876]
+position = Vector2(111, 629)
+texture_normal = ExtResource("10_irapc")
+texture_pressed = ExtResource("11_gx7d8")
+
+[node name="RT" type="TouchScreenButton" parent="." unique_id=2083887805]
+position = Vector2(1725, 629)
+texture_normal = ExtResource("12_7oeu1")
+texture_pressed = ExtResource("13_kp4gx")
+
+[node name="LB" type="TouchScreenButton" parent="." unique_id=792838587]
+position = Vector2(111, 472)
+texture_normal = ExtResource("14_isnk2")
+texture_pressed = ExtResource("15_ujokv")
+
+[node name="RB" type="TouchScreenButton" parent="." unique_id=153551796]
+position = Vector2(1725, 472)
+texture_normal = ExtResource("16_hfjkq")
+texture_pressed = ExtResource("17_oriid")
+
+[node name="DPAD_UP" type="TouchScreenButton" parent="." unique_id=763986692]
+position = Vector2(507, 759)
+texture_normal = ExtResource("18_24fnc")
+texture_pressed = ExtResource("19_1fcdr")
+
+[node name="DPAD_DOWN" type="TouchScreenButton" parent="." unique_id=1398882251]
+position = Vector2(507, 904)
+texture_normal = ExtResource("20_ksbkn")
+texture_pressed = ExtResource("21_11tkk")
+
+[node name="DPAD_LEFT" type="TouchScreenButton" parent="." unique_id=1928164056]
+position = Vector2(433, 830)
+texture_normal = ExtResource("22_erm8q")
+texture_pressed = ExtResource("23_k0s6a")
+
+[node name="DPAD_RIGHT" type="TouchScreenButton" parent="." unique_id=937091446]
+position = Vector2(579, 831)
+texture_normal = ExtResource("24_2ww1u")
+texture_pressed = ExtResource("25_ii7nv")
+
+[node name="START" type="TouchScreenButton" parent="." unique_id=662099076]
+position = Vector2(806, 896)
+texture_normal = ExtResource("26_olp0f")
+texture_pressed = ExtResource("27_nj2jr")
+
+[node name="SELECT" type="TouchScreenButton" parent="." unique_id=1291353929]
+position = Vector2(1001, 896)
+texture_normal = ExtResource("28_8v4x7")
+texture_pressed = ExtResource("28_8v4x7")
+
+[node name="LS" type="Control" parent="." unique_id=903635164]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 111.0
+offset_top = 789.0
+offset_right = 313.0
+offset_bottom = 991.0
+pivot_offset = Vector2(101, 101)
+script = ExtResource("29_2sqwv")
+joystick_texture = ExtResource("30_jeifm")
+joystick_opacity = 1.0
+stick_texture = ExtResource("31_0d6du")
+stick_opacity = 1.0
+metadata/_custom_type_script = "uid://bg0p1uphg1h86"
+
+[node name="RS" type="Control" parent="." unique_id=264262643]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1625.0
+offset_top = 789.0
+offset_right = 1827.0
+offset_bottom = 991.0
+pivot_offset = Vector2(101, 101)
+script = ExtResource("29_2sqwv")
+joystick_texture = ExtResource("30_jeifm")
+joystick_opacity = 1.0
+stick_texture = ExtResource("31_0d6du")
+stick_opacity = 1.0
+metadata/_custom_type_script = "uid://bg0p1uphg1h86"
+
+[node name="LSB" type="TouchScreenButton" parent="." unique_id=424146290]
+position = Vector2(285, 535)
+texture_normal = ExtResource("32_eq7pn")
+texture_pressed = ExtResource("32_eq7pn")
+
+[node name="RSB" type="TouchScreenButton" parent="." unique_id=1522947890]
+position = Vector2(1559, 535)
+texture_normal = ExtResource("33_coq4m")
+texture_pressed = ExtResource("33_coq4m")
