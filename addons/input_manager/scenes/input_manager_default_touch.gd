@@ -3,24 +3,26 @@
 class_name InputManagerDefaultTouch extends CanvasLayer
 
 
-@onready var a: TouchScreenButton = $A
-@onready var b: TouchScreenButton = $B
-@onready var x: TouchScreenButton = $X
-@onready var y: TouchScreenButton = $Y
-@onready var lt: TouchScreenButton = $LT
-@onready var rt: TouchScreenButton = $RT
-@onready var lb: TouchScreenButton = $LB
-@onready var rb: TouchScreenButton = $RB
-@onready var dpad_up: TouchScreenButton = $DPAD_UP
-@onready var dpad_down: TouchScreenButton = $DPAD_DOWN
-@onready var dpad_left: TouchScreenButton = $DPAD_LEFT
-@onready var dpad_right: TouchScreenButton = $DPAD_RIGHT
-@onready var start: TouchScreenButton = $START
-@onready var select: TouchScreenButton = $SELECT
-@onready var ls: VirtualJoystick = $LS
-@onready var rs: VirtualJoystick = $RS
-@onready var lsb: TouchScreenButton = $LSB
-@onready var rsb: TouchScreenButton = $RSB
+@onready var rt: TouchScreenButton = $Main/RightBottom/RT
+@onready var rb: TouchScreenButton = $Main/RightBottom/RB
+@onready var rsb: TouchScreenButton = $Main/RightBottom/RSB
+@onready var rs: VirtualJoystick = $Main/RightBottom/RS
+@onready var a: TouchScreenButton = $Main/RightBottom/A
+@onready var b: TouchScreenButton = $Main/RightBottom/B
+@onready var x: TouchScreenButton = $Main/RightBottom/X
+@onready var y: TouchScreenButton = $Main/RightBottom/Y
+@onready var select: TouchScreenButton = $Main/RightBottom/SELECT
+@onready var lt: TouchScreenButton = $Main/LeftBottom/LT
+@onready var lb: TouchScreenButton = $Main/LeftBottom/LB
+@onready var lsb: TouchScreenButton = $Main/LeftBottom/LSB
+@onready var ls: VirtualJoystick = $Main/LeftBottom/LS
+@onready var dpad_up: TouchScreenButton = $Main/LeftBottom/DPAD_UP
+@onready var dpad_down: TouchScreenButton = $Main/LeftBottom/DPAD_DOWN
+@onready var dpad_left: TouchScreenButton = $Main/LeftBottom/DPAD_LEFT
+@onready var dpad_right: TouchScreenButton = $Main/LeftBottom/DPAD_RIGHT
+@onready var start: TouchScreenButton = $Main/LeftBottom/START
+
+
 
 
 func set_touch_opacity(value: float) -> void:
