@@ -11,7 +11,6 @@ class_name InputManagerDefaultTouch extends CanvasLayer
 @onready var b: TouchScreenButton = $Main/RightBottom/B
 @onready var x: TouchScreenButton = $Main/RightBottom/X
 @onready var y: TouchScreenButton = $Main/RightBottom/Y
-@onready var select: TouchScreenButton = $Main/RightBottom/SELECT
 @onready var lt: TouchScreenButton = $Main/LeftBottom/LT
 @onready var lb: TouchScreenButton = $Main/LeftBottom/LB
 @onready var lsb: TouchScreenButton = $Main/LeftBottom/LSB
@@ -20,7 +19,9 @@ class_name InputManagerDefaultTouch extends CanvasLayer
 @onready var dpad_down: TouchScreenButton = $Main/LeftBottom/DPAD_DOWN
 @onready var dpad_left: TouchScreenButton = $Main/LeftBottom/DPAD_LEFT
 @onready var dpad_right: TouchScreenButton = $Main/LeftBottom/DPAD_RIGHT
-@onready var start: TouchScreenButton = $Main/LeftBottom/START
+@onready var start: TouchScreenButton = $Main/CenterBottom/START
+@onready var select: TouchScreenButton = $Main/CenterBottom/SELECT
+
 
 
 

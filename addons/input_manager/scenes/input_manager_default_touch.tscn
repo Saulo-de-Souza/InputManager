@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://be3yf6taiye7c"]
 
-[ext_resource type="Script" path="res://addons/input_manager/scenes/input_manager_default_touch.gd" id="1_0yytx"]
+[ext_resource type="Script"    path="res://addons/input_manager/scenes/input_manager_default_touch.gd" id="1_0yytx"]
 [ext_resource type="Texture2D" path="res://addons/input_manager/textures/a_normal.png" id="2_5rer1"]
 [ext_resource type="Texture2D" path="res://addons/input_manager/textures/a_pressed.png" id="3_eq7pn"]
 [ext_resource type="Texture2D" path="res://addons/input_manager/textures/b_normal.png" id="4_coq4m"]
@@ -28,14 +28,16 @@
 [ext_resource type="Texture2D" path="res://addons/input_manager/textures/start_normal.png" id="26_olp0f"]
 [ext_resource type="Texture2D" path="res://addons/input_manager/textures/start_pressed.png" id="27_nj2jr"]
 [ext_resource type="Texture2D" path="res://addons/input_manager/textures/select_normal.png" id="28_8v4x7"]
-[ext_resource type="Script" path="res://addons/input_manager/virtual_joystick/virtual_joystick.gd" id="29_2sqwv"]
-[ext_resource type="Texture2D"  path="res://addons/input_manager/virtual_joystick/textures/joystick_texture_5.png" id="30_jeifm"]
-[ext_resource type="Texture2D"  path="res://addons/input_manager/virtual_joystick/textures/stick_texture_5.png" id="31_0d6du"]
-[ext_resource type="Texture2D"  path="res://addons/input_manager/textures/lsb.png" id="32_eq7pn"]
-[ext_resource type="Texture2D"  path="res://addons/input_manager/textures/rsb.png" id="33_coq4m"]
+[ext_resource type="Script"    path="res://addons/input_manager/virtual_joystick/virtual_joystick.gd" id="29_2sqwv"]
+[ext_resource type="Texture2D" path="res://addons/input_manager/virtual_joystick/textures/joystick_texture_5.png" id="30_jeifm"]
+[ext_resource type="Texture2D" path="res://addons/input_manager/virtual_joystick/textures/stick_texture_5.png" id="31_0d6du"]
+[ext_resource type="Texture2D" path="res://addons/input_manager/textures/lsb.png" id="32_eq7pn"]
+[ext_resource type="Texture2D" path="res://addons/input_manager/textures/rsb.png" id="33_coq4m"]
 
 [node name="InputManagerDefaultTouch" type="CanvasLayer" unique_id=2110435959]
 script = ExtResource("1_0yytx")
+metadata/_edit_vertical_guides_ = [960.0]
+metadata/_edit_horizontal_guides_ = [850.0, 714.0, 557.0]
 
 [node name="Main" type="Control" parent="." unique_id=377488724]
 layout_mode = 3
@@ -56,12 +58,12 @@ offset_right = 700.0
 grow_vertical = 0
 
 [node name="LT" type="TouchScreenButton" parent="Main/LeftBottom" unique_id=1797043876]
-position = Vector2(26, 334)
+position = Vector2(50, 334)
 texture_normal = ExtResource("10_irapc")
 texture_pressed = ExtResource("11_gx7d8")
 
 [node name="LB" type="TouchScreenButton" parent="Main/LeftBottom" unique_id=792838587]
-position = Vector2(26, 177)
+position = Vector2(50, 177)
 texture_normal = ExtResource("14_isnk2")
 texture_pressed = ExtResource("15_ujokv")
 
@@ -75,10 +77,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 26.0
-offset_top = -230.0
-offset_right = 228.0
-offset_bottom = -28.0
+offset_left = 50.0
+offset_top = -228.0
+offset_right = 252.0
+offset_bottom = -26.0
 grow_vertical = 0
 pivot_offset = Vector2(101, 101)
 script = ExtResource("29_2sqwv")
@@ -88,29 +90,24 @@ stick_texture = ExtResource("31_0d6du")
 stick_opacity = 1.0
 
 [node name="DPAD_UP" type="TouchScreenButton" parent="Main/LeftBottom" unique_id=763986692]
-position = Vector2(374, 434)
+position = Vector2(422, 453)
 texture_normal = ExtResource("18_24fnc")
 texture_pressed = ExtResource("19_1fcdr")
 
 [node name="DPAD_DOWN" type="TouchScreenButton" parent="Main/LeftBottom" unique_id=1398882251]
-position = Vector2(374, 579)
+position = Vector2(422, 598)
 texture_normal = ExtResource("20_ksbkn")
 texture_pressed = ExtResource("21_11tkk")
 
 [node name="DPAD_LEFT" type="TouchScreenButton" parent="Main/LeftBottom" unique_id=1928164056]
-position = Vector2(300, 505)
+position = Vector2(348, 524)
 texture_normal = ExtResource("22_erm8q")
 texture_pressed = ExtResource("23_k0s6a")
 
 [node name="DPAD_RIGHT" type="TouchScreenButton" parent="Main/LeftBottom" unique_id=937091446]
-position = Vector2(446, 506)
+position = Vector2(494, 525)
 texture_normal = ExtResource("24_2ww1u")
 texture_pressed = ExtResource("25_ii7nv")
-
-[node name="START" type="TouchScreenButton" parent="Main/LeftBottom" unique_id=662099076]
-position = Vector2(761, 277)
-texture_normal = ExtResource("26_olp0f")
-texture_pressed = ExtResource("27_nj2jr")
 
 [node name="RightBottom" type="Control" parent="Main" unique_id=496469991]
 layout_mode = 1
@@ -125,17 +122,17 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [node name="RT" type="TouchScreenButton" parent="Main/RightBottom" unique_id=2083887805]
-position = Vector2(485, 256)
+position = Vector2(556, 334)
 texture_normal = ExtResource("12_7oeu1")
 texture_pressed = ExtResource("13_kp4gx")
 
 [node name="RB" type="TouchScreenButton" parent="Main/RightBottom" unique_id=153551796]
-position = Vector2(485, 99)
+position = Vector2(556, 177)
 texture_normal = ExtResource("16_hfjkq")
 texture_pressed = ExtResource("17_oriid")
 
 [node name="RSB" type="TouchScreenButton" parent="Main/RightBottom" unique_id=1522947890]
-position = Vector2(319, 162)
+position = Vector2(366, 240)
 texture_normal = ExtResource("33_coq4m")
 texture_pressed = ExtResource("33_coq4m")
 
@@ -146,10 +143,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -254.0
-offset_top = -230.0
-offset_right = -52.0
-offset_bottom = -28.0
+offset_left = -239.0
+offset_top = -228.0
+offset_right = -37.0
+offset_bottom = -26.0
 grow_horizontal = 0
 grow_vertical = 0
 pivot_offset = Vector2(101, 101)
@@ -179,7 +176,25 @@ position = Vector2(316, 472)
 texture_normal = ExtResource("8_a4to5")
 texture_pressed = ExtResource("9_fy5lf")
 
-[node name="SELECT" type="TouchScreenButton" parent="Main/RightBottom" unique_id=1291353929]
-position = Vector2(-264, 277)
+[node name="CenterBottom" type="Control" parent="Main" unique_id=512423929]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -700.0
+offset_right = 200.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="START" type="TouchScreenButton" parent="Main/CenterBottom" unique_id=662099076]
+position = Vector2(45, 277)
+texture_normal = ExtResource("26_olp0f")
+texture_pressed = ExtResource("27_nj2jr")
+
+[node name="SELECT" type="TouchScreenButton" parent="Main/CenterBottom" unique_id=1291353929]
+position = Vector2(240, 277)
 texture_normal = ExtResource("28_8v4x7")
 texture_pressed = ExtResource("28_8v4x7")
