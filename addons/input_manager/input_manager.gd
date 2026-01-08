@@ -399,27 +399,34 @@ var _key_l_pressed: bool = false:
 
 #region ENGINE METHODS ***************************************************
 func _enter_tree() -> void:
+	pass
+		
+		
+func _ready() -> void:
+	get_viewport().size_changed.connect(func():
+		pass
+		)
+	
+	await get_tree().process_frame
+	await get_tree().physics_frame
+	await get_tree().create_timer(0.2).timeout
+		
 	if input_manager_data:
 		input_manager_data.init(self)
-
 		for s in Input.get_signal_connection_list("joy_connection_changed"):
 			Input.joy_connection_changed.disconnect(s.callable)
 		Input.joy_connection_changed.connect(func(device, connected): on_device_changed.emit(device, connected))
-		
 		if on_action_button.is_connected(_on_action_changed_intern):
 			on_action_button.disconnect(_on_action_changed_intern)
 		on_action_button.connect(_on_action_changed_intern)
-
 		if on_action_stick.is_connected(_on_action_changed_intern):
 			on_action_stick.disconnect(_on_action_changed_intern)
 		on_action_stick.connect(_on_action_changed_intern)
-
 		if on_action_trigger.is_connected(_on_action_changed_intern):
 			on_action_trigger.disconnect(_on_action_changed_intern)
 		on_action_trigger.connect(_on_action_changed_intern)
-
 		_init_all_touch_buttons()
-		
+	
 
 func _exit_tree() -> void:
 	_actions_buttons.clear()
@@ -1225,7 +1232,10 @@ func _check_mouse_button(event: InputEventMouseButton) -> void:
 				if event.pressed:
 					on_mouse_button_wheel_down_changed.emit()
 	pass
+#endregion PRIVATE METHODS ***********************************************
 
+
+#region INIT TOUCH
 func _init_button_a_touch() -> void:
 	if input_manager_data:
 		_button_a_touch.texture_normal = input_manager_data._button_a_texture_normal
@@ -2121,4 +2131,4 @@ func _position_right_stick_ui() -> Vector2:
 	if not is_inside_tree(): return Vector2.ZERO
 	var screen_size: Vector2 = get_viewport().get_visible_rect().size
 	return Vector2(screen_size.x - _right_stick_ui._joystick_radius * 2 - _right_stick_ui.joystick_border * 2 - 150, screen_size.y - _right_stick_ui._joystick_radius * 2 - _right_stick_ui.joystick_border * 2 - 150) + input_manager_data._right_stick_ui_position
-#endregion PRIVATE METHODS ***********************************************
+#endregion INIT TOUCH METHODS ********************************************
